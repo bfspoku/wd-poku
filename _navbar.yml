@@ -1,0 +1,19 @@
+name: "Mywebsite"
+title: "My new website"
+type: inverse
+left:
+  - text: "Popular votes"
+    menu:
+      - text: "Data lifecycle"
+        href: ./lifecycle.html
+      - text: "Codebook"
+        href: ./coodebookpopvotes.html
+  - text: "XXX"
+    menu:
+       - text: "Project part 1"
+         href: ./project1.html
+       - text: "Project part 2"
+         href: ./project2.html
+right:
+  - icon: fa-github fa-lg
+    href: https://github.com/githubusername/mywebsite

@@ -1,0 +1,18 @@
+---
+title: "TEST OGD Abstimmungen"
+output: 
+  html_document:
+    toc: FALSE
+---
+
+
+**Welcome to my website!**
+
+Documentation for the datasets published by POKU/FSO on opendata.swiss:
+
+* [Echtzeitdaten am Abstimmungstag zu eidgenössischen Abstimmungsvorlagen](https://opendata.swiss/en/dataset/echtzeitdaten-am-abstimmungstag-zu-eidgenoessischen-abstimmungsvorlagen)
+* [Echtzeitdaten am Abstimmungstag zu kantonalen Abstimmungsvorlagen](https://opendata.swiss/de/dataset/echtzeitdaten-am-abstimmungstag-zu-kantonalen-abstimmungsvorlagen)
+
+
+
+
