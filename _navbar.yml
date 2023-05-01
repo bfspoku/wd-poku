@@ -7,9 +7,9 @@ left:
     menu:
       - text: "Data lifecycle"
         href: ./lifecycle.html
-      - text: "Codebook"
+      - text: "Kleine blöde Änderung Codebook"
         href: ./codebookpopvotes.html
-  - text: "XXX"
+  - text: "National Elections 2023"
     menu:
        - text: "Project part 1"
          href: ./project1.html
