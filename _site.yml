@@ -1,8 +1,9 @@
 name: "My new website"
 output_dir: 'docs'
+exclude: ["*.xlsx"]
 output:
   html_document:
-    theme: flatly
+    theme: default
     highlight: zenburn
     toc: true
     toc_depth: 2

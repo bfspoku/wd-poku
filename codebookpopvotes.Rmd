@@ -1,0 +1,30 @@
+---
+title: "codebookpopvotes"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(cache = TRUE)
+library(readxl)
+library(knitr)
+```
+
+
+```{r include=FALSE}
+library(readxl)
+
+
+codebook_raw <- read_xlsx("codebook/codebook_votations.xlsx")
+
+```
+
+
+```{r, echo=FALSE}
+library(knitr)
+opts <- options(knitr.kable.NA = "tbd")
+
+kable(codebook_raw, "pipe")
+
+```
+

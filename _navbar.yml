@@ -1,13 +1,14 @@
 name: "Mywebsite"
-title: "My new website"
-type: inverse
+title: "About"
+type: default
 left:
   - text: "Popular votes"
+    href: index.html
     menu:
       - text: "Data lifecycle"
         href: ./lifecycle.html
       - text: "Codebook"
-        href: ./coodebookpopvotes.html
+        href: ./codebookpopvotes.html
   - text: "XXX"
     menu:
        - text: "Project part 1"
