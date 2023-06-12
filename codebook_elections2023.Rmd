@@ -19,35 +19,44 @@ codebook_WBet <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx",
 codebook_Kand <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx", sheet = "kandidierende", col_names = TRUE))
 codebook_Part <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx", sheet = "parteien", col_names = TRUE))
 codebook_List <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx", sheet = "listen", col_names = TRUE))
-
+codebook_ZR_F_B <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx", sheet = "zeitreihen-frauen-beteiligung", col_names = TRUE))
+codebook_ZR_P <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx", sheet = "zeitreihen-parteien", col_names = TRUE))
 ```
 
 
 ### Intro
-Description of the dataset on the official provisional election results for the 2023 federal elections on opendata.swiss.
-Currently, only a provisional test data set with dummy results of the 2019 elections is available on opendata.swiss: 
+Description of the dataset on the official provisional election results for the 2023 federal elections on [opendata.swiss](https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023).
 
-Test data set: <https://ogdch-abnahme.clients.liip.ch/de/dataset/eidgenossische-wahlen-2023-testing>
 
-In the following, the characteristics of these files are described.
-For this purpose, 3 different states are provided as test data for each file: \
+
+Currently, 3 provisional test data sets with dummy results from the 2019 elections (National Council) are available: \
+(Description and test data for the Council of States will follow.) \ 
+
   1. empty files. State how the file looks like before the election day.\
+    <https://github.com/bfspoku/wd-poku/blob/3745e9c45d4bc76b0416b639aa7fa1c994defa7b/docs/files/Testdata1.zip> \
+    
   2. state, how the file looks like with partial results during the election day.\
+    URL..... \
+    
   3. state how the file looks like at the end of the election.\
+    URL..... \
   
-  **Warning**: The file structures of the JSONs here are currently NOT yet final. Any changes to these files will be published on this page and in the          changelog on opendata.swiss.
+  In the following, the characteristics of these files are described.
+  
+  **Warning**: The file structures of the JSONs here are currently NOT yet final. Any changes to these files will be published on this page and in the changelog on opendata.swiss.
   \
+  
+Responsible for data set: Swiss Federal Statistical Office | 
+Section Politics, Culture, Media | 
+Contact: poku@bfs.admin.ch \   
 
 <hr style="border:1px solid black">
 
 \
 
 ### JSON Wahlbeteiligung \
-(Wahlbeteiligung/Participation/Partecipazione/Turnout) \
+(Participation/Partecipazione/Turnout) \
 
-Testdataset1: <https://www-tmp-a.bfs.admin.ch/bfsstatic/dam/assets/23185013/master> \
-Testdataset2:   \
-Testdataset3:   \
 
 \
 
@@ -67,11 +76,9 @@ kbl(codebook_WBet) %>% kable_paper(full_width = F) %>%
 \
 
 ### JSON Kandidierende \
-(Kandidierende/Candidats/Candidati/Candidates) \
+(Candidats/Candidati/Candidates) \
 
-Testdataset1: <https://www-tmp-a.bfs.admin.ch/bfsstatic/dam/assets/23185004/master> \
-Testdataset2:   \
-Testdataset3:   \
+
 
 \
 
@@ -91,11 +98,9 @@ kbl(codebook_Kand) %>% kable_paper(full_width = F) %>%
 \
 
 ### JSON Parteien \
-(Parteien/Partis/Partiti/Parties) \
+(Partis/Partiti/Parties) \
 
-Testdataset1: <https://www-tmp-a.bfs.admin.ch/bfsstatic/dam/assets/23185009/master> \
-Testdataset2:   \
-Testdataset3:   \
+
 
 \
 
@@ -115,11 +120,9 @@ kbl(codebook_Part) %>% kable_paper(full_width = F) %>%
 \
 
 ### JSON Listen \
-(Listen/Listes/Liste/Lists) \
+(Listes/Liste/Lists) \
 
-Testdataset1: <https://www-tmp-a.bfs.admin.ch/bfsstatic/dam/assets/23185010/master> \
-Testdataset2:   \
-Testdataset3:   \
+
 
 \
 
@@ -129,6 +132,50 @@ library(kableExtra)
 opts <- options(knitr.kable.NA = "")
 
 kbl(codebook_List) %>% kable_paper(full_width = F) %>%
+  column_spec(1, bold = T, border_right = T) %>%
+  column_spec(2, bold = T, border_right = T) %>%
+  column_spec(3, bold = F, border_right = T) %>% 
+  column_spec(4, width = "30em") %>% 
+  column_spec(5, width = "30em", background = "#D3D3D3")
+```
+
+\
+
+### JSON Zeitreihen-frauen-beteiligung \
+(Séries temporelles participation-femmes/Serie temporale partecipazione-donne/Time series participation-women) \
+
+
+
+\
+
+Content description for the file: sd-t-17.02-NRW2023-zeitreihen-frauen-beteiligung.json
+```{r, echo=FALSE}
+library(kableExtra)
+opts <- options(knitr.kable.NA = "")
+
+kbl(codebook_ZR_F_B) %>% kable_paper(full_width = F) %>%
+  column_spec(1, bold = T, border_right = T) %>%
+  column_spec(2, bold = T, border_right = T) %>%
+  column_spec(3, bold = F, border_right = T) %>% 
+  column_spec(4, width = "30em") %>% 
+  column_spec(5, width = "30em", background = "#D3D3D3")
+```
+
+\
+
+### JSON Zeitreihen-parteien \
+(Séries temporelles partis/Serie temporale parti/Time series parties) \
+
+
+
+\
+
+Content description for the file: sd-t-17.02-NRW2023-zeitreihen-parteien.json
+```{r, echo=FALSE}
+library(kableExtra)
+opts <- options(knitr.kable.NA = "")
+
+kbl(codebook_ZR_P) %>% kable_paper(full_width = F) %>%
   column_spec(1, bold = T, border_right = T) %>%
   column_spec(2, bold = T, border_right = T) %>%
   column_spec(3, bold = F, border_right = T) %>% 

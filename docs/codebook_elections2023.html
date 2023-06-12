@@ -369,15 +369,24 @@ div.tocify {
 
 <div id="intro" class="section level3">
 <h3>Intro</h3>
-<p>Description of the dataset on the official provisional election results for the 2023 federal elections on opendata.swiss. Currently, only a provisional test data set with dummy results of the 2019 elections is available on opendata.swiss:</p>
-<p>Test data set: <a href="https://ogdch-abnahme.clients.liip.ch/de/dataset/eidgenossische-wahlen-2023-testing" class="uri">https://ogdch-abnahme.clients.liip.ch/de/dataset/eidgenossische-wahlen-2023-testing</a></p>
-<p>In the following, the characteristics of these files are described. For this purpose, 3 different states are provided as test data for each file:<br />
-1. empty files. State how the file looks like before the election day.<br />
-2. state, how the file looks like with partial results during the election day.<br />
-3. state how the file looks like at the end of the election.<br />
-</p>
+<p>Description of the dataset on the official provisional election results for the 2023 federal elections on <a href="https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023">opendata.swiss</a>.</p>
+<p>Currently, 3 provisional test data sets with dummy results of the 2019 elections (National Council) are available:<br />
+(Description and test data for the Council of States will follow.)  </p>
+<ol style="list-style-type: decimal">
+<li><p>empty files. State how the file looks like before the election day.<br />
+<a href="https://github.com/bfspoku/wd-poku/blob/3745e9c45d4bc76b0416b639aa7fa1c994defa7b/docs/files/Testdata1.zip" class="uri">https://github.com/bfspoku/wd-poku/blob/3745e9c45d4bc76b0416b639aa7fa1c994defa7b/docs/files/Testdata1.zip</a><br />
+</p></li>
+<li><p>state, how the file looks like with partial results during the election day.<br />
+URL…..<br />
+</p></li>
+<li><p>state how the file looks like at the end of the election.<br />
+URL…..<br />
+</p></li>
+</ol>
+<p>In the following, the characteristics of these files are described.</p>
 <p><strong>Warning</strong>: The file structures of the JSONs here are currently NOT yet final. Any changes to these files will be published on this page and in the changelog on opendata.swiss.<br />
 </p>
+<p>Responsible for data set: Swiss Federal Statistical Office | Section Politics, Culture, Media | Contact: <a href="mailto:poku@bfs.admin.ch" class="email">poku@bfs.admin.ch</a>  </p>
 <hr style="border:1px solid black">
 <p><br />
 </p>
@@ -385,11 +394,7 @@ div.tocify {
 <div id="json-wahlbeteiligung" class="section level3">
 <h3>JSON Wahlbeteiligung<br />
 </h3>
-<p>(Wahlbeteiligung/Participation/Partecipazione/Turnout)<br />
-</p>
-<p>Testdataset1: <a href="https://www-tmp-a.bfs.admin.ch/bfsstatic/dam/assets/23185013/master" class="uri">https://www-tmp-a.bfs.admin.ch/bfsstatic/dam/assets/23185013/master</a><br />
-Testdataset2:<br />
-Testdataset3:<br />
+<p>(Participation/Partecipazione/Turnout)<br />
 </p>
 <p><br />
 </p>
@@ -727,7 +732,7 @@ level_kantone
 kanton_nummer
 </td>
 <td style="text-align:left;border-right:1px solid;">
-integer
+integer [1-26]
 </td>
 <td style="text-align:left;width: 30em; ">
 FSO canton numeric
@@ -910,7 +915,7 @@ Municipality name
 kanton_nummer
 </td>
 <td style="text-align:left;border-right:1px solid;">
-integer
+integer [1-26]
 </td>
 <td style="text-align:left;width: 30em; ">
 FSO canton numeric
@@ -1046,11 +1051,7 @@ Difference in voter turnout between the current election and the past election (
 <div id="json-kandidierende" class="section level3">
 <h3>JSON Kandidierende<br />
 </h3>
-<p>(Kandidierende/Candidats/Candidati/Candidates)<br />
-</p>
-<p>Testdataset1: <a href="https://www-tmp-a.bfs.admin.ch/bfsstatic/dam/assets/23185004/master" class="uri">https://www-tmp-a.bfs.admin.ch/bfsstatic/dam/assets/23185004/master</a><br />
-Testdataset2:<br />
-Testdataset3:<br />
+<p>(Candidats/Candidati/Candidates)<br />
 </p>
 <p><br />
 </p>
@@ -1734,11 +1735,7 @@ Indicates elected and non elected candidates (boolean 1/0)
 <div id="json-parteien" class="section level3">
 <h3>JSON Parteien<br />
 </h3>
-<p>(Parteien/Partis/Partiti/Parties)<br />
-</p>
-<p>Testdataset1: <a href="https://www-tmp-a.bfs.admin.ch/bfsstatic/dam/assets/23185009/master" class="uri">https://www-tmp-a.bfs.admin.ch/bfsstatic/dam/assets/23185009/master</a><br />
-Testdataset2:<br />
-Testdataset3:<br />
+<p>(Partis/Partiti/Parties)<br />
 </p>
 <p><br />
 </p>
@@ -1959,7 +1956,7 @@ integer
 FSO party number
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-level_ch: Will be populated as soon as the election is completed.
+level_ch: Will be populated as soon as the election is completed.; The file also includes parties that contested the previous election but are no longer contesting the current election. This is to make it as easy as possible to display all changes in the party results. Consequently, however, it is also possible that parties are listed that are not running in the current election.
 </td>
 </tr>
 <tr>
@@ -1975,6 +1972,7 @@ integer
 number of lists; level: CH
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
 </td>
 </tr>
 <tr>
@@ -1990,6 +1988,7 @@ integer
 number of candidates; level: CH
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
 </td>
 </tr>
 <tr>
@@ -2005,6 +2004,7 @@ integer
 number of female candidates; level: CH
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
 </td>
 </tr>
 <tr>
@@ -2020,6 +2020,7 @@ integer
 number of male candidates; level: CH
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
 </td>
 </tr>
 <tr>
@@ -2285,13 +2286,13 @@ level_kantone
 kanton_nummer
 </td>
 <td style="text-align:left;border-right:1px solid;">
-integer
+integer [1-26]
 </td>
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-level_kantone: Update interval per completed canton
+level_kantone: Update interval per completed canton; The file also includes parties that contested the previous election but are no longer contesting the current election. This is to make it as easy as possible to display all changes in the party results. Consequently, however, it is also possible that parties are listed that are not running in the current election.
 </td>
 </tr>
 <tr>
@@ -2337,6 +2338,7 @@ integer
 number of lists; level: canton
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
 </td>
 </tr>
 <tr>
@@ -2352,6 +2354,7 @@ integer
 number of candidates; level: canton
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
 </td>
 </tr>
 <tr>
@@ -2367,6 +2370,7 @@ integer
 number of female candidates; level: canton
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
 </td>
 </tr>
 <tr>
@@ -2382,6 +2386,7 @@ integer
 number of male candidates; level: canton
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
 </td>
 </tr>
 <tr>
@@ -2529,7 +2534,7 @@ Difference in the number of male candidates elected between the current election
 fiktive_waehlende
 </td>
 <td style="text-align:left;border-right:1px solid;">
-integer oder numeric?
+integer
 </td>
 <td style="text-align:left;width: 30em; ">
 number of “fictional voters” (Concept for calculating party strengths across different electoral constituencies); level: canton
@@ -2544,7 +2549,7 @@ number of “fictional voters” (Concept for calculating party strengths across
 letzte_wahl_fiktive_waehlende
 </td>
 <td style="text-align:left;border-right:1px solid;">
-integer oder numeric?
+integer
 </td>
 <td style="text-align:left;width: 30em; ">
 number of “fictional voters” previous election; level: canton
@@ -2559,7 +2564,7 @@ number of “fictional voters” previous election; level: canton
 differenz_fiktive_waehlende
 </td>
 <td style="text-align:left;border-right:1px solid;">
-integer oder numeric?
+integer
 </td>
 <td style="text-align:left;width: 30em; ">
 Difference in the number of “fictional voters” between the current election and the previous election; level: canton
@@ -2700,7 +2705,6 @@ integer
 FSO municipality number
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-level_gemeinden: continuous update interval with the already completed municipalities (depending on the canton). Empty file already contains complete file structure.
 </td>
 </tr>
 <tr>
@@ -2717,6 +2721,7 @@ string
 Municipality name
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+level_gemeinden: continuous update interval with the already completed municipalities (depending on the canton). Empty file already contains complete file structure.; The file also includes parties that contested the previous election but are no longer contesting the current election. This is to make it as easy as possible to display all changes in the party results. Consequently, however, it is also possible that parties are listed that are not running in the current election.
 </td>
 </tr>
 <tr>
@@ -2726,7 +2731,7 @@ Municipality name
 kanton_nummer
 </td>
 <td style="text-align:left;border-right:1px solid;">
-integer
+integer [1-26]
 </td>
 <td style="text-align:left;width: 30em; ">
 FSO canton number
@@ -2877,11 +2882,7 @@ Indicates the strongest party (boolean 1/0); level: municipality
 <div id="json-listen" class="section level3">
 <h3>JSON Listen<br />
 </h3>
-<p>(Listen/Listes/Liste/Lists)<br />
-</p>
-<p>Testdataset1: <a href="https://www-tmp-a.bfs.admin.ch/bfsstatic/dam/assets/23185010/master" class="uri">https://www-tmp-a.bfs.admin.ch/bfsstatic/dam/assets/23185010/master</a><br />
-Testdataset2:<br />
-Testdataset3:<br />
+<p>(Listes/Liste/Lists)<br />
 </p>
 <p><br />
 </p>
@@ -3191,6 +3192,1046 @@ number
 </td>
 <td style="text-align:left;width: 30em; ">
 Strength of the list in percent; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+</div>
+<div id="json-zeitreihen-frauen-beteiligung" class="section level3">
+<h3>JSON Zeitreihen-frauen-beteiligung<br />
+</h3>
+<p>(Séries temporelles participation-femmes/Serie temporale partecipazione-donne/Time series participation-women)<br />
+</p>
+<p><br />
+</p>
+Content description for the file: sd-t-17.02-NRW2023-zeitreihen-frauen-beteiligung.json
+<table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Node
+</th>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Description
+</th>
+<th style="text-align:left;">
+Comments
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+timestamp
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;border-right:1px solid;">
+</td>
+<td style="text-align:left;width: 30em; ">
+Date and Time of data creation
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+spatial_reference
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;border-right:1px solid;">
+</td>
+<td style="text-align:left;width: 30em; ">
+TEXT ??
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+stand
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;border-right:1px solid;">
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+wahl_abgeschlossen
+</td>
+<td style="text-align:left;border-right:1px solid;">
+boolean
+</td>
+<td style="text-align:left;width: 30em; ">
+Indicates that all cantons have delievered and confirmed their provisional final result (boolean true/false)
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+kantone_total
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer [26]
+</td>
+<td style="text-align:left;width: 30em; ">
+Total number of cantons
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+kantone_abgeschlossen
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer [1-26]
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of cantons that have delievered and confirmed their provisional final result
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+level_ch
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;border-right:1px solid;">
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+wahljahr
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Year of the election
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+wahlbeteiligung
+</td>
+<td style="text-align:left;border-right:1px solid;">
+number
+</td>
+<td style="text-align:left;width: 30em; ">
+Voter turnout / voter participation (in percent); level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+frauen_anteil
+</td>
+<td style="text-align:left;border-right:1px solid;">
+number
+</td>
+<td style="text-align:left;width: 30em; ">
+Proportion of women (in percent); level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_listen
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of lists; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_kandidierende
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of candidates; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_kandidierende_f
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of female candidates; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_kandidierende_m
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of male candidates; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_gewaehlte
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of elected candidates; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Critical variable: set only after the canton is confirmed.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_gewaehlte_f
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of female elected candidates; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Critical variable: set only after the canton is confirmed.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_gewaehlte_m
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of male elected candidates; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Critical variable: set only after the canton is confirmed.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+level_kantone
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;border-right:1px solid;">
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+kanton_nummer
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer [1-26]
+</td>
+<td style="text-align:left;width: 30em; ">
+FSO canton number
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+kanton_bezeichnung_kurz
+</td>
+<td style="text-align:left;border-right:1px solid;">
+string
+</td>
+<td style="text-align:left;width: 30em; ">
+Canton name short
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+wahljahr
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Year of the election
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+wahlbeteiligung
+</td>
+<td style="text-align:left;border-right:1px solid;">
+number
+</td>
+<td style="text-align:left;width: 30em; ">
+Voter turnout / voter participation (in percent); level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+frauen_anteil
+</td>
+<td style="text-align:left;border-right:1px solid;">
+number
+</td>
+<td style="text-align:left;width: 30em; ">
+Proportion of women (in percent); level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_listen
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of lists; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_kandidierende
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of candidates; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_kandidierende_f
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of female candidates; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_kandidierende_m
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of male candidates; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_gewaehlte
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of elected candidates; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Critical variable: set only after the canton is confirmed.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_gewaehlte_f
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of female elected candidates; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Critical variable: set only after the canton is confirmed.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_gewaehlte_m
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of male elected candidates; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Critical variable: set only after the canton is confirmed.
+</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+</div>
+<div id="json-zeitreihen-parteien" class="section level3">
+<h3>JSON Zeitreihen-parteien<br />
+</h3>
+<p>(Séries temporelles partis/Serie temporale parti/Time series parties)<br />
+</p>
+<p><br />
+</p>
+Content description for the file: sd-t-17.02-NRW2023-zeitreihen-parteien.json
+<table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Node
+</th>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Description
+</th>
+<th style="text-align:left;">
+Comments
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+timestamp
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;border-right:1px solid;">
+</td>
+<td style="text-align:left;width: 30em; ">
+Date and Time of data creation
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+spatial_reference
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;border-right:1px solid;">
+</td>
+<td style="text-align:left;width: 30em; ">
+TEXT ??
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+stand
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;border-right:1px solid;">
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+wahl_abgeschlossen
+</td>
+<td style="text-align:left;border-right:1px solid;">
+boolean
+</td>
+<td style="text-align:left;width: 30em; ">
+Indicates that all cantons have delievered and confirmed their provisional final result (boolean true/false)
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+kantone_total
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer [26]
+</td>
+<td style="text-align:left;width: 30em; ">
+Total number of cantons
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+kantone_abgeschlossen
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer [1-26]
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of cantons that have delievered and confirmed their provisional final result
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+level_ch
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;border-right:1px solid;">
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+wahljahr
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Year of the election
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+partei_id
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+FSO party number
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_listen
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of lists; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_kandidierende
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of candidates; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_kandidierende_f
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of female candidates; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_kandidierende_m
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of male candidates; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+partei_staerke
+</td>
+<td style="text-align:left;border-right:1px solid;">
+number
+</td>
+<td style="text-align:left;width: 30em; ">
+Party strength in percent; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_gewaehlte
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of elected candidates; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Critical variable: set only after the canton is confirmed.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_gewaehlte_f
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of female elected candidates; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Critical variable: set only after the canton is confirmed.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_gewaehlte_m
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of male elected candidates; level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Critical variable: set only after the canton is confirmed.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+frauen_anteil
+</td>
+<td style="text-align:left;border-right:1px solid;">
+number
+</td>
+<td style="text-align:left;width: 30em; ">
+Proportion of women (in percent); level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+flag_staerkste_partei
+</td>
+<td style="text-align:left;border-right:1px solid;">
+boolean
+</td>
+<td style="text-align:left;width: 30em; ">
+Indicates the strongest party (boolean 1/0); level: CH
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+level_kantone
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;border-right:1px solid;">
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+kanton_nummer
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer [1-26]
+</td>
+<td style="text-align:left;width: 30em; ">
+FSO canton number
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+kanton_bezeichnung
+</td>
+<td style="text-align:left;border-right:1px solid;">
+string
+</td>
+<td style="text-align:left;width: 30em; ">
+Canton name
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+wahljahr
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Year of the election
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+partei_id
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+FSO party number
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_listen
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of lists; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_kandidierende
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of candidates; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_kandidierende_f
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of female candidates; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_kandidierende_m
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of male candidates; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Only for cantons with proportional representation system.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+partei_staerke
+</td>
+<td style="text-align:left;border-right:1px solid;">
+number
+</td>
+<td style="text-align:left;width: 30em; ">
+Party strength in percent; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_gewaehlte
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of elected candidates; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Critical variable: set only after the canton is confirmed.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_gewaehlte_f
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of female elected candidates; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Critical variable: set only after the canton is confirmed.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+anzahl_gewaehlte_m
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of male elected candidates; level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+Critical variable: set only after the canton is confirmed.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+frauen_anteil
+</td>
+<td style="text-align:left;border-right:1px solid;">
+number
+</td>
+<td style="text-align:left;width: 30em; ">
+Proportion of women (in percent); level: canton
+</td>
+<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+flag_staerkste_partei
+</td>
+<td style="text-align:left;border-right:1px solid;">
+boolean
+</td>
+<td style="text-align:left;width: 30em; ">
+Indicates the strongest party (boolean 1/0); level: canton
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
 </td>
