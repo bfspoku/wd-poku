@@ -11,10 +11,10 @@ left:
         href: ./codebookpopvotes.html
   - text: "National Elections 2023"
     menu:
-       - text: "Project part 1"
-         href: ./project1.html
-       - text: "Project part 2"
-         href: ./project2.html
+       - text: "Data description"
+         href: ./Data.html
+       - text: "API description"
+         href: ./API.html
 right:
   - icon: fa-github fa-lg
     href: https://github.com/githubusername/mywebsite

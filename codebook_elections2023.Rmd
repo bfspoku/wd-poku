@@ -1,5 +1,5 @@
 ---
-title: "codebook_elections2023"
+title: "Federal elections 2023: data description"
 output: html_document
 ---
 
@@ -32,14 +32,14 @@ Description of the dataset on the official provisional election results for the 
 Currently, 3 provisional test data sets with dummy results from the 2019 elections (National Council) are available: \
 (Description and test data for the Council of States will follow.) \ 
 
-  1. empty files. State how the file looks like before the election day.\
-    <https://github.com/bfspoku/wd-poku/blob/3745e9c45d4bc76b0416b639aa7fa1c994defa7b/docs/files/Testdata1.zip> \
+  1. empty files. Structure of the files before election day.\
+    <https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata1.zip> (Download --> "View Raw") \
     
-  2. state, how the file looks like with partial results during the election day.\
-    URL..... \
+  2. Structure of the files during election day (with partial results). \
+    <https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata2.zip> (Download --> "View Raw") \
     
-  3. state how the file looks like at the end of the election.\
-    URL..... \
+  3. Structure of the files after the election has been completed. \
+    <https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata3.zip> (Download --> "View Raw") \
   
   In the following, the characteristics of these files are described.
   
@@ -70,7 +70,7 @@ kbl(codebook_WBet) %>% kable_paper(full_width = F) %>%
   column_spec(2, bold = T, border_right = T) %>%
   column_spec(3, bold = F, border_right = T) %>% 
   column_spec(4, width = "30em") %>% 
-  column_spec(5, width = "30em", background = "#D3D3D3")
+  column_spec(5, width = "40em", background = "#D3D3D3")
 ```
 
 \
@@ -92,7 +92,7 @@ kbl(codebook_Kand) %>% kable_paper(full_width = F) %>%
   column_spec(2, bold = T, border_right = T) %>%
   column_spec(3, bold = F, border_right = T) %>% 
   column_spec(4, width = "30em") %>% 
-  column_spec(5, width = "30em", background = "#D3D3D3")
+  column_spec(5, width = "40em", background = "#D3D3D3")
 ```
 
 \
@@ -114,7 +114,7 @@ kbl(codebook_Part) %>% kable_paper(full_width = F) %>%
   column_spec(2, bold = T, border_right = T) %>%
   column_spec(3, bold = F, border_right = T) %>% 
   column_spec(4, width = "30em") %>% 
-  column_spec(5, width = "30em", background = "#D3D3D3")
+  column_spec(5, width = "40em", background = "#D3D3D3")
 ```
 
 \
@@ -136,7 +136,7 @@ kbl(codebook_List) %>% kable_paper(full_width = F) %>%
   column_spec(2, bold = T, border_right = T) %>%
   column_spec(3, bold = F, border_right = T) %>% 
   column_spec(4, width = "30em") %>% 
-  column_spec(5, width = "30em", background = "#D3D3D3")
+  column_spec(5, width = "40em", background = "#D3D3D3")
 ```
 
 \
@@ -158,7 +158,7 @@ kbl(codebook_ZR_F_B) %>% kable_paper(full_width = F) %>%
   column_spec(2, bold = T, border_right = T) %>%
   column_spec(3, bold = F, border_right = T) %>% 
   column_spec(4, width = "30em") %>% 
-  column_spec(5, width = "30em", background = "#D3D3D3")
+  column_spec(5, width = "40em", background = "#D3D3D3")
 ```
 
 \
