@@ -1,7 +1,7 @@
 ---
 title: "Federal Elections 2023"
 subtitle: "Data Documentation"
-author: "Swiss Federal Statistical Office | Section Politics, Culture, Media | Contact: poku@bfs.admin.ch"
+author: "Swiss Federal Statistical Office | Politics, Culture, Media Section | Contact: poku@bfs.admin.ch"
 date: June 22, 2023
 output: html_document
 ---
@@ -30,7 +30,7 @@ codebook_ZR_P <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx",
 
 ### Intro
 
-The FSO is responsible for publishing the official provisional elections results of the federal elections. This documentation focuses on the dataset [Federal elections 2023](https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023) which contains the continuously updated result files on Election Sunday, October 22, 2023. 
+The FSO is responsible for publishing the official provisional elections results of the federal elections. This documentation focuses on the dataset [Federal elections 2023](https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023) (currently DEV environment) which contains the continuously updated result files on Election Sunday, October 22, 2023. 
 
 
 
@@ -45,7 +45,7 @@ The FSO is responsible for publishing the official provisional elections results
 Currently, 3 provisional test data sets with dummy results from the 2019 elections (National Council) are available. Description and test data for the Council of States will follow. \
 (Go to "View Raw" for download ) \ 
 
-  1. empty files. Structure of the files before election day.\
+  1. Empty files. Structure of the files before election day.\
     <https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata1.zip> 
     
   2. Structure of the files during election day (with partial results). 

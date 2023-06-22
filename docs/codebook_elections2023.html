@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Swiss Federal Statistical Office | Section Politics, Culture, Media | Contact: poku@bfs.admin.ch" />
+<meta name="author" content="Swiss Federal Statistical Office | Politics, Culture, Media Section | Contact: poku@bfs.admin.ch" />
 
 <meta name="date" content="2023-06-22" />
 
@@ -332,6 +332,18 @@ div.tocify {
     </li>
   </ul>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Popular votes
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="./popular_votes.html">Data description</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -351,7 +363,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Federal Elections 2023</h1>
 <h3 class="subtitle">Data Documentation</h3>
-<h4 class="author">Swiss Federal Statistical Office | Section Politics, Culture, Media | Contact: <a href="mailto:poku@bfs.admin.ch" class="email">poku@bfs.admin.ch</a></h4>
+<h4 class="author">Swiss Federal Statistical Office | Politics, Culture, Media Section | Contact: <a href="mailto:poku@bfs.admin.ch" class="email">poku@bfs.admin.ch</a></h4>
 <h4 class="date">June 22, 2023</h4>
 
 </div>
@@ -360,7 +372,7 @@ div.tocify {
 <p><br></p>
 <div id="intro" class="section level3">
 <h3>Intro</h3>
-<p>The FSO is responsible for publishing the official provisional elections results of the federal elections. This documentation focuses on the dataset <a href="https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023">Federal elections 2023</a> which contains the continuously updated result files on Election Sunday, October 22, 2023.</p>
+<p>The FSO is responsible for publishing the official provisional elections results of the federal elections. This documentation focuses on the dataset <a href="https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023">Federal elections 2023</a> (currently DEV environment) which contains the continuously updated result files on Election Sunday, October 22, 2023.</p>
 <p><strong>Note</strong>: The structure of the JSON files is still under review and has not been finally defined yet. Any changes to these files will be published on this page and in the changelog on opendata.swiss. or demonstration purposes, the dataset is currently linked on the DEV environment of opendata.swiss. The final files will be made available at the following URL: [PROD LINK opendata.swiss]</p>
 <p><br></p>
 </div>
@@ -369,7 +381,7 @@ div.tocify {
 <p>Currently, 3 provisional test data sets with dummy results from the 2019 elections (National Council) are available. Description and test data for the Council of States will follow.<br />
 (Go to “View Raw” for download )  </p>
 <ol style="list-style-type: decimal">
-<li><p>empty files. Structure of the files before election day.<br />
+<li><p>Empty files. Structure of the files before election day.<br />
 <a href="https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata1.zip" class="uri">https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata1.zip</a></p></li>
 <li><p>Structure of the files during election day (with partial results).</p>
 <ul>
@@ -781,7 +793,7 @@ kanton_nummer
 integer [1-26]
 </td>
 <td style="text-align:left;width: 30em; ">
-FSO canton numeric
+FSO canton number
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
 </td>
@@ -945,10 +957,10 @@ gemeinde_nummer
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-FSO municipality numeric
+FSO municipality number
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Attention: In the case of election results, special cases at the municipal level must be taken into account. Due to shared ballot boxes, no result can be shown for elections in a few municipalities. Some cantons have a separate municipality number for their Swiss abroad.
+Attention: In the case of election results, special cases at the municipal level must be taken into account. Due to shared ballot boxes, no result can be shown for elections in a few municipalities. Some cantons have a separate municipality number for their Swiss abroad. The number/Id of these special municipalities will be composed as follows: Ex. Canton AI: 19160 (&lt;prefix 19&gt;&lt;FSO canton number, 2 digits&gt;&lt;suffix 0&gt;)
 </td>
 </tr>
 <tr>
@@ -976,7 +988,7 @@ kanton_nummer
 integer [1-26]
 </td>
 <td style="text-align:left;width: 30em; ">
-FSO canton numeric
+FSO canton number
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
 </td>
@@ -1703,14 +1715,14 @@ integer
 FSO municipality number
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Attention: In the case of election results, special cases at the municipal level must be taken into account. Due to shared ballot boxes, no result can be shown for elections in a few municipalities. Some cantons have a separate municipality number for their Swiss abroad.
+Attention: In the case of election results, special cases at the municipal level must be taken into account. Due to shared ballot boxes, no result can be shown for elections in a few municipalities. Some cantons have a separate municipality number for their Swiss abroad. The number/Id of these special municipalities will be composed as follows: Ex. Canton AI: 19160 (&lt;prefix 19&gt;&lt;FSO canton number, 2 digits&gt;&lt;suffix 0&gt;)
 </td>
 </tr>
 <tr>
 <td style="text-align:left;font-weight: bold;border-right:1px solid;">
 </td>
 <td style="text-align:left;font-weight: bold;border-right:1px solid;">
-GEMEINDE_BEZEICHNUNG
+gemeinde_bezeichnung
 </td>
 <td style="text-align:left;border-right:1px solid;">
 string
@@ -1770,7 +1782,7 @@ Candidate number
 <td style="text-align:left;font-weight: bold;border-right:1px solid;">
 </td>
 <td style="text-align:left;font-weight: bold;border-right:1px solid;">
-NAME
+name
 </td>
 <td style="text-align:left;border-right:1px solid;">
 string
@@ -1785,7 +1797,7 @@ First name of candidate
 <td style="text-align:left;font-weight: bold;border-right:1px solid;">
 </td>
 <td style="text-align:left;font-weight: bold;border-right:1px solid;">
-VORNAME
+vorname
 </td>
 <td style="text-align:left;border-right:1px solid;">
 string
@@ -2489,7 +2501,7 @@ integer
 FSO party number
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-see metadaten.json
+see metadaten.json; Attention: also included are parties that contested only the previous election, but not the current election.
 </td>
 </tr>
 <tr>
@@ -2886,7 +2898,7 @@ integer
 FSO municipality number
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Attention: In the case of election results, special cases at the municipal level must be taken into account. Due to shared ballot boxes, no result can be shown for elections in a few municipalities. Some cantons have a separate municipality number for their Swiss abroad.
+Attention: In the case of election results, special cases at the municipal level must be taken into account. Due to shared ballot boxes, no result can be shown for elections in a few municipalities. Some cantons have a separate municipality number for their Swiss abroad. The number/Id of these special municipalities will be composed as follows: Ex. Canton AI: 19160 (&lt;prefix 19&gt;&lt;FSO canton number, 2 digits&gt;&lt;suffix 0&gt;)
 </td>
 </tr>
 <tr>
@@ -3336,6 +3348,7 @@ string
 Indicates list combination (list union)
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+see metadaten.json
 </td>
 </tr>
 <tr>
@@ -3351,6 +3364,7 @@ string
 Indicates list sub-combination
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+see metadaten.json
 </td>
 </tr>
 <tr>
@@ -4084,7 +4098,7 @@ integer
 Number of lists; level: CH
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-Only for cantons with proportional representation system.
+Only for cantons with proportional representation system.; The party LPS/PLS (FSO party number=5) was assigned to that of FDP/PLR (FSO party number=1) for level_ch for all data years.
 </td>
 </tr>
 <tr>
@@ -4100,7 +4114,7 @@ integer
 Number of candidates; level: CH
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-Only for cantons with proportional representation system.
+Only for cantons with proportional representation system.; The party LPS/PLS (FSO party number=5) was assigned to that of FDP/PLR (FSO party number=1) for level_ch for all data years.
 </td>
 </tr>
 <tr>
@@ -4116,7 +4130,7 @@ integer
 Number of female candidates; level: CH
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-Only for cantons with proportional representation system.
+Only for cantons with proportional representation system.; The party LPS/PLS (FSO party number=5) was assigned to that of FDP/PLR (FSO party number=1) for level_ch for all data years.
 </td>
 </tr>
 <tr>
@@ -4132,7 +4146,7 @@ integer
 Number of male candidates; level: CH
 </td>
 <td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-Only for cantons with proportional representation system.
+Only for cantons with proportional representation system.; The party LPS/PLS (FSO party number=5) was assigned to that of FDP/PLR (FSO party number=1) for level_ch for all data years.
 </td>
 </tr>
 <tr>
