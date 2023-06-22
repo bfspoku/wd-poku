@@ -2,7 +2,7 @@ name: "Mywebsite"
 title: "About"
 type: default
 left:
-  - text: "National Elections 2023" 
+  - text: "Federal Elections 2023" 
     menu:
        - text: "Data description"
          href: ./codebook_elections2023.html

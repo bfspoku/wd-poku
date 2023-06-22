@@ -9,9 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Swiss Federal Statistical Office | Section Politics, Culture, Media | Contact: poku@bfs.admin.ch" />
 
+<meta name="date" content="2023-06-22" />
 
-<title>Federal elections 2023: data description</title>
+<title>Federal Elections 2023</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -317,7 +319,7 @@ div.tocify {
       <ul class="nav navbar-nav">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    National Elections 2023
+    Federal Elections 2023
      
     <span class="caret"></span>
   </a>
@@ -347,31 +349,39 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Federal elections 2023: data description</h1>
+<h1 class="title toc-ignore">Federal Elections 2023</h1>
+<h3 class="subtitle">Data Documentation</h3>
+<h4 class="author">Swiss Federal Statistical Office | Section Politics, Culture, Media | Contact: <a href="mailto:poku@bfs.admin.ch" class="email">poku@bfs.admin.ch</a></h4>
+<h4 class="date">June 22, 2023</h4>
 
 </div>
 
 
+<p><br></p>
 <div id="intro" class="section level3">
 <h3>Intro</h3>
-<p>Description of the dataset on the official provisional election results for the 2023 federal elections on <a href="https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023">opendata.swiss</a>.</p>
-<p>Currently, 3 provisional test data sets with dummy results from the 2019 elections (National Council) are available:<br />
-(Description and test data for the Council of States will follow.)  </p>
+<p>The FSO is responsible for publishing the official provisional elections results of the federal elections. This documentation focuses on the dataset <a href="https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023">Federal elections 2023</a> which contains the continuously updated result files on Election Sunday, October 22, 2023.</p>
+<p><strong>Note</strong>: The structure of the JSON files is still under review and has not been finally defined yet. Any changes to these files will be published on this page and in the changelog on opendata.swiss. or demonstration purposes, the dataset is currently linked on the DEV environment of opendata.swiss. The final files will be made available at the following URL: [PROD LINK opendata.swiss]</p>
+<p><br></p>
+</div>
+<div id="example-data" class="section level3">
+<h3>Example data</h3>
+<p>Currently, 3 provisional test data sets with dummy results from the 2019 elections (National Council) are available. Description and test data for the Council of States will follow.<br />
+(Go to “View Raw” for download )  </p>
 <ol style="list-style-type: decimal">
 <li><p>empty files. Structure of the files before election day.<br />
-<a href="https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata1.zip" class="uri">https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata1.zip</a> (Download –&gt; “View Raw”)<br />
-</p></li>
-<li><p>Structure of the files during election day (with partial results).<br />
-<a href="https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata2.zip" class="uri">https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata2.zip</a> (Download –&gt; “View Raw”)<br />
-</p></li>
+<a href="https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata1.zip" class="uri">https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata1.zip</a></p></li>
+<li><p>Structure of the files during election day (with partial results).</p>
+<ul>
+<li>Canton LU complete &amp; confirmed</li>
+<li>Canton BL intermediate status: 28/86 municipalities completed</li>
+<li>remaining cantons empty<br />
+</li>
+</ul>
+<p><a href="https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata2.zip" class="uri">https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata2.zip</a></p></li>
 <li><p>Structure of the files after the election has been completed.<br />
-<a href="https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata3.zip" class="uri">https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata3.zip</a> (Download –&gt; “View Raw”)<br />
-</p></li>
+<a href="https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata3.zip" class="uri">https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata3.zip</a></p></li>
 </ol>
-<p>In the following, the characteristics of these files are described.</p>
-<p><strong>Warning</strong>: The file structures of the JSONs here are currently NOT yet final. Any changes to these files will be published on this page and in the changelog on opendata.swiss.<br />
-</p>
-<p>Responsible for data set: Swiss Federal Statistical Office | Section Politics, Culture, Media | Contact: <a href="mailto:poku@bfs.admin.ch" class="email">poku@bfs.admin.ch</a>  </p>
 <hr style="border:1px solid black">
 <p><br />
 </p>
@@ -522,7 +532,7 @@ integer
 Total number of municipalities
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-The number of municipalities does not necessarily correspond to the number in the Swiss official commune register. Deviations: Municipalities that do not have their own ballot box. Some cantons have fictitious separate municipalities of the Swiss abroad.
+The number of municipalities does not necessarily correspond to the number in the Swiss official commune register. Deviations include municipalities that do not have their own ballot box. In addition, some cantons maintain fictitious separate municipalities for the Swiss living abroad.
 </td>
 </tr>
 <tr>
@@ -624,7 +634,7 @@ level_ch
 <td style="text-align:left;width: 30em; ">
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-level_ch: Will be populated as soon as the election is completed.
+level_ch: Will be filled as soon as the election is completed.
 </td>
 </tr>
 <tr>
@@ -1192,7 +1202,7 @@ wahl_abgeschlossen
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates that all cantons have delievered and confirmed their provisional final result (boolean true/false)
+Indicates that all cantons have delivered and confirmed their provisional final result (boolean true/false)
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
 </td>
@@ -1222,7 +1232,7 @@ kantone_abgeschlossen
 integer [1-26]
 </td>
 <td style="text-align:left;width: 30em; ">
-Number of cantons that have delievered and confirmed their provisional final result
+Number of cantons that have delivered and confirmed their provisional final result
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
 </td>
@@ -1295,7 +1305,7 @@ kanton_abgeschlossen
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates that the canton has delievered and confirmed its provisional final result (boolean true/false)
+Indicates that the canton has delivered and confirmed its provisional final result (boolean true/false)
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
 </td>
@@ -1313,7 +1323,7 @@ integer
 Total number of municipalities (within the canton)
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-The number of municipalities does not necessarily correspond to the number in the Swiss official commune register. Deviations: Municipalities that do not have their own ballot box. Some cantons have fictitious separate municipalities of the Swiss abroad.
+The number of municipalities does not necessarily correspond to the number in the Swiss official commune register. Deviations include municipalities that do not have their own ballot box. In addition, some cantons maintain fictitious separate municipalities for the Swiss living abroad.
 </td>
 </tr>
 <tr>
@@ -1385,7 +1395,7 @@ liste_nummer_bfs
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-OFS number of the list (numeric)
+FSO list number (numeric)
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
 </td>
@@ -1400,7 +1410,7 @@ liste_nummer_kanton
 string
 </td>
 <td style="text-align:left;width: 30em; ">
-Official cantonal number of the list (alphanumeric)
+Official list number given by canton (alphanumeric)
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
 </td>
@@ -1508,6 +1518,7 @@ string
 Sex of candidate
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+F=female, M=male
 </td>
 </tr>
 <tr>
@@ -1520,7 +1531,7 @@ geburtsdatum
 date
 </td>
 <td style="text-align:left;width: 30em; ">
-Daten of birth of candidate
+Date of birth of candidate
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
 </td>
@@ -1553,6 +1564,7 @@ integer
 FSO municipality number of place of residence of candidate
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+For candidates living abroad, 9950 is assigned as municipality number
 </td>
 </tr>
 <tr>
@@ -1660,7 +1672,7 @@ level_gemeinden
 <td style="text-align:left;width: 30em; ">
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-level_gemeinden: Update interval per completed canton; Important: For performance reasons, no empty file structure at municipality level. The variables on the “level_gemeinden” level are then populated on election day on a canton-by-canton basis.
+level_gemeinden: Update interval per completed canton; Important: For performance reasons, no empty file structure at municipality level. The variables on the “level_gemeinden” level are then filled on election day on a canton-by-canton basis.
 </td>
 </tr>
 <tr>
@@ -1719,7 +1731,7 @@ liste_nummer_bfs
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-OFS number of the list (numeric)
+FSO list number (numeric))
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
 </td>
@@ -1734,7 +1746,7 @@ liste_nummer_kanton
 string
 </td>
 <td style="text-align:left;width: 30em; ">
-Official cantonal number of the list (alphanumeric)
+Official list number given by canton (alphanumeric)
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
 </td>
@@ -1980,7 +1992,7 @@ integer
 Total number of municipalities
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-The number of municipalities does not necessarily correspond to the number in the Swiss official commune register. Deviations: Municipalities that do not have their own ballot box. Some cantons have fictitious separate municipalities of the Swiss abroad.
+The number of municipalities does not necessarily correspond to the number in the Swiss official commune register. Deviations include municipalities that do not have their own ballot box. In addition, some cantons maintain fictitious separate municipalities for the Swiss living abroad.
 </td>
 </tr>
 <tr>
@@ -2082,7 +2094,7 @@ level_ch
 <td style="text-align:left;width: 30em; ">
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-level_ch: Will be populated as soon as the election is completed.; The file also includes parties that contested the previous election but are no longer contesting the current election. This is to make it as easy as possible to display all changes in the party results. Consequently, however, it is also possible that parties are listed that are not running in the current election.
+level_ch: Will be filled as soon as the election is completed.; The file also includes parties that contested the previous election but are no longer contesting the current election. This is to make it as easy as possible to display all changes in the party results. Consequently, however, it is also possible that parties are listed that are not running in the current election.
 </td>
 </tr>
 <tr>
@@ -3276,7 +3288,7 @@ liste_nummer_bfs
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-OFS number of the list (numeric)
+FSO list number (numeric))
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
 </td>
@@ -3291,7 +3303,7 @@ liste_nummer_kanton
 string
 </td>
 <td style="text-align:left;width: 30em; ">
-Official cantonal number of the list (alphanumeric)
+Official list number given by canton (alphanumeric)
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
 </td>

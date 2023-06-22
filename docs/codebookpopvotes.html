@@ -315,31 +315,16 @@ div.tocify {
       <ul class="nav navbar-nav">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Popular votes
+    Federal Elections 2023
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="./lifecycle.html">Data lifecycle</a>
+      <a href="./codebook_elections2023.html">Data description</a>
     </li>
     <li>
-      <a href="./codebookpopvotes.html">Kleine blöde Änderung Codebook</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    National Elections 2023
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="./project1.html">Project part 1</a>
-    </li>
-    <li>
-      <a href="./project2.html">Project part 2</a>
+      <a href="./APIs_elections2023.html">API description</a>
     </li>
   </ul>
 </li>
@@ -366,13 +351,6 @@ div.tocify {
 
 
 <table>
-<colgroup>
-<col width="21%" />
-<col width="51%" />
-<col width="8%" />
-<col width="9%" />
-<col width="9%" />
-</colgroup>
 <thead>
 <tr class="header">
 <th align="left">Property</th>
@@ -399,7 +377,7 @@ div.tocify {
 </tr>
 <tr class="odd">
 <td align="left">spatial_reference</td>
-<td align="left">reference date for spatial information (cantons,</td>
+<td align="left">tbd</td>
 <td align="left">tbd</td>
 <td align="left">tbd</td>
 <td align="left">tbd</td>
@@ -551,7 +529,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2",
+      selectors: "h1,h2,h3",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
