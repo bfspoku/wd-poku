@@ -34,7 +34,7 @@ The FSO is responsible for publishing the official provisional elections results
 
 
 
-**Note**: The structure of the JSON files is still under review and has not been finally defined yet. Any changes to these files will be published on this page and in the changelog on opendata.swiss. or demonstration purposes, the dataset is currently linked on the DEV environment of opendata.swiss. The final files will be made available at the following URL: [PROD LINK opendata.swiss]
+**Note**: The structure of the JSON files is still under review and has not been finally defined yet. Any changes to these files will be published on this page and in the changelog on opendata.swiss. For demonstration purposes, the dataset is currently linked on the DEV environment of opendata.swiss. The final files will be made available at the following URL: [PROD LINK opendata.swiss]
 
 
 <br>
@@ -115,7 +115,7 @@ kbl(codebook_Kand) %>% kable_paper(full_width = F) %>%
 
 \
 
-Content description for the file: sd-t-17.02-sd-t-17.02-NRW2023-parteien.json
+Content description for the file: sd-t-17.02-NRW2023-parteien.json
 ```{r, echo=FALSE}
 library(kableExtra)
 opts <- options(knitr.kable.NA = "")
