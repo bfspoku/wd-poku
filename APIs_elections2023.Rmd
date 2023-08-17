@@ -8,4 +8,4 @@ output: html_document
 ### Intro
 Description and examples of how to use the APIs to access data for the 2023 federal elections.\
 
---> More to follow until the end of June
+--> More to follow.
