@@ -1,0 +1,26 @@
+---
+title: "Changelog_Eidgwahlen2023"
+author: "Swiss Federal Statistical Office | Politics, Culture, Media Section | Contact: poku@bfs.admin.ch"
+date: August 16, 2023
+output: html_document
+---
+
+<br>
+
+This changelog lists all changes made to the files in the dataset [Federal elections 2023](https://opendata.swiss/dataset/eidg-wahlen-2023)
+
+
+<br>
+
+### 2023-08-16
+
+**change** \
+
+sd-t-17.02-NRW2023-kandidierende.json \
+All (potential) double quotes in the variables "name", "vorname" and "beruf" are replaced by single quotes.
+
+**change** \
+
+sd-t-17.02-NRW2023-kandidierende.json \
+sd-t-17.02-NRW2023-metadaten.json \
+Variable kandidat_status_id: Only the value =2 (bisherig/sortant/uscente/incumbent) will be supplied. The specification =3 (ehemalig/ancien/ne élu/e/già eletto/a in passato/former) can no longer be offered. The structure of the variable is retained.

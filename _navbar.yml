@@ -6,6 +6,8 @@ left:
     menu:
        - text: "Data description"
          href: ./codebook_elections2023.html
+       - text: "Changelog"
+         href: ./Changelog_Eidgwahlen2023.html       
        - text: "API description"
          href: ./APIs_elections2023.html
   - text: "Popular votes" 
