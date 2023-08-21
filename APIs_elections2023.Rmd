@@ -9,3 +9,17 @@ output: html_document
 Description and examples of how to use the APIs to access data for the 2023 federal elections.\
 
 --> More to follow.
+
+
+HTTP/1.1 200 OK
+x-amz-id-2: tpS9Gu0RLuMZbRDwvNEa8qKW2NQBPBm8vYKRf5E+4b9PRS9MNmC/YZBgUDagmw1s172evjx3z64=
+x-amz-request-id: Z1T8XB7DNKMZTSDX
+Date: Mon, 21 Aug 2023 08:45:52 GMT
+Last-Modified: Wed, 16 Aug 2023 14:58:29 GMT
+ETag: "811dca5203b626b70e83b79191a760ad"
+x-amz-server-side-encryption: AES256
+x-amz-meta-minimum-api-version: 32
+Accept-Ranges: bytes
+Content-Type: application/json
+Server: AmazonS3
+Content-Length: 3231927
