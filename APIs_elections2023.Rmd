@@ -3,13 +3,30 @@ title: "API description Federal elections 2023"
 output: html_document
 ---
 
-
-
 ### Intro
 Description and examples of how to use the APIs to access data for the 2023 federal elections.\
 
---> More to follow.
+The main problem is that the `real-time' files can become pretty big and if many people access them too often just to check if they have been updated, the system is likely to slow down considerably. Moreover, in the unlikely event of a server or network failure, we would switch to a fallback solution, so the URLs of the resource must be up to date on your side. We recommend using the principle below to mitigate these risks.
 
+
+### Basic Principle
+
+```mermaid
+flowchart LR
+    id1 -.- id4[Opendata.swiss];
+    id1[OFS] -.- id2[(AWS S3)];
+    id3[Consumer] -->|"(1) get URLs"| id4;
+    id3[Consumer] -->|"(2) HEAD request"| id2;
+    id3[Consumer] -->|"(3) download resource
+    if new"| id2;
+```
+
+1. **The consumer gets the URL(s) of the resource(s) from opendata.swiss API.**<br/>
+This ensures that the URLS are up to date. In the unlikely case of a system failure of the AWS S3 bucket, the FSO will switch to a fallback server and update the URLS in the API.
+2. **The consumer makes a HEAD request on the resource server.**<br/>
+This allows the detection of changes without downloading the entire file, by checking the `Last-Modified` header. Example with curl (*Another example using Python is available below.*)
+```shell
+$ curl -I https://ogd-dev-static.voteinfo-app.ch/v4/ogd/sd-t-17.02-NRW2023-kandidierende.json 
 
 HTTP/1.1 200 OK
 x-amz-id-2: tpS9Gu0RLuMZbRDwvNEa8qKW2NQBPBm8vYKRf5E+4b9PRS9MNmC/YZBgUDagmw1s172evjx3z64=
@@ -23,3 +40,12 @@ Accept-Ranges: bytes
 Content-Type: application/json
 Server: AmazonS3
 Content-Length: 3231927
+```
+3. **The consumer downloads the resource (only if it has been updated).**
+
+
+### Example Code (Python)
+
+An example of how to use the Opendata.swiss API to retrieve the resource URLs and then check if a resource has been updated without downloading it based on the principle above is available on our GitHub: https://github.com/bfspoku/ogd-demo
+
+Feel free to use, modify or redistribute the code.
