@@ -15,11 +15,12 @@ The main problem is that the `real-time' files can become pretty big and if many
 flowchart LR
     id1 -.- id4[Opendata.swiss];
     id1[OFS] -.- id2[(AWS S3)];
-    id3[Consumer] -->|"(1) get URLs"| id4;
-    id3[Consumer] -->|"(2) HEAD request"| id2;
-    id3[Consumer] -->|"(3) download resource
-    if new"| id2;
+    id3[Consumer] -->|1 get URLs| id4;
+    id3[Consumer] -->|2 HEAD request| id2;
+    id3[Consumer] -->|3 download resource if new| id2;
 ```
+
+![Fig. 1 Basic Principle](image.png)
 
 1. **The consumer gets the URL(s) of the resource(s) from opendata.swiss API.**<br/>
 This ensures that the URLS are up to date. In the unlikely case of a system failure of the AWS S3 bucket, the FSO will switch to a fallback server and update the URLS in the API.
