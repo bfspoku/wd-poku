@@ -1579,7 +1579,7 @@ integer
 FSO municipality number of place of residence of candidate
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-For candidates living abroad, 9950 is assigned as municipality number
+The number (ID) is only supplied after the periods allowed for rectifications in all cantons have expired. The municipality number is added on the basis of address data by the FSO. For candidates living abroad, 9950 is assigned as municipality number
 </td>
 </tr>
 <tr>
@@ -1595,6 +1595,7 @@ string
 Place of residence of candidate
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+Indication by candidate when registering candidacy.
 </td>
 </tr>
 <tr>
@@ -1623,7 +1624,7 @@ kandidat_status_id
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-null: candidate has never been elected before; 2: incumbent; 3: former (candidate has already been elected in the past)
+2= incumbent; else value=‘null’
 </td>
 <td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
 see metadaten.json; The value =3 (ehemalig/ancien/ne élu/e/già eletto/a in passato/former) can no longer be supplied for 2023. The structure of the variable is retained.
