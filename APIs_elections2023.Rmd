@@ -8,6 +8,8 @@ Description and examples of how to use the APIs to access data for the 2023 fede
 
 The main problem is that the `real-time' files can become pretty big and if many people access them too often just to check if they have been updated, the system is likely to slow down considerably. Moreover, in the unlikely event of a server or network failure, we would switch to a fallback solution, so the URLs of the resource must be up to date on your side. We recommend using the principle below to mitigate these risks.
 
+\
+
 #### API Endpoints
 
 | Environment | Endpoint URL | Use |
@@ -51,6 +53,7 @@ Content-Length: 3231927
 ```
 3. **The consumer downloads the resource (only if it has been updated).**
 
+\
 
 ### Example Code (Python)
 
@@ -58,6 +61,7 @@ An example of how to use the Opendata.swiss API to retrieve the resource URLs an
 
 Feel free to use, modify or redistribute the code.
 
+\
 
 ### Limitations
 

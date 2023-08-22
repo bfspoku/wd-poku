@@ -23,4 +23,13 @@ All (potential) double quotes in the variables "name", "vorname" and "beruf" are
 
 sd-t-17.02-NRW2023-kandidierende.json \
 sd-t-17.02-NRW2023-metadaten.json \
-Variable kandidat_status_id: Only the value =2 (bisherig/sortant/uscente/incumbent) will be supplied. The specification =3 (ehemalig/ancien/ne élu/e/già eletto/a in passato/former) can no longer be offered. The structure of the variable is retained.
+Variable kandidat_status_id: Only the value =2 (bisherig/sortant/uscente/incumbent) will be supplied. The value =3 (ehemalig/ancien/ne élu/e/già eletto/a in passato/former) can no longer be supplied for 2023. The structure of the variable is retained.
+
+**change** \
+
+sd-t-17.02-NRW2023-parteien.json \
+sd-t-17.02-NRW2023-listen.json \
+sd-t-17.02-NRW2023-zeitreihen-frauen-beteiligung.json \
+sd-t-17.02-NRW2023-zeitreihen-parteien.json \
+
+Variables that indicate the number of elected are no longer treated as critical variables and are delivered normally (automatically, without manual control).
