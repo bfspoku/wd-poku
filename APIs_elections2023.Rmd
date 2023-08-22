@@ -8,13 +8,19 @@ Description and examples of how to use the APIs to access data for the 2023 fede
 
 The main problem is that the `real-time' files can become pretty big and if many people access them too often just to check if they have been updated, the system is likely to slow down considerably. Moreover, in the unlikely event of a server or network failure, we would switch to a fallback solution, so the URLs of the resource must be up to date on your side. We recommend using the principle below to mitigate these risks.
 
-<!-- #TODO: add the real links to opendata.swiss when they are known. -->
+#### API Endpoints
+
+| Environment | Endpoint URL | Use |
+| - | - | - | 
+| Test | https://ckan.ogdch-abnahme.clients.liip.ch/api/3/action/package_show?id=eidg-wahlen-2023 | Tests before election Sunday | 
+| Production | https://ckan.opendata.swiss/api/3/action/package_show?id=eidg-wahlen-2023 | Lists and candidates before Sunday + results on Sunday starting 12:00 CET |
+
 
 ### Basic Principle
 
 ```mermaid
 flowchart LR
-    id1 -.- id4[Opendata.swiss];
+    id1 -.- id4[Opendata.swiss API];
     id1[OFS] -.- id2[(AWS S3)];
     id3[Consumer] -->|1 get URLs| id4;
     id3[Consumer] -->|2 HEAD request| id2;
