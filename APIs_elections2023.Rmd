@@ -57,3 +57,9 @@ Content-Length: 3231927
 An example of how to use the Opendata.swiss API to retrieve the resource URLs and then check if a resource has been updated without downloading it based on the principle above is available on our GitHub: https://github.com/bfspoku/ogd-demo
 
 Feel free to use, modify or redistribute the code.
+
+
+### Limitations
+
+HEAD Request works only on HTTP servers or end points where the `Last-Modified` header is returned. This won't work with services like the FSO DAM that is a Tomcat web app and returns data directly from a DB without `Last-Modified`. If you see any link looking like 
+https://dam-api.bfs.admin.ch/hub/api/dam/assets/26965404/master, it won't be applicable.
