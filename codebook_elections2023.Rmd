@@ -30,11 +30,12 @@ codebook_ZR_P <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx",
 
 ### Intro
 
-The FSO is responsible for publishing the official provisional elections results of the federal elections. This documentation focuses on the dataset [Federal elections 2023](https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023) (currently DEV environment) which contains the continuously updated result files on Election Sunday, October 22, 2023. 
+The FSO is responsible for publishing the official provisional elections results of the federal elections. This documentation focuses on the dataset [Federal elections 2023](https://opendata.swiss/dataset/eidg-wahlen-2023) which contains the continuously updated result files on Election Sunday, October 22, 2023.
 
 
+**Testing**: For testing purposes, a dataset exists on the DEV environment of opendata.swiss. Test data will be uploaded there several times until election Sunday. More information will follow in the associated data description (please subscribe to the dataset to receive update notifications). \
+DEV-environment: https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023
 
-**Note**: The structure of the JSON files is still under review and has not been finally defined yet. Any changes to these files will be published on this page and in the changelog on opendata.swiss. For demonstration purposes, the dataset is currently linked on the DEV environment of opendata.swiss. The final files will be made available at the following URL: [PROD LINK opendata.swiss]
 
 
 <br>
@@ -43,7 +44,10 @@ The FSO is responsible for publishing the official provisional elections results
 
 
 Currently, 3 provisional test data sets with dummy results from the 2019 elections (National Council) are available. Description and test data for the Council of States will follow. \
-(Go to "View Raw" for download ) \ 
+(Go to "View Raw" for download ) \
+
+**Note**: Status of test data: June 2023. Please refer to the changelog for the latest changes: https://bfspoku.github.io/wd-poku/Changelog_Eidgwahlen2023.html \
+
 
   1. Empty files. Structure of the files before election day.\
     <https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata1.zip> 
