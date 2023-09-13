@@ -9,9 +9,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Swiss Federal Statistical Office | Section Politics, Culture, Media (POKU) | Contact: poku@bfs.admin.ch" />
 
 
-<title>API description Federal elections 2023</title>
+<title>Geometries</title>
 
 <script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -372,94 +373,198 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">API description Federal elections 2023</h1>
+<h1 class="title toc-ignore">Geometries</h1>
+<h4 class="author">Swiss Federal Statistical Office | Section Politics, Culture, Media (POKU) | Contact: <a href="mailto:poku@bfs.admin.ch" class="email">poku@bfs.admin.ch</a></h4>
+<h4 class="date">Last update: 13/09/23, 17:24</h4>
 
 </div>
 
 
-<div id="intro" class="section level3">
-<h3>Intro</h3>
-<p>Description and examples of how to use the APIs to access data for the 2023 federal elections.<br />
-</p>
-<p>The main problem is that the `real-time’ files can become pretty big and if many people access them too often just to check if they have been updated, the system is likely to slow down considerably. Moreover, in the unlikely event of a server or network failure, we would switch to a fallback solution, so the URLs of the resource must be up to date on your side. We recommend using the principle below to mitigate these risks.</p>
-<p><br />
-</p>
-<div id="api-endpoints" class="section level4">
-<h4>API Endpoints</h4>
+<div id="geometries-in-political-statistics" class="section level3">
+<h3>Geometries in Political Statistics</h3>
+<p>The following section describes the geometries used to produce the output of the Statistics of Elections and Popular Votes by POKU FSO.</p>
+<p>The results of federal votes and elections are provided for the following spatial dimensions:</p>
+<ul>
+<li>Switzerland</li>
+<li>Cantons</li>
+<li>Districts</li>
+<li>Communes (municipalities)</li>
+<li>infra-communal counting districts (only used for popular votes)</li>
+<li>Other spatial typologies (e.g. language region; only available for popular votes)</li>
+</ul>
+<p>The basis of all spatial data (naming conventions, identification number) is the <a href="https://www.bfs.admin.ch/bfs/en/home/basics/swiss-official-commune-register.html">Swiss official commune register</a>. Due to special circumstances in the political statistics, there are some differences regarding the municipality status, which are explained below.</p>
+<p><br></p>
+<div id="shared-polling-stations-gemeinsame-urnen" class="section level4">
+<h4>Shared polling stations (<em>Gemeinsame Urnen</em>)</h4>
+<p>Some communes do not run their own polling station and count their ballots in another commune. For these communes with “shared polling stations”, it is not possible to determine which commune the votes originate from.</p>
+<p>As of <em>01.07.2023</em>, the following communes count their ballots in another commune:</p>
 <table>
 <colgroup>
-<col width="33%" />
-<col width="33%" />
-<col width="33%" />
+<col width="20%" />
+<col width="21%" />
+<col width="26%" />
+<col width="31%" />
 </colgroup>
 <thead>
 <tr class="header">
-<th>Environment</th>
-<th>Endpoint URL</th>
-<th>Use</th>
+<th><strong>FSO no. </strong> w/o p. station</th>
+<th><strong>Commune w/o p. station</strong></th>
+<th><strong>FSO no.</strong> location of p. station</th>
+<th><strong>Commune where p. station is located </strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Test</td>
-<td><a href="https://ckan.ogdch-abnahme.clients.liip.ch/api/3/action/package_show?id=eidg-wahlen-2023" class="uri">https://ckan.ogdch-abnahme.clients.liip.ch/api/3/action/package_show?id=eidg-wahlen-2023</a></td>
-<td>Tests before election Sunday</td>
+<td>877</td>
+<td>Niedermuhlern</td>
+<td>888</td>
+<td>Wald (BE)</td>
 </tr>
 <tr class="even">
-<td>Production</td>
-<td><a href="https://ckan.opendata.swiss/api/3/action/package_show?id=eidg-wahlen-2023" class="uri">https://ckan.opendata.swiss/api/3/action/package_show?id=eidg-wahlen-2023</a></td>
-<td>Lists and candidates before Sunday + results on Sunday starting 12:00 CET</td>
+<td>535</td>
+<td>Deisswil bei Münchenbuchsee</td>
+<td>553</td>
+<td>Wiggiswil</td>
+</tr>
+<tr class="odd">
+<td>408</td>
+<td>Hellsau</td>
+<td>410</td>
+<td>Höchstetten</td>
+</tr>
+<tr class="even">
+<td>389</td>
+<td>Meienried</td>
+<td>383</td>
+<td>Büren an der Aare</td>
+</tr>
+<tr class="odd">
+<td>629</td>
+<td>Oberhünigen</td>
+<td>628</td>
+<td>Zäziwil</td>
 </tr>
 </tbody>
 </table>
+<p>For these communes, the results are published with the FSO identification number and name of the commune where the polling station is located. As a consequence, the communes without own polling stations are missing in the datasets published by POKU, even though they are included in the Swiss official commune register.</p>
+<p><br></p>
+</div>
+<div id="special-communes-for-swiss-citizens-living-abroad-auslandschweizergemeinden" class="section level4">
+<h4>Special communes for Swiss citizens living abroad (<em>Auslandschweizergemeinden</em>)</h4>
+<p>In various cantons, special communes/districts (“extraterritorial” communes/districts) are designated for certain elections and votes. These special communes/districts are included in the datasets published by POKU, but are not included in the Swiss official commune register. 12 cantons maintain a special municipality to count the votes of the Swiss citizens living abroad separately:</p>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="17%" />
+<col width="27%" />
+<col width="26%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Canton ID</strong></th>
+<th><strong>Canton</strong></th>
+<th><strong>FSO no. commune/district (old)</strong></th>
+<th><strong>FSO no. (as of October 2023)</strong></th>
+<th><strong>Commune/district</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Zürich</td>
+<td>9010</td>
+<td>19010</td>
+<td>ZH-Ausland-CH</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>Luzern</td>
+<td>9030</td>
+<td>19030</td>
+<td>LU-Ausland-CH</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Uri</td>
+<td>9040</td>
+<td>19040</td>
+<td>UR-Ausland-CH</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Fribourg / Freiburg</td>
+<td>9100</td>
+<td>19100</td>
+<td>FR-CH de l’étranger</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>Basel-Stadt</td>
+<td>9120</td>
+<td>19120</td>
+<td>BS-Ausland-CH</td>
+</tr>
+<tr class="even">
+<td>16</td>
+<td>Appenzell Innerrhoden</td>
+<td>9160</td>
+<td>19160</td>
+<td>AI-Ausland-CH</td>
+</tr>
+<tr class="odd">
+<td>17</td>
+<td>St. Gallen</td>
+<td>9170</td>
+<td>19170</td>
+<td>SG-Ausland-CH</td>
+</tr>
+<tr class="even">
+<td>19</td>
+<td>Aargau</td>
+<td>9190</td>
+<td>19190</td>
+<td>AG-Ausland-CH</td>
+</tr>
+<tr class="odd">
+<td>20</td>
+<td>Thurgau</td>
+<td>9200</td>
+<td>19200</td>
+<td>TG-Ausland-CH</td>
+</tr>
+<tr class="even">
+<td>22</td>
+<td>Vaud</td>
+<td>9220</td>
+<td>19220</td>
+<td>VD-CH de l’étranger</td>
+</tr>
+<tr class="odd">
+<td>23</td>
+<td>Valais / Wallis</td>
+<td>9230</td>
+<td>19230</td>
+<td>VS-CH de l’étranger</td>
+</tr>
+<tr class="even">
+<td>25</td>
+<td>Genève</td>
+<td>9250</td>
+<td>19250</td>
+<td>GE-CH de l’étranger</td>
+</tr>
+</tbody>
+</table>
+<p>Note that the FSO identification numbers for the communes/districts of the Swiss abroad have been reassigned. They are now composed as follows: &lt;prefix 19&gt;-&lt;Canton ID FSO, (2 digits)&gt;-&lt;suffix 0&gt;. The new system will be used for the first time for the federal elections in 2023. The old FSO numbers will be discontinued.</p>
 </div>
 </div>
-<div id="basic-principle" class="section level3">
-<h3>Basic Principle</h3>
-<pre class="mermaid"><code>flowchart LR
-    id1 -.- id4[Opendata.swiss API];
-    id1[OFS] -.- id2[(AWS S3)];
-    id3[Consumer] --&gt;|1 get URLs| id4;
-    id3[Consumer] --&gt;|2 HEAD request| id2;
-    id3[Consumer] --&gt;|3 download resource if new| id2;</code></pre>
-<div class="figure">
-<img src="image.png" alt="" />
-<p class="caption">Fig. 1 Basic Principle</p>
-</div>
-<ol style="list-style-type: decimal">
-<li><strong>The consumer gets the URL(s) of the resource(s) from opendata.swiss API.</strong><br/> This ensures that the URLS are up to date. In the unlikely case of a system failure of the AWS S3 bucket, the FSO will switch to a fallback server and update the URLS in the API.</li>
-<li><strong>The consumer makes a HEAD request on the resource server.</strong><br/> This allows the detection of changes without downloading the entire file, by checking the <code>Last-Modified</code> header. Example with curl (<em>Another example using Python is available below.</em>)</li>
-</ol>
-<pre class="shell"><code>$ curl -I https://ogd-dev-static.voteinfo-app.ch/v4/ogd/sd-t-17.02-NRW2023-kandidierende.json 
-
-HTTP/1.1 200 OK
-x-amz-id-2: tpS9Gu0RLuMZbRDwvNEa8qKW2NQBPBm8vYKRf5E+4b9PRS9MNmC/YZBgUDagmw1s172evjx3z64=
-x-amz-request-id: Z1T8XB7DNKMZTSDX
-Date: Mon, 21 Aug 2023 08:45:52 GMT
-Last-Modified: Wed, 16 Aug 2023 14:58:29 GMT
-ETag: &quot;811dca5203b626b70e83b79191a760ad&quot;
-x-amz-server-side-encryption: AES256
-x-amz-meta-minimum-api-version: 32
-Accept-Ranges: bytes
-Content-Type: application/json
-Server: AmazonS3
-Content-Length: 3231927</code></pre>
-<ol start="3" style="list-style-type: decimal">
-<li><strong>The consumer downloads the resource (only if it has been updated).</strong></li>
-</ol>
-<p><br />
-</p>
-</div>
-<div id="example-code-python" class="section level3">
-<h3>Example Code (Python)</h3>
-<p>An example of how to use the Opendata.swiss API to retrieve the resource URLs and then check if a resource has been updated without downloading it based on the principle above is available on our GitHub: <a href="https://github.com/bfspoku/ogd-demo" class="uri">https://github.com/bfspoku/ogd-demo</a></p>
-<p>Feel free to use, modify or redistribute the code.</p>
-<p><br />
-</p>
-</div>
-<div id="limitations" class="section level3">
-<h3>Limitations</h3>
-<p>HEAD Request works only on HTTP servers or end points where the <code>Last-Modified</code> header is returned. This won’t work with services like the FSO DAM that is a Tomcat web app and returns data directly from a DB without <code>Last-Modified</code>. If you see any link looking like <a href="https://dam-api.bfs.admin.ch/hub/api/dam/assets/26965404/master" class="uri">https://dam-api.bfs.admin.ch/hub/api/dam/assets/26965404/master</a>, it won’t be applicable.</p>
+<div id="further-information" class="section level3">
+<h3>Further Information</h3>
+<ul>
+<li><a href="https://www.agvchapp.bfs.admin.ch/de/communes/query">Application of the Swiss Communes</a>: For queries regarding the current state of communes, past and future mutations and spatial typologies (only available in DE/FR/IT).</li>
+<li><a href="https://www.bfs.admin.ch/bfs/de/home/grundlagen/agvch/historisiertes-gemeindeverzeichnis.assetdetail.15224054.html">REST services for the Swiss official commune register</a>: description available in DE/FR.</li>
+</ul>
 </div>
 
 
