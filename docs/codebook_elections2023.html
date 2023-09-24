@@ -11,7 +11,6 @@
 
 <meta name="author" content="Swiss Federal Statistical Office | Politics, Culture, Media Section | Contact: poku@bfs.admin.ch" />
 
-<meta name="date" content="2023-06-22" />
 
 <title>Federal Elections 2023</title>
 
@@ -325,6 +324,9 @@ div.tocify {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="./Info.html">Info</a>
+    </li>
+    <li>
       <a href="./codebook_elections2023.html">Data description</a>
     </li>
     <li>
@@ -379,7 +381,7 @@ div.tocify {
 <h1 class="title toc-ignore">Federal Elections 2023</h1>
 <h3 class="subtitle">Data Documentation</h3>
 <h4 class="author">Swiss Federal Statistical Office | Politics, Culture, Media Section | Contact: <a href="mailto:poku@bfs.admin.ch" class="email">poku@bfs.admin.ch</a></h4>
-<h4 class="date">June 22, 2023</h4>
+<h4 class="date">Last update: 24/09/23, 19:29</h4>
 
 </div>
 
@@ -414,6 +416,193 @@ DEV-environment: <a href="https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-
 <a href="https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata3.zip" class="uri">https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata3.zip</a></p></li>
 </ol>
 <hr style="border:1px solid black">
+<p><br />
+</p>
+</div>
+<div id="new-json-listen-gde" class="section level3">
+<h3>NEW: JSON Listen-gde<br />
+</h3>
+<p>(Listes/Liste/Lists)<br />
+</p>
+<p>20230926: New JSON with list results at municipality level. Update interval: continuously.<br />
+(Unlike the other files, the file is not offered with an empty structure. Before 12.00 noon on election day, the file will be completely empty (0KB). )</p>
+<p>Please read the following description.</p>
+<p><br />
+</p>
+Content description for the file: sd-t-17.02-NRW2023-listen-gde.json
+<table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Node
+</th>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:left;">
+Type
+</th>
+<th style="text-align:left;">
+Description
+</th>
+<th style="text-align:left;">
+Comments
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+timestamp
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;border-right:1px solid;">
+</td>
+<td style="text-align:left;width: 30em; ">
+Date and Time of data creation
+</td>
+<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+level_gemeinden
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;border-right:1px solid;">
+</td>
+<td style="text-align:left;width: 30em; ">
+</td>
+<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+level_gemeinden: continuous update interval with the already completed municipalities (depending on the canton); Important: For performance reasons, the empty file does NOT contain the full file structure.
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+kanton_nummer
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+FSO canton number
+</td>
+<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+kanton_bezeichnung
+</td>
+<td style="text-align:left;border-right:1px solid;">
+string
+</td>
+<td style="text-align:left;width: 30em; ">
+Canton name
+</td>
+<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+gemeinde_nummer
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+FSO municipality number
+</td>
+<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+Attention: In the case of election results, special cases at the municipal level must be taken into account. Due to shared ballot boxes, no result can be shown for elections in a few municipalities. Some cantons have a separate municipality number for their Swiss abroad. The number/Id of these special municipalities will be composed as follows: Ex. Canton AI: 19160 (&lt;prefix 19&gt;&lt;FSO canton number, 2 digits&gt;&lt;suffix 0&gt;)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+gemeinde_bezeichnung
+</td>
+<td style="text-align:left;border-right:1px solid;">
+string
+</td>
+<td style="text-align:left;width: 30em; ">
+Municipality name
+</td>
+<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+liste_nummer_bfs
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+FSO list number (numeric))
+</td>
+<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+liste_nummer_kanton
+</td>
+<td style="text-align:left;border-right:1px solid;">
+string
+</td>
+<td style="text-align:left;width: 30em; ">
+Official list number given by canton (alphanumeric)
+</td>
+<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+partei_id
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+FSO party number
+</td>
+<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+see metadaten.json
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+</td>
+<td style="text-align:left;font-weight: bold;border-right:1px solid;">
+stimmen_liste
+</td>
+<td style="text-align:left;border-right:1px solid;">
+integer
+</td>
+<td style="text-align:left;width: 30em; ">
+Number of total votes per list; level: municipality
+</td>
+<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+</td>
+</tr>
+</tbody>
+</table>
 <p><br />
 </p>
 </div>

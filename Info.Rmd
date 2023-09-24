@@ -1,0 +1,83 @@
+---
+title: "Federal Elections 2023"
+subtitle: "Info"
+author: "Swiss Federal Statistical Office | Politics, Culture, Media Section | Contact: poku@bfs.admin.ch"
+date: "Last update: `r format(Sys.time(), '%d/%m/%y, %H:%M')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(cache = FALSE)
+library(readxl)
+library(knitr)
+library(kableExtra)
+```
+
+```{r include=FALSE}
+library(readxl)
+#Var-Tabellen einlesen
+data_intervals <- as.data.frame(read_xlsx("codebook/data_intervals_elections2023.xlsx", col_names = TRUE))
+
+```
+
+\
+
+## Info page FSO data set on opendata.swiss
+Info page with updates on the Federal Statistical Office's data set for the Federal Elections 2023
+
+\
+
+**Productive data set:**https://opendata.swiss/dataset/eidg-wahlen-2023
+
+**Testing data set:** https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023
+
+<hr style="border:1px solid black">
+
+\
+
+#### 20230925: New Data Ressource sd-t-17.02-NRW2023-listen-gde.json
+Due to corresponding demand (and after extensive internal testing), we offer a new JSON with list results at municipality level. This JSON will be continuously updated on election Sunday. \
+There are some special aspects to be taken into account with this file. Please read the data description, which has been extended accordingly to include this file: https://bfspoku.github.io/wd-poku/codebook_elections2023.html
+
+\
+<hr style="border:1px solid black">
+
+
+#### 20230925: Test day on 28 September 2023
+**Planned schedule for the test day on 28 September 2023**
+
+On 28 September 2023 from 10.00 - 12.00 test files will be continuously uploaded on the DEV environment (https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023)
+Below is a brief overview of the schedule and test dates offered. <br> 
+1. The test only includes the JSON files on the National Council elections. <br> 
+2. All files will already contain the official lists and candidates.(Exceptions are possible for cantons with a majoritarian electoral system without compulsory registration). <br>
+3. A first set of test data will already be uploaded to the DEV environment on 26 September. This should facilitate the preparation for the test day. <br>
+4. There will be intermediate results uploaded for several cantons, and for some there will also be a cantonal final result. The complete election results at the Swiss level will not be simulated. (Work on such a complete data set is underway, but it is still unclear whether this can be offered until election day. Corresponding information on further testing possibilities would be published here.)
+
+
+**Overview test data** <br>
+(May be changed at short notice.)
+
+Intermediate results for the following cantons: 1, 3, 9, 11, 12, 13, 18, 20, 24, 26
+
+\
+
+Final results for the following cantons: 1, 9, 11, 12, 20, 26
+
+
+\
+<hr style="border:1px solid black">
+
+#### 20230925: Cantonal delivery intervals on election Sunday \
+(Indication of the cantons, without guarantee)
+```{r, echo=FALSE}
+library(kableExtra)
+opts <- options(knitr.kable.NA = "")
+
+kbl(data_intervals) %>% kable_paper(full_width = F) %>%
+  column_spec(1, border_right = T) %>%
+  column_spec(2, border_right = T) %>%
+  column_spec(3, border_right = T, width = "30em") %>% 
+  column_spec(4, width = "30em")
+```
+

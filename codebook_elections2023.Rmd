@@ -2,7 +2,7 @@
 title: "Federal Elections 2023"
 subtitle: "Data Documentation"
 author: "Swiss Federal Statistical Office | Politics, Culture, Media Section | Contact: poku@bfs.admin.ch"
-date: June 22, 2023
+date: "Last update: `r format(Sys.time(), '%d/%m/%y, %H:%M')`"
 output: html_document
 ---
 
@@ -24,6 +24,7 @@ codebook_Part <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx",
 codebook_List <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx", sheet = "listen", col_names = TRUE))
 codebook_ZR_F_B <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx", sheet = "zeitreihen-frauen-beteiligung", col_names = TRUE))
 codebook_ZR_P <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx", sheet = "zeitreihen-parteien", col_names = TRUE))
+codebook_List_Gde <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx", sheet = "listen-gde", col_names = TRUE))
 ```
 
 <br>
@@ -66,6 +67,31 @@ Currently, 3 provisional test data sets with dummy results from the 2019 electio
   
   
 <hr style="border:1px solid black">
+
+\
+
+### NEW: JSON Listen-gde \
+(Listes/Liste/Lists) \
+
+20230926: New JSON with list results at municipality level. Update interval: continuously. \
+(Unlike the other files, the file is not offered with an empty structure. Before 12.00 noon on election day, the file will be completely empty (0KB). ) 
+
+Please read the following description.
+
+\
+
+Content description for the file: sd-t-17.02-NRW2023-listen-gde.json
+```{r, echo=FALSE}
+library(kableExtra)
+opts <- options(knitr.kable.NA = "")
+
+kbl(codebook_List_Gde) %>% kable_paper(full_width = F) %>%
+  column_spec(1, bold = T, border_right = T) %>%
+  column_spec(2, bold = T, border_right = T) %>%
+  column_spec(3, bold = F, border_right = T) %>% 
+  column_spec(4, width = "30em") %>% 
+  column_spec(5, width = "40em", background = "#D3D3D3")
+```
 
 \
 
