@@ -33,12 +33,20 @@ Info page with updates on the Federal Statistical Office's data set for the Fede
 **Testing data set:** https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023
 
 <hr style="border:1px solid black">
+\
+
+#### 20230925: New Data Ressource sd-t-17.02-SRW2023-kandidierende_erster-wahlgang.json
+JSON file for the results of the Council of States added to the test environment. This file already includes the candidates for the first round of voting on October 22. Results for the Council of States are updated per completed canton.\
+Data description: https://bfspoku.github.io/wd-poku/codebook_elections2023.html#JSON_SR_-_Kandidierende_
+
+\
+<hr style="border:1px solid black">
 
 \
 
 #### 20230925: New Data Ressource sd-t-17.02-NRW2023-listen-gde.json
 Due to corresponding demand (and after extensive internal testing), we offer a new JSON with list results at municipality level. This JSON will be continuously updated on election Sunday. \
-There are some special aspects to be taken into account with this file. Please read the data description, which has been extended accordingly to include this file: https://bfspoku.github.io/wd-poku/codebook_elections2023.html
+There are some special aspects to be taken into account with this file. Please read the data description, which has been extended accordingly to include this file: https://bfspoku.github.io/wd-poku/codebook_elections2023.html#JSON_Listen_
 
 \
 <hr style="border:1px solid black">
