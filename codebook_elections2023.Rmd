@@ -25,6 +25,8 @@ codebook_List <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx",
 codebook_ZR_F_B <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx", sheet = "zeitreihen-frauen-beteiligung", col_names = TRUE))
 codebook_ZR_P <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx", sheet = "zeitreihen-parteien", col_names = TRUE))
 codebook_List_Gde <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx", sheet = "listen-gde", col_names = TRUE))
+codebook_SRW <- as.data.frame(read_xlsx("codebook/codebook_elections2023.xlsx", sheet = "SRW", col_names = TRUE))
+
 ```
 
 <br>
@@ -217,6 +219,31 @@ library(kableExtra)
 opts <- options(knitr.kable.NA = "")
 
 kbl(codebook_ZR_P) %>% kable_paper(full_width = F) %>%
+  column_spec(1, bold = T, border_right = T) %>%
+  column_spec(2, bold = T, border_right = T) %>%
+  column_spec(3, bold = F, border_right = T) %>% 
+  column_spec(4, width = "30em") %>% 
+  column_spec(5, width = "30em", background = "#D3D3D3")
+```
+
+\
+
+
+### JSON SR - Kandidierende \
+(CE - Candidats/CS - Candidati) \
+
+\
+
+Results of the elections to the Council of States are provided in the following formats:
+
+* sd-t-17.02-SRW2023-candidates_first-round_election.json: results of the 1st round of elections
+* sd-t-17.02-SRW2023-candidates_second-round.json: results of the 2nd round of elections
+
+```{r, echo=FALSE}
+library(kableExtra)
+opts <- options(knitr.kable.NA = "")
+
+kbl(codebook_SRW) %>% kable_paper(full_width = F) %>%
   column_spec(1, bold = T, border_right = T) %>%
   column_spec(2, bold = T, border_right = T) %>%
   column_spec(3, bold = F, border_right = T) %>% 
