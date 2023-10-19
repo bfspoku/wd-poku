@@ -49,7 +49,7 @@ DEV-environment: https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-20
 Currently, 3 provisional test data sets with dummy results from the 2019 elections (National Council) are available. Description and test data for the Council of States will follow. \
 (Go to "View Raw" for download ) \
 
-**Note**: Status of test data: June 2023. Please refer to the changelog for the latest changes: https://bfspoku.github.io/wd-poku/Changelog_Eidgwahlen2023.html \
+**Note**: Status of test data : June 2023 (outdated). Please refer to the changelog for the latest changes: https://bfspoku.github.io/wd-poku/Changelog_Eidgwahlen2023.html \
 
 
   1. Empty files. Structure of the files before election day.\

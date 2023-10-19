@@ -35,6 +35,23 @@ Info page with updates on the Federal Statistical Office's data set for the Fede
 <hr style="border:1px solid black">
 \
 
+#### 20231019: Last minor changes (structure of the files is not affected)
+
+1. Files with municipality level: In the canton BE, the municipality "Oberhünigen" (BFS-Nr. 629) now has its own ballot box and is therefore included in the files.
+
+2. Based on the consultation with all the general secretariats of the parties regarding the attribution of the submitted electoral lists to national parties, the following change has been made:
+
+
+| Canton    | liste_nummer_bfs | liste_nummer_kanton | liste_bezeichnung       | Party old | Party new |
+|:---------:|:----------------:|:-------------------:|:------------------------:|:---------:|:---------:|
+|  3 / LU   |         23       |        26           | Aktive Senioren Luzern  |  SVP       |  Others
+
+\
+<hr style="border:1px solid black">
+
+\
+
+
 #### 20230925: New Data Ressource sd-t-17.02-SRW2023-kandidierende_erster-wahlgang.json
 JSON file for the results of the Council of States added to the test environment. This file already includes the candidates for the first round of voting on October 22. Results for the Council of States are updated per completed canton.\
 Data description: https://bfspoku.github.io/wd-poku/codebook_elections2023.html#JSON_SR_-_Kandidierende_
