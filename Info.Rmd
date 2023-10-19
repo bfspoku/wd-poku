@@ -37,7 +37,7 @@ Info page with updates on the Federal Statistical Office's data set for the Fede
 
 #### 20231019: Last minor changes (structure of the files is not affected)
 
-1. Files with municipality level: In the canton BE, the municipality "Oberhünigen" (BFS-Nr. 629) now has its own ballot box and is therefore included in the files.
+1. Files with municipality level: In the canton BE, the municipality "Rüti bei Lyssach" (BFS-Nr. 422) now has its own ballot box and is therefore included in the files.
 
 2. Based on the consultation with all the general secretariats of the parties regarding the attribution of the submitted electoral lists to national parties, the following change has been made:
 
