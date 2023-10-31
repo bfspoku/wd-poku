@@ -30,7 +30,29 @@ Info page with updates on the Federal Statistical Office's data set for the Fede
 
 **Productive data set:**https://opendata.swiss/dataset/eidg-wahlen-2023
 
-**Testing data set:** https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023
+**Testing data set:** https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023 (deactivated)
+
+<hr style="border:1px solid black">
+\
+
+#### 202310131: New Data Resource sd-t-17.02-SRW2023-kandidierende_zweiter-wahlgang.json
+New resource on 2nd rounds of elections to the Council of States. Results are updated only once, on Monday after the election round.
+
+<hr style="border:1px solid black">
+\
+
+#### 202310125: National Council elections: Error in published party strengths at national level
+
+For further information, see [press release](https://www.bfs.admin.ch/bfs/en/home/news/press-releases.assetdetail.29025152.html). The following resources are affected by the correction:
+
+*	sd-t-17.02-NRW2023-wahlbeteiligung.json
+*	sd-t-17.02-NRW2023-wahlbeteiligung-appendix.csv
+*	sd-t-17.02-NRW2023-parteien.json
+*	sd-t-17.02-NRW2023-parteien-appendix.csv
+*	sd-t-17.02-NRW2023-zeitreihen-parteien.json
+*	sd-t-17.02-NRW2023-zeitreihen-parteien-appendix.csv
+
+The corrections include the rectification of the aggregation error made by the FSO. The corrections received from the cantons are being collected and will be released in the course of the publication of the final results end of November.
 
 <hr style="border:1px solid black">
 \
@@ -52,7 +74,7 @@ Info page with updates on the Federal Statistical Office's data set for the Fede
 \
 
 
-#### 20230925: New Data Ressource sd-t-17.02-SRW2023-kandidierende_erster-wahlgang.json
+#### 20230925: New Data Resource sd-t-17.02-SRW2023-kandidierende_erster-wahlgang.json
 JSON file for the results of the Council of States added to the test environment. This file already includes the candidates for the first round of voting on October 22. Results for the Council of States are updated per completed canton.\
 Data description: https://bfspoku.github.io/wd-poku/codebook_elections2023.html#JSON_SR_-_Kandidierende_
 
