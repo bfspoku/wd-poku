@@ -35,13 +35,20 @@ Info page with updates on the Federal Statistical Office's data set for the Fede
 <hr style="border:1px solid black">
 \
 
-#### 202310131: New Data Resource sd-t-17.02-SRW2023-kandidierende_zweiter-wahlgang.json
+#### 20231130: Upload of the final results
+The final results have been uploaded. The published data includes the corrections provided by the cantons after election day.
+
+<hr style="border:1px solid black">
+\
+
+
+#### 20231031: New Data Resource sd-t-17.02-SRW2023-kandidierende_zweiter-wahlgang.json
 New resource on 2nd rounds of elections to the Council of States. Results are updated only once, on Monday after the election round.
 
 <hr style="border:1px solid black">
 \
 
-#### 202310125: National Council elections: Error in published party strengths at national level
+#### 20231025: National Council elections: Error in published party strengths at national level
 
 For further information, see [press release](https://www.bfs.admin.ch/bfs/en/home/news/press-releases.assetdetail.29025152.html). The following resources are affected by the correction:
 
