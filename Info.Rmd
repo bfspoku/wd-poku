@@ -21,6 +21,20 @@ data_intervals <- as.data.frame(read_xlsx("codebook/data_intervals_elections2023
 
 ```
 
+```{r include=FALSE}
+library(readxl)
+#Var-Tabellen einlesen
+New_KandNr_ListPos <- as.data.frame(read_xlsx("codebook/Corr_KandNr_ListPos.xlsx", sheet = "New", col_names = TRUE))
+
+```
+
+```{r include=FALSE}
+library(readxl)
+#Var-Tabellen einlesen
+Old_KandNr_ListPos <- as.data.frame(read_xlsx("codebook/Corr_KandNr_ListPos.xlsx", sheet = "Old", col_names = TRUE))
+
+```
+
 \
 
 ## Info page FSO data set on opendata.swiss
@@ -34,6 +48,67 @@ Info page with updates on the Federal Statistical Office's data set for the Fede
 
 <hr style="border:1px solid black">
 \
+
+#### 20240524: Minor corrections in the context of data archiving
+
+Corrections have no influence on the final result. \
+
+* Modification of candidate numbers for liste_nummer_bfs=12 (liste_nummer_kanton=12) in canton GR (Correction in data supplied by the canton)
+* Modification of the list positions of candidates in GR and AG
+
+\
+**NEW:** \
+
+```{r, echo=FALSE}
+library(kableExtra)
+opts <- options(knitr.kable.NA = "")
+
+kbl(New_KandNr_ListPos, align='lclcllcc') %>% kable_paper(full_width = F) %>%
+  column_spec(1, border_right = T) %>%
+  column_spec(2, border_right = T) %>%
+  column_spec(3, border_right = T) %>% 
+  column_spec(4, border_right = T) %>% 
+  column_spec(5, border_right = T) %>% 
+  column_spec(6, border_right = T) %>% 
+  column_spec(7, border_right = T) %>% 
+  column_spec(8, border_right = T) 
+  
+```
+
+\
+
+**OLD:** \
+```{r, echo=FALSE}
+library(kableExtra)
+opts <- options(knitr.kable.NA = "")
+
+kbl(Old_KandNr_ListPos, align='lclcllcc') %>% kable_paper(full_width = F) %>%
+  column_spec(1, border_right = T) %>%
+  column_spec(2, border_right = T) %>%
+  column_spec(3, border_right = T) %>% 
+  column_spec(4, border_right = T) %>% 
+  column_spec(5, border_right = T) %>% 
+  column_spec(6, border_right = T) %>% 
+  column_spec(7, border_right = T) %>% 
+  column_spec(8, border_right = T) 
+  
+```
+
+
+\
+
+* FSO municipality number of the place of residence added (best effort)\
+    JSON-file: sd-t-17.02-NRW2023-kandidierende.json \
+    Variable: "wohnort_gemeinde_nummer" \
+    
+* With the data upload of 30 November, the variables indicating the number of municipalities with a result were no longer filled correctly. \
+    JSON-files: multiple \
+    Variable: gemeinden_abgeschlossen	\
+
+<hr style="border:1px solid black">
+\
+
+
 
 #### 20231130: Upload of the final results
 The final results have been uploaded. The published data includes the corrections provided by the cantons after election day.
