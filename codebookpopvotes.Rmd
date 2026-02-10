@@ -1,6 +1,10 @@
 ---
-title: "codebookpopvotes"
-output: html_document
+title: "Popular votes"
+subtitle: "Data Documentation"
+author: "Swiss Federal Statistical Office | Politics, Culture, Media Section | Contact: poku@bfs.admin.ch"
+date: "Last update: `r format(Sys.time(), '%d/%m/%y, %H:%M')`"
+output:
+  html_document:
 ---
 
 ```{r setup, include=FALSE}
@@ -8,23 +12,218 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(cache = TRUE)
 library(readxl)
 library(knitr)
+library(dplyr)
+library(stringr)
 ```
 
 
 ```{r include=FALSE}
 library(readxl)
+library(dplyr)
+library(stringr)
 
 
-codebook_raw <- read_xlsx("codebook/codebook_votations.xlsx")
+codebook_raw <- read_xlsx("codebook/codebook_votations.xlsx") %>%
+  mutate(across(
+    where(is.character),
+    ~ str_replace_all(., "\\r?\\n", "<br>")
+  ))
 
 ```
+<br>
 
+### Intro
+
+The Swiss Federal Statistical Office (FSO), Politics, Culture and Media Section (POKU), is responsible for processing and publishing the official results of federal popular votes on Voting Sunday. Moreover, in the context of the project [VoteInfo](https://www.admin.ch/gov/de/start/dokumentation/abstimmungen/voteinfo.html), it handles the publication of the results of the cantonal popular votes for the application. The results are processed centrally and made available in machine-readable formats. This documentation focuses on the datasets offered via opendata.swiss which contain the continuously updated result files:
+
+* [Real-time data on federal popular votes ](https://opendata.swiss/en/dataset/echtzeitdaten-am-abstimmungstag-zu-eidgenoessischen-abstimmungsvorlagen)
+* [Real-time data on federal popular votes - Municipal status on the date of the vote ](https://opendata.swiss/en/dataset/echtzeitdaten-zu-den-eidgenossischen-abstimmungen-gemeindestand-am-datum-der-abstimmung)
+* [Real-time data on cantonal popular votes](https://opendata.swiss/de/dataset/echtzeitdaten-am-abstimmungstag-zu-kantonalen-abstimmungsvorlagen) (tbd)
+
+<br>
+
+### Data Processing Lifecycle
+
+The data are produced in **JSON format** and uploaded to the FSO’s Data Asset Management (DAM) system as well as to the VoteInfo server. They can be accessed via the DAM API or opendata.swiss.If you want to access and process the data in real-time on voting Sunday, we recommend opendata.swiss.
+
+The overall data processing lifecycle consists of three main phases:
+
+#### 1. Preparation Phase
+
+The preparation phase starts several weeks before Voting Sunday. During this phase, all required metadata and structural elements are prepared:
+
+- Processing of metadata:
+  - information about the vote (e.g. vote date)
+  - information on proposals (e.g. ID, titles, topic)
+  - municipal structure valid on the date of the vote
+- Creation of the basic structure of the result files, with all results set to null.
+- Production of the corresponding [TopoJSON](https://opendata.swiss/en/dataset/geodaten-zu-den-eidgenoessischen-abstimmungsvorlagen) files containing the geometries
+
+These preliminary datasets are published on **opendata.swiss** approximately **one month before Voting Sunday**.  
+For cantonal votes, the cantons are responsible for announcing cantonal proposals for a given vote date and for entering the corresponding metadata. The empty structure of the result files containing the cantonal proposals is typically made available approximately **two weeks before Voting Sunday**.
+
+#### 2. Voting Sunday
+
+On Voting Sunday, cantonal data deliveries are processed and **continuously published from 12:00 p.m. onwards**:
+
+- Results on the municipal level are received continuously throughout the day; most cantons send several deliveries with intermediate results, while some only send the fully counted result once
+- Incoming data are validated and processed automatically. Updated result files are published in near real time via opendata.swiss
+- Once all municipal results are in, the canton is asked to confirm the aggregated cantonal result. This process may take some time (usually within 15 minutes, after the fully counted results are in). After confirmation is received, the results are marked as **completed** (`vorlageBeendet = true`) for the respective canton. The vote is considered as concluded only after all 26 cantons are marked as completed for all proposals. We refer to the results as 'Provisional official result'.
+- Due to the high number of access requests the access URLs indicated on opendata.swiss all point to the VoteInfo server on voting Sunday (URLs starting with https://ogd-static.voteinfo-app.ch/v1/ogd). Later on, after the confirmation of the final results (see point 3 below), the referenced URLs point to DAM (URLs starting with https://dam-api.bfs.admin.ch/hub/api/dam/assets/).
+
+#### 3. Post-processing Phase
+
+After Voting Sunday, a post-processing phase takes place:
+
+- Cantons typically submit **corrections** to their results, usually within approximately **two weeks after the vote**
+- Data deliveries received after Voting Sunday are not published automatically; all corrections are reviewed and the result files are updated accordingly
+- Prior to the publication of the Federal Council’s validation decree, the aggregated municipal results are compared with the results published in the cantonal official gazettes
+- After the official validation of the results by the **Federal Council** (usually within **2-6 months after Voting Sunday**), the **final and definitive results** are produced and published. At this point, the datasets are considered complete and final (`provisorisch = false`).
+
+
+<br>
+
+### JSON Result Files for Federal Popular Votes
+
+
+The table below describes the properties of the JSON result files for the following datasets:
+
+- [Real-time data on federal popular votes](https://opendata.swiss/en/dataset/echtzeitdaten-am-abstimmungstag-zu-eidgenoessischen-abstimmungsvorlagen)  
+(**endpoint URL**: https://ckan.opendata.swiss/api/3/action/package_show?id=echtzeitdaten-am-abstimmungstag-zu-eidgenoessischen-abstimmungsvorlagen)
+
+- [Real-time data on federal popular votes – Municipal status on the date of the vote](https://opendata.swiss/en/dataset/echtzeitdaten-zu-den-eidgenossischen-abstimmungen-gemeindestand-am-datum-der-abstimmung)  
+(**endpoint URL**: https://ckan.opendata.swiss/api/3/action/package_show?id=echtzeitdaten-zu-den-eidgenossischen-abstimmungen-gemeindestand-am-datum-der-abstimmung)
+
+The two datasets are largely identical in structure. In the first dataset, the result files of all previous votes are harmonised to the **most recent municipal structure**. This primarily affects the result files of past votes. The logic behind this harmonization is to ensure compatibility with applications such as VoteInfo, which use a single, current geometry reference.. In contrast, the second dataset always presents the result files using the **municipal structure valid on Voting Sunday**. In addition, the second dataset contains a small number of additional properties that are primarily used by the FSO’s [Popular Votes Dashboard](https://popular-votes.admin.ch/en/overview). These additional properties mainly relate to the presentation of results by **settlement type** or **language region** and are provided in the `raumgliederungen` array. Aside from these additional properties, there is **no difference** between the files for the **most recent vote**, as both datasets reflect the same current municipal status. For municipal-level analysis, we recommend using the files with the original municipal structure from the day of the vote.
 
 ```{r, echo=FALSE}
 library(knitr)
-opts <- options(knitr.kable.NA = "tbd")
+opts <- options(knitr.kable.NA = "")
 
 kable(codebook_raw, "pipe")
+# kable(
+#   codebook_raw,
+#   format = "html",
+#   escape = FALSE
+# )
 
+```
+
+<br>
+
+### JSON Result Files for Cantonal Popular Votes
+
+*coming soon*
+
+<br>
+
+### Special Case: Connected Proposals
+
+In rare cases at the federal level, voters decide on an issue that consists of multiple **connected proposals** (also referred to as *variant proposals*). This setup applies when a popular initiative is accompanied by a direct counter-proposal.
+
+In such cases, voters are presented with the following three ballot items:
+
+1. **Main proposal** (popular initiative)
+2. **Direct counter-proposal** (usually proposed by the Federal Council)
+3. **Deciding question**, asking which proposal should prevail if both the main proposal and the counter-proposal are accepted
+
+If both the main proposal and the counter-proposal are accepted by the voters, the outcome of the **deciding question** determines which proposal is ultimately implemented (see also [Procedure applicable to an initiative and counter-proposal] (https://www.fedlex.admin.ch/eli/cc/1999/404/en#art_139_b)).
+
+
+#### Conceptual and Technical Representation
+
+On a technical level, the FSO treats the main proposal, the counter-proposal, and the deciding question as **three separate proposals**. Each of them is represented as an individual entry in the JSON result files.
+
+These proposals are linked to each other via their identifiers and specific metadata fields, as described below.
+
+#### Interpretation of Results for the Deciding Question
+
+In the JSON result files, the deciding question contains the same result properties as other proposals (e.g. number of *yes* and *no* votes). However, these values require a specific interpretation:
+
+- **Yes votes** represent votes in favour of the **main proposal**
+- **No votes** represent votes in favour of the **counter-proposal**
+
+In the same logic, if `vorlageAngenommen = true` then the result of the deciding question is in favor of the main proposal/initiative. This interpretation applies only to deciding questions and does not affect the interpretation of results for other proposal types.
+
+#### Identification via Proposal IDs
+
+Connected proposals can be identified using their proposal IDs and type indicators:
+
+- The **fourth digit** of the `vorlagenId` identifies the role of the proposal:
+  - `1` → main proposal
+  - `2` → counter-proposal
+  - `3` → deciding question
+- The field `vorlagenArtId` further specifies the proposal type:
+  - `4` → main proposal
+  - `5` → counter-proposal
+  - `6` → deciding question
+
+For **normal proposals** and **main proposals**, the field `hauptvorlagenId` is set to `null`.
+
+##### Example: Main Proposal
+
+```json
+{
+  "vorlagen": [
+    {
+      "vorlagenId": 8881,
+      "reihenfolgeAnzeige": 8881,
+      "vorlagenTitel": [
+        ...
+      ],
+      "vorlageBeendet": false,
+      "provisorisch": true,
+      "vorlageAngenommen": null,
+      "vorlagenArtId": 4,
+      "hauptvorlagenId": null,
+      "reserveInfoText": null
+    }
+  ]
+}
+```
+
+##### Example: Counter-proposal
+
+```json
+{
+  "vorlagen": [
+    {
+      "vorlagenId": 8882,
+      "reihenfolgeAnzeige": 8882,
+      "vorlagenTitel": [
+        ...
+      ],
+      "vorlageBeendet": false,
+      "provisorisch": true,
+      "vorlageAngenommen": null,
+      "vorlagenArtId": 5,
+      "hauptvorlagenId": 8881,
+      "reserveInfoText": null
+    }
+  ]
+}
+
+```
+
+##### Example: Deciding Question
+
+```json
+{
+  "vorlagen": [
+    {
+      "vorlagenId": 8883,
+      "reihenfolgeAnzeige": 8883,
+      "vorlagenTitel": [
+        ...
+      ],
+      "vorlageBeendet": false,
+      "provisorisch": true,
+      "vorlageAngenommen": null,
+      "vorlagenArtId": 6,
+      "hauptvorlagenId": 8881,
+      "reserveInfoText": null
+    }
+  ]
+}
 ```
 

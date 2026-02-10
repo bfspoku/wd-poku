@@ -1,8 +1,0 @@
----
-title: "Popular votes"
-subtitle: "Data Documentation"
-author: "Swiss Federal Statistical Office | Section Politics, Culture, Media | Contact: poku@bfs.admin.ch"
-output: html_document
----
-
-Under construction.

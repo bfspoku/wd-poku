@@ -9,12 +9,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Swiss Federal Statistical Office | Politics, Culture, Media Section | Contact: poku@bfs.admin.ch" />
 
 
-<title>codebookpopvotes</title>
+<title>Popular votes</title>
 
-<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -29,12 +30,11 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -44,6 +44,17 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
 
 
 
@@ -73,6 +84,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -130,11 +144,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -163,8 +181,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -172,16 +190,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -211,75 +222,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-.tocify-subheader {
-  display: inline;
-}
-.tocify-subheader .tocify-item {
-  font-size: 0.95em;
-}
-
-</style>
-
-
 
 </head>
 
@@ -289,22 +231,12 @@ div.tocify {
 <div class="container-fluid main-container">
 
 
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row">
-<div class="col-sm-12 col-md-4 col-lg-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-sm-12 col-md-8 col-lg-9">
-
-
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -314,7 +246,7 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Federal Elections 2023
      
     <span class="caret"></span>
@@ -335,7 +267,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Popular votes
      
     <span class="caret"></span>
@@ -347,7 +279,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Geometries
      
     <span class="caret"></span>
@@ -362,7 +294,7 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/githubusername/mywebsite">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -375,18 +307,176 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">codebookpopvotes</h1>
+<h1 class="title toc-ignore">Popular votes</h1>
+<h3 class="subtitle">Data Documentation</h3>
+<h4 class="author">Swiss Federal Statistical Office | Politics, Culture,
+Media Section | Contact: <a href="mailto:poku@bfs.admin.ch"
+class="email">poku@bfs.admin.ch</a></h4>
+<h4 class="date">Last update: 09/02/26, 11:55</h4>
 
 </div>
 
 
-<table>
+<p><br></p>
+<div id="intro" class="section level3">
+<h3>Intro</h3>
+<p>The Swiss Federal Statistical Office (FSO), Politics, Culture and
+Media Section (POKU), is responsible for processing and publishing the
+official results of federal popular votes on Voting Sunday. Moreover, in
+the context of the project <a
+href="https://www.admin.ch/gov/de/start/dokumentation/abstimmungen/voteinfo.html">VoteInfo</a>,
+it handles the publication of the results of the cantonal popular votes
+for the application. The results are processed centrally and made
+available in machine-readable formats. This documentation focuses on the
+datasets offered via opendata.swiss which contain the continuously
+updated result files:</p>
+<ul>
+<li><a
+href="https://opendata.swiss/en/dataset/echtzeitdaten-am-abstimmungstag-zu-eidgenoessischen-abstimmungsvorlagen">Real-time
+data on federal popular votes</a></li>
+<li><a
+href="https://opendata.swiss/en/dataset/echtzeitdaten-zu-den-eidgenossischen-abstimmungen-gemeindestand-am-datum-der-abstimmung">Real-time
+data on federal popular votes - Municipal status on the date of the
+vote</a></li>
+<li><a
+href="https://opendata.swiss/de/dataset/echtzeitdaten-am-abstimmungstag-zu-kantonalen-abstimmungsvorlagen">Real-time
+data on cantonal popular votes</a> (tbd)</li>
+</ul>
+<p><br></p>
+</div>
+<div id="data-processing-lifecycle" class="section level3">
+<h3>Data Processing Lifecycle</h3>
+<p>The data are produced in <strong>JSON format</strong> and uploaded to
+the FSO’s Data Asset Management (DAM) system as well as to the VoteInfo
+server. They can be accessed via the DAM API or opendata.swiss.If you
+want to access and process the data in real-time on voting Sunday, we
+recommend opendata.swiss.</p>
+<p>The overall data processing lifecycle consists of three main
+phases:</p>
+<div id="preparation-phase" class="section level4">
+<h4>1. Preparation Phase</h4>
+<p>The preparation phase starts several weeks before Voting Sunday.
+During this phase, all required metadata and structural elements are
+prepared:</p>
+<ul>
+<li>Processing of metadata:
+<ul>
+<li>information about the vote (e.g. vote date)</li>
+<li>information on proposals (e.g. ID, titles, topic)</li>
+<li>municipal structure valid on the date of the vote</li>
+</ul></li>
+<li>Creation of the basic structure of the result files, with all
+results set to null.</li>
+<li>Production of the corresponding <a
+href="https://opendata.swiss/en/dataset/geodaten-zu-den-eidgenoessischen-abstimmungsvorlagen">TopoJSON</a>
+files containing the geometries</li>
+</ul>
+<p>These preliminary datasets are published on
+<strong>opendata.swiss</strong> approximately <strong>one month before
+Voting Sunday</strong>.<br />
+For cantonal votes, the cantons are responsible for announcing cantonal
+proposals for a given vote date and for entering the corresponding
+metadata. The empty structure of the result files containing the
+cantonal proposals is typically made available approximately <strong>two
+weeks before Voting Sunday</strong>.</p>
+</div>
+<div id="voting-sunday" class="section level4">
+<h4>2. Voting Sunday</h4>
+<p>On Voting Sunday, cantonal data deliveries are processed and
+<strong>continuously published from 12:00 p.m. onwards</strong>:</p>
+<ul>
+<li>Results on the municipal level are received continuously throughout
+the day; most cantons send several deliveries with intermediate results,
+while some only send the fully counted result once</li>
+<li>Incoming data are validated and processed automatically. Updated
+result files are published in near real time via opendata.swiss</li>
+<li>Once all municipal results are in, the canton is asked to confirm
+the aggregated cantonal result. This process may take some time (usually
+within 15 minutes, after the fully counted results are in). After
+confirmation is received, the results are marked as
+<strong>completed</strong> (<code>vorlageBeendet = true</code>) for the
+respective canton. The vote is considered as concluded only after all 26
+cantons are marked as completed for all proposals. We refer to the
+results as ‘Provisional official result’.</li>
+<li>Due to the high number of access requests the access URLs indicated
+on opendata.swiss all point to the VoteInfo server on voting Sunday
+(URLs starting with <a href="https://ogd-static.voteinfo-app.ch/v1/ogd"
+class="uri">https://ogd-static.voteinfo-app.ch/v1/ogd</a>). Later on,
+after the confirmation of the final results (see point 3 below), the
+referenced URLs point to DAM (URLs starting with <a
+href="https://dam-api.bfs.admin.ch/hub/api/dam/assets/"
+class="uri">https://dam-api.bfs.admin.ch/hub/api/dam/assets/</a>).</li>
+</ul>
+</div>
+<div id="post-processing-phase" class="section level4">
+<h4>3. Post-processing Phase</h4>
+<p>After Voting Sunday, a post-processing phase takes place:</p>
+<ul>
+<li>Cantons typically submit <strong>corrections</strong> to their
+results, usually within approximately <strong>two weeks after the
+vote</strong></li>
+<li>Data deliveries received after Voting Sunday are not published
+automatically; all corrections are reviewed and the result files are
+updated accordingly</li>
+<li>Prior to the publication of the Federal Council’s validation decree,
+the aggregated municipal results are compared with the results published
+in the cantonal official gazettes</li>
+<li>After the official validation of the results by the <strong>Federal
+Council</strong> (usually within <strong>2-6 months after Voting
+Sunday</strong>), the <strong>final and definitive results</strong> are
+produced and published. At this point, the datasets are considered
+complete and final (<code>provisorisch = false</code>).</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="json-result-files-for-federal-popular-votes"
+class="section level3">
+<h3>JSON Result Files for Federal Popular Votes</h3>
+<p>The table below describes the properties of the JSON result files for
+the following datasets:</p>
+<ul>
+<li><p><a
+href="https://opendata.swiss/en/dataset/echtzeitdaten-am-abstimmungstag-zu-eidgenoessischen-abstimmungsvorlagen">Real-time
+data on federal popular votes</a><br />
+(<strong>endpoint URL</strong>: <a
+href="https://ckan.opendata.swiss/api/3/action/package_show?id=echtzeitdaten-am-abstimmungstag-zu-eidgenoessischen-abstimmungsvorlagen"
+class="uri">https://ckan.opendata.swiss/api/3/action/package_show?id=echtzeitdaten-am-abstimmungstag-zu-eidgenoessischen-abstimmungsvorlagen</a>)</p></li>
+<li><p><a
+href="https://opendata.swiss/en/dataset/echtzeitdaten-zu-den-eidgenossischen-abstimmungen-gemeindestand-am-datum-der-abstimmung">Real-time
+data on federal popular votes – Municipal status on the date of the
+vote</a><br />
+(<strong>endpoint URL</strong>: <a
+href="https://ckan.opendata.swiss/api/3/action/package_show?id=echtzeitdaten-zu-den-eidgenossischen-abstimmungen-gemeindestand-am-datum-der-abstimmung"
+class="uri">https://ckan.opendata.swiss/api/3/action/package_show?id=echtzeitdaten-zu-den-eidgenossischen-abstimmungen-gemeindestand-am-datum-der-abstimmung</a>)</p></li>
+</ul>
+<p>The two datasets are largely identical in structure. In the first
+dataset, the result files of all previous votes are harmonised to the
+<strong>most recent municipal structure</strong>. This primarily affects
+the result files of past votes. The logic behind this harmonization is
+to ensure compatibility with applications such as VoteInfo, which use a
+single, current geometry reference.. In contrast, the second dataset
+always presents the result files using the <strong>municipal structure
+valid on Voting Sunday</strong>. In addition, the second dataset
+contains a small number of additional properties that are primarily used
+by the FSO’s <a
+href="https://popular-votes.admin.ch/en/overview">Popular Votes
+Dashboard</a>. These additional properties mainly relate to the
+presentation of results by <strong>settlement type</strong> or
+<strong>language region</strong> and are provided in the
+<code>raumgliederungen</code> array. Aside from these additional
+properties, there is <strong>no difference</strong> between the files
+for the <strong>most recent vote</strong>, as both datasets reflect the
+same current municipal status. For municipal-level analysis, we
+recommend using the files with the original municipal structure from the
+day of the vote.</p>
+<table style="width:100%;">
 <colgroup>
-<col width="21%" />
-<col width="51%" />
-<col width="8%" />
-<col width="9%" />
-<col width="9%" />
+<col width="4%" />
+<col width="39%" />
+<col width="2%" />
+<col width="29%" />
+<col width="23%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -400,130 +490,618 @@ div.tocify {
 <tbody>
 <tr class="odd">
 <td align="left">abstimmtag</td>
-<td align="left">date of vote</td>
-<td align="left">integer</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">Date of vote.</td>
+<td align="left">string (date)</td>
+<td align="left"></td>
+<td align="left">YYYYMMDD</td>
 </tr>
 <tr class="even">
 <td align="left">timestamp</td>
-<td align="left">time stamp of file creation</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">Time of file creation.</td>
+<td align="left">string (date-time)</td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">spatial_reference</td>
-<td align="left">reference date for spatial information (cantons,</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">Unit and date of reference for spatial information
+(cantons, districts, communes).</td>
+<td align="left">array</td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left">spatial_unit</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">Spatial unit referenced.</td>
+<td align="left">string</td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">spatial_date</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">Date of status of the information for the spatial unit
+referenced.</td>
+<td align="left">string (date)</td>
+<td align="left"></td>
+<td align="left">YYYY-MM-DD</td>
 </tr>
 <tr class="even">
 <td align="left">schweiz</td>
-<td align="left">xxx</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">Information on the swiss / proposal level.</td>
+<td align="left">object</td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">geoLevelnummer</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">Unique identifier of the spatial unit. Generally
+corresponds to the official ids found in the Swiss official commune
+register.</td>
+<td align="left">string</td>
+<td align="left"></td>
+<td align="left">On the Swiss level, schweiz.geoLevelnummer is currently
+of type integer and set to 0.</td>
 </tr>
 <tr class="even">
 <td align="left">geoLevelname</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">Name of spatial unit. Generally corresponds to the
+official names found in the Swiss official commune register.</td>
+<td align="left">string</td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">nochKeineInformation</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">Indication whether there is information on the
+proposals.</td>
+<td align="left">boolean</td>
+<td align="left"></td>
+<td align="left">Not in use anymore. Currently always set to false</td>
 </tr>
 <tr class="even">
 <td align="left">vorlagen</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">List of voting proposals.</td>
+<td align="left">array</td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">vorlagenId</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">Unique identifier of proposal.</td>
+<td align="left">integer</td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="even">
 <td align="left">reihenfolgeAnzeige</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">Display order of the proposal.</td>
+<td align="left">integer</td>
+<td align="left"></td>
+<td align="left">For federal proposals, it is equal to the property
+vorlagenId.</td>
 </tr>
 <tr class="odd">
 <td align="left">vorlagenTitel</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">List of proposal titles.</td>
+<td align="left">array</td>
+<td align="left"></td>
+<td align="left">Currently, the FSO uses the official “communication
+title” and not the full legal title, exluding the date of the passing of
+the law, for example</td>
 </tr>
 <tr class="even">
 <td align="left">langKey</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">Language key for the title. For federal proposals,
+titles are available in DE, FR, IT, RM, EN</td>
+<td align="left">string</td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="odd">
 <td align="left">text</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">Proposal title in the specified language.</td>
+<td align="left">string</td>
+<td align="left"></td>
+<td align="left"></td>
 </tr>
 <tr class="even">
-<td align="left">provisorisch</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">vorlageBeendet</td>
+<td align="left">Indicates if the counting process for a given proposal
+has ended and the result has been confirmed by the cantonal
+authority.</td>
+<td align="left">boolean</td>
+<td align="left"></td>
+<td align="left">Available on the Swiss and cantonal level. For voting
+proposals on the federal level: only true, if gebietAusgezaehlt and
+vorlageBeendet is true for all cantons</td>
 </tr>
 <tr class="odd">
+<td align="left">provisorisch</td>
+<td align="left">Indicates if the results are provisional.</td>
+<td align="left">boolean</td>
+<td align="left"></td>
+<td align="left">The results remain provisional until they have been
+confirmed by the Federal Council and published in the Federal
+Gazette.</td>
+</tr>
+<tr class="even">
+<td align="left">vorlageAngenommen</td>
+<td align="left">Indicates whether the proposal has been accepted. In
+the case of the subsidiary (deciding) question, true indicates that the
+main proposal is prioritised over the counter-proposal.</td>
+<td align="left">boolean or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">vorlagenArtId</td>
+<td align="left">Type identifier of the voting proposal (e.g. popular
+initiative, facultative referendum, mandatory referendum etc.)</td>
+<td align="left">integer</td>
+<td align="left">1 = Mandatory referendum <br>2 = Optional
+referendum<br>3 = Popular initiative<br>4 = Popular initiative with
+counter-proposal<br>5 = Counter-proposal to a popular initiative<br>6 =
+Deciding question</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">hauptvorlagenId</td>
+<td align="left">Identifier of the main proposal if proposals are
+connected (e.g. main proposal + counter-proposal + deciding
+question).</td>
+<td align="left">integer or null</td>
+<td align="left"></td>
+<td align="left">further information on connected proposals below</td>
+</tr>
+<tr class="odd">
+<td align="left">reserveInfoText</td>
+<td align="left">Additional reserved information text for the
+proposal</td>
+<td align="left">string or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">doppeltesMehr</td>
+<td align="left">Indicates if the cantonal votes (staende) are relevant
+for the results of the vote. Generally true if a double majority is
+required for the proposal to be accepted. Also used for the deciding
+question.</td>
+<td align="left">boolean</td>
+<td align="left"></td>
+<td align="left">Might be renamed in the future</td>
+</tr>
+<tr class="odd">
+<td align="left">staende</td>
+<td align="left">List of cantonal votes (Stände).</td>
+<td align="left">object</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">jaStaendeGanz</td>
+<td align="left">Number of cantons with a full cantonal vote that have
+accepted the proposal by a majority. In the case of the subsidiary
+(deciding) question, this corresponds to the number of cantons with a
+full cantonal vote that favour the main proposal over the
+counter-proposal.</td>
+<td align="left">integer or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">neinStaendeGanz</td>
+<td align="left">Number of cantons with a full cantonal vote that have
+rejected the proposal by a majority. In the case of the subsidiary
+(deciding) question, this corresponds to the number of cantons with a
+full cantonal vote that favour the counter-proposal over the main
+proposal.</td>
+<td align="left">integer or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">anzahlStaendeGanz</td>
+<td align="left">Total number of cantons with a whole cantonal vote. 20
+cantons each have a whole cantonal vote.</td>
+<td align="left">integer or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">jaStaendeHalb</td>
+<td align="left">Number of cantons with a half cantonal vote that have
+accepted a proposal by a majority. In the case of the subsidiary
+(deciding) question, this corresponds to the number of cantons with a
+half cantonal vote that favour the main proposal over the
+counter-proposal.</td>
+<td align="left">integer or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">neinStaendeHalb</td>
+<td align="left">Number of cantons with a half cantonal vote that have
+rejected a proposal by a majority. In the case of the subsidiary
+(deciding) question, this corresponds to the number of cantons with a
+half cantonal vote that favour the counter-proposal over the main
+proposal.</td>
+<td align="left">integer or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">anzahlStaendeHalb</td>
+<td align="left">Total number of cantons with a half cantonal vote. Six
+cantons have half a cantonal vote.</td>
+<td align="left">integer or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">kantone</td>
+<td align="left">List of cantons.</td>
+<td align="left">array</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">bezirke</td>
+<td align="left">List of districts.</td>
+<td align="left">array</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">gemeinden</td>
+<td align="left">List of communes.</td>
+<td align="left">array</td>
+<td align="left"></td>
+<td align="left">see also <a
+href="https://bfspoku.github.io/wd-poku/geometries.html"
+class="uri">https://bfspoku.github.io/wd-poku/geometries.html</a></td>
+</tr>
+<tr class="odd">
+<td align="left">zaehlkreise</td>
+<td align="left">Subcommunal counting circles for the proposal.</td>
+<td align="left">array (optional)</td>
+<td align="left"></td>
+<td align="left">Only used in the canton of Zurich.</td>
+</tr>
+<tr class="even">
+<td align="left">geoLevelParentnummer</td>
+<td align="left">Parent identifier for the higher level geographical
+unit.</td>
+<td align="left">string</td>
+<td align="left"></td>
+<td align="left">Only used for communal level or lower (gemeinden or
+zaehlkreise)</td>
+</tr>
+<tr class="odd">
+<td align="left">resultat</td>
+<td align="left">List of vote result types.</td>
+<td align="left">object</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">anzahlKantoneAusgezaehlt</td>
+<td align="left">Number of fully counted cantons.</td>
+<td align="left">integer</td>
+<td align="left"></td>
+<td align="left">Only available on the schweiz.vorlagen.resultat level
+and used only in the unharmonized files
+(sd-t-17-02-YYMMDD-eidgAbstimmung-o.json)</td>
+</tr>
+<tr class="odd">
+<td align="left">anzahlKantone</td>
+<td align="left">Total number of cantons.</td>
+<td align="left">integer</td>
+<td align="left"></td>
+<td align="left">Only available on the schweiz.vorlagen.resultat level
+and used only in the unharmonized files
+(sd-t-17-02-YYMMDD-eidgAbstimmung-o.json)</td>
+</tr>
+<tr class="even">
+<td align="left">anzahlBezirkeAusgezaehlt</td>
+<td align="left">Number of fully counted districts in a given
+geographical unit..</td>
+<td align="left">integer</td>
+<td align="left"></td>
+<td align="left">Only available on the canton level or higher and used
+only in the unharmonized files
+(sd-t-17-02-YYMMDD-eidgAbstimmung-o.json)</td>
+</tr>
+<tr class="odd">
+<td align="left">anzahlBezirke</td>
+<td align="left">Total number of districts in a given geographical
+unit.</td>
+<td align="left">integer</td>
+<td align="left"></td>
+<td align="left">Only available on the canton level or higher and used
+only in the unharmonized files
+(sd-t-17-02-YYMMDD-eidgAbstimmung-o.json)</td>
+</tr>
+<tr class="even">
+<td align="left">anzahlGemeindenAusgezaehlt</td>
+<td align="left">Number of fully counted municipalities in a given
+geographical unit.</td>
+<td align="left">integer</td>
+<td align="left"></td>
+<td align="left">Only available on the district level or higher and used
+only in the unharmonized files
+(sd-t-17-02-YYMMDD-eidgAbstimmung-o.json)</td>
+</tr>
+<tr class="odd">
+<td align="left">anzahlGemeinden</td>
+<td align="left">Total number of municipalities in a given geographical
+unit.</td>
+<td align="left">integer</td>
+<td align="left"></td>
+<td align="left">Only available on the district level or higher and used
+only in the unharmonized files
+(sd-t-17-02-YYMMDD-eidgAbstimmung-o.json)</td>
+</tr>
+<tr class="even">
 <td align="left">gebietAusgezaehlt</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
-<td align="left">tbd</td>
+<td align="left">Indicates if the unit is fully counted.</td>
+<td align="left">boolean</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">jaStimmenInProzent</td>
+<td align="left">Percentage of “yes” votes. The “yes” vote share is
+calculated by dividing the number of valid yes votes by the total number
+of valid votes. In the case of the deciding question, this property
+represents the share of votes for the main proposal.</td>
+<td align="left">number or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">jaStimmenAbsolut</td>
+<td align="left">Absolute number of “yes” votes. In the case of the
+deciding question, this property represents the number votes for the
+main proposal.</td>
+<td align="left">integer or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">neinStimmenAbsolut</td>
+<td align="left">Absolute number of “no” votes. In the case of the
+deciding question, this property represents the number votes for the
+counter-proposal.</td>
+<td align="left">integer or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">stimmbeteiligungInProzent</td>
+<td align="left">Voter turnout percentage. Voter turnout is calculated
+by dividing the number of ballots cast (including blank/invalid votes)
+by the number of persons eligible to vote.</td>
+<td align="left">number or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">eingelegteStimmzettel</td>
+<td align="left">Number of ballots cast.</td>
+<td align="left">integer or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">anzahlStimmberechtigte</td>
+<td align="left">Number of eligible voters.</td>
+<td align="left">integer or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">gueltigeStimmen</td>
+<td align="left">Number of valid votes.</td>
+<td align="left">integer or null</td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">raumgliederungen</td>
+<td align="left">List of spatial divisions. Currently a combination of
+language region and settlement type (see also <a
+href="https://www.bfs.admin.ch/bfs/de/home/grundlagen/raumgliederungen.html"
+class="uri">https://www.bfs.admin.ch/bfs/de/home/grundlagen/raumgliederungen.html</a>).</td>
+<td align="left">array</td>
+<td align="left"></td>
+<td align="left">only used in the unharmonized files
+(sd-t-17-02-YYMMDD-eidgAbstimmung-o.json)</td>
+</tr>
+<tr class="odd">
+<td align="left">sprachregId</td>
+<td align="left">Language region identifier.</td>
+<td align="left">string</td>
+<td align="left"></td>
+<td align="left">only used in the unharmonized files
+(sd-t-17-02-YYMMDD-eidgAbstimmung-o.json)</td>
+</tr>
+<tr class="even">
+<td align="left">sprachregName</td>
+<td align="left">Names of the language region in different languages
+(de/fr/it/rm/en)</td>
+<td align="left">object</td>
+<td align="left"></td>
+<td align="left">only used in the unharmonized files
+(sd-t-17-02-YYMMDD-eidgAbstimmung-o.json)</td>
+</tr>
+<tr class="odd">
+<td align="left">siedlungstypId</td>
+<td align="left">Settlement type identifier.</td>
+<td align="left">string</td>
+<td align="left"></td>
+<td align="left">only used in the unharmonized files
+(sd-t-17-02-YYMMDD-eidgAbstimmung-o.json)</td>
+</tr>
+<tr class="even">
+<td align="left">siedlungstypName</td>
+<td align="left">Names of the settlement type in different languages
+(de/fr/it/rm/en)</td>
+<td align="left">object</td>
+<td align="left"></td>
+<td align="left">only used in the unharmonized files
+(sd-t-17-02-YYMMDD-eidgAbstimmung-o.json)</td>
 </tr>
 </tbody>
 </table>
-
-
-
+<p><br></p>
+</div>
+<div id="json-result-files-for-cantonal-popular-votes"
+class="section level3">
+<h3>JSON Result Files for Cantonal Popular Votes</h3>
+<p><em>coming soon</em></p>
+<p><br></p>
+</div>
+<div id="special-case-connected-proposals" class="section level3">
+<h3>Special Case: Connected Proposals</h3>
+<p>In rare cases at the federal level, voters decide on an issue that
+consists of multiple <strong>connected proposals</strong> (also referred
+to as <em>variant proposals</em>). This setup applies when a popular
+initiative is accompanied by a direct counter-proposal.</p>
+<p>In such cases, voters are presented with the following three ballot
+items:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Main proposal</strong> (popular initiative)</li>
+<li><strong>Direct counter-proposal</strong> (usually proposed by the
+Federal Council)</li>
+<li><strong>Deciding question</strong>, asking which proposal should
+prevail if both the main proposal and the counter-proposal are
+accepted</li>
+</ol>
+<p>If both the main proposal and the counter-proposal are accepted by
+the voters, the outcome of the <strong>deciding question</strong>
+determines which proposal is ultimately implemented (see also [Procedure
+applicable to an initiative and counter-proposal] (<a
+href="https://www.fedlex.admin.ch/eli/cc/1999/404/en#art_139_b"
+class="uri">https://www.fedlex.admin.ch/eli/cc/1999/404/en#art_139_b</a>)).</p>
+<div id="conceptual-and-technical-representation"
+class="section level4">
+<h4>Conceptual and Technical Representation</h4>
+<p>On a technical level, the FSO treats the main proposal, the
+counter-proposal, and the deciding question as <strong>three separate
+proposals</strong>. Each of them is represented as an individual entry
+in the JSON result files.</p>
+<p>These proposals are linked to each other via their identifiers and
+specific metadata fields, as described below.</p>
+</div>
+<div id="interpretation-of-results-for-the-deciding-question"
+class="section level4">
+<h4>Interpretation of Results for the Deciding Question</h4>
+<p>In the JSON result files, the deciding question contains the same
+result properties as other proposals (e.g. number of <em>yes</em> and
+<em>no</em> votes). However, these values require a specific
+interpretation:</p>
+<ul>
+<li><strong>Yes votes</strong> represent votes in favour of the
+<strong>main proposal</strong></li>
+<li><strong>No votes</strong> represent votes in favour of the
+<strong>counter-proposal</strong></li>
+</ul>
+<p>In the same logic, if <code>vorlageAngenommen = true</code> then the
+result of the deciding question is in favor of the main
+proposal/initiative. This interpretation applies only to deciding
+questions and does not affect the interpretation of results for other
+proposal types.</p>
+</div>
+<div id="identification-via-proposal-ids" class="section level4">
+<h4>Identification via Proposal IDs</h4>
+<p>Connected proposals can be identified using their proposal IDs and
+type indicators:</p>
+<ul>
+<li>The <strong>fourth digit</strong> of the <code>vorlagenId</code>
+identifies the role of the proposal:
+<ul>
+<li><code>1</code> → main proposal</li>
+<li><code>2</code> → counter-proposal</li>
+<li><code>3</code> → deciding question</li>
+</ul></li>
+<li>The field <code>vorlagenArtId</code> further specifies the proposal
+type:
+<ul>
+<li><code>4</code> → main proposal</li>
+<li><code>5</code> → counter-proposal</li>
+<li><code>6</code> → deciding question</li>
+</ul></li>
+</ul>
+<p>For <strong>normal proposals</strong> and <strong>main
+proposals</strong>, the field <code>hauptvorlagenId</code> is set to
+<code>null</code>.</p>
+<div id="example-main-proposal" class="section level5">
+<h5>Example: Main Proposal</h5>
+<pre class="json"><code>{
+  &quot;vorlagen&quot;: [
+    {
+      &quot;vorlagenId&quot;: 8881,
+      &quot;reihenfolgeAnzeige&quot;: 8881,
+      &quot;vorlagenTitel&quot;: [
+        ...
+      ],
+      &quot;vorlageBeendet&quot;: false,
+      &quot;provisorisch&quot;: true,
+      &quot;vorlageAngenommen&quot;: null,
+      &quot;vorlagenArtId&quot;: 4,
+      &quot;hauptvorlagenId&quot;: null,
+      &quot;reserveInfoText&quot;: null
+    }
+  ]
+}</code></pre>
+</div>
+<div id="example-counter-proposal" class="section level5">
+<h5>Example: Counter-proposal</h5>
+<pre class="json"><code>{
+  &quot;vorlagen&quot;: [
+    {
+      &quot;vorlagenId&quot;: 8882,
+      &quot;reihenfolgeAnzeige&quot;: 8882,
+      &quot;vorlagenTitel&quot;: [
+        ...
+      ],
+      &quot;vorlageBeendet&quot;: false,
+      &quot;provisorisch&quot;: true,
+      &quot;vorlageAngenommen&quot;: null,
+      &quot;vorlagenArtId&quot;: 5,
+      &quot;hauptvorlagenId&quot;: 8881,
+      &quot;reserveInfoText&quot;: null
+    }
+  ]
+}
+</code></pre>
+</div>
+<div id="example-deciding-question" class="section level5">
+<h5>Example: Deciding Question</h5>
+<pre class="json"><code>{
+  &quot;vorlagen&quot;: [
+    {
+      &quot;vorlagenId&quot;: 8883,
+      &quot;reihenfolgeAnzeige&quot;: 8883,
+      &quot;vorlagenTitel&quot;: [
+        ...
+      ],
+      &quot;vorlageBeendet&quot;: false,
+      &quot;provisorisch&quot;: true,
+      &quot;vorlageAngenommen&quot;: null,
+      &quot;vorlagenArtId&quot;: 6,
+      &quot;hauptvorlagenId&quot;: 8881,
+      &quot;reserveInfoText&quot;: null
+    }
+  ]
+}</code></pre>
 </div>
 </div>
+</div>
+
+
+
 
 </div>
 
@@ -556,32 +1134,6 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = false;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
