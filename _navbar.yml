@@ -15,7 +15,7 @@ left:
   - text: "Popular votes" 
     menu:
        - text: "Data description"
-         href: ./popular_votes.html
+         href: ./codebookpopvotes.html
   - text: "Geometries" 
     menu:
        - text: "Geometries"

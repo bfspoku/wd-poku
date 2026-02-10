@@ -1,0 +1,72 @@
+---
+title: "Geometries"
+subtitle: ""
+author: "Swiss Federal Statistical Office | Section Politics, Culture, Media (POKU) | Contact: poku@bfs.admin.ch"
+date: "Last update: `r format(Sys.time(), '%d/%m/%y, %H:%M')`"
+output: html_document
+---
+
+### Geometries in Political Statistics
+
+The following section describes the geometries used to produce the output of the Statistics of Elections and Popular Votes by POKU FSO. 
+
+
+The results of federal votes and elections are provided for the following spatial dimensions:
+
+* Switzerland
+* Cantons
+* Districts
+* Communes (municipalities)
+* infra-communal counting districts (only used for popular votes)
+* Other spatial typologies (e.g. language region; only available for popular votes)
+
+
+
+The basis of all spatial data (naming conventions, identification number) is the [Swiss official commune register](https://www.bfs.admin.ch/bfs/en/home/basics/swiss-official-commune-register.html). Due to special circumstances in the political statistics, there are some differences regarding the municipality status, which are explained below.
+
+<br>
+
+#### Shared polling stations (*Gemeinsame Urnen*)
+Some communes do not run their own polling station and count their ballots in another commune. For these communes with "shared polling stations", it is not possible to determine which commune the votes originate from.
+
+As of *01.07.2023*, the following communes count their ballots in another commune:
+
+| **FSO no. ** w/o p. station | **Commune w/o p. station** | **FSO no.** location of p. station| **Commune where p. station is located ** |
+|----------------------------|-----------------------------|-----------------------------------|------------------------------------------|
+| 877                        | Niedermuhlern               | 888                               | Wald (BE)                                |
+| 535                        | Deisswil bei Münchenbuchsee | 553                               | Wiggiswil                                |
+| 408                        | Hellsau                     | 410                               | Höchstetten                              |
+| 389                        | Meienried                   | 383                               | Büren an der Aare                        |
+| 629                        | Oberhünigen                 | 628                               | Zäziwil                                  |
+
+
+For these communes, the results are published with the FSO identification number and name of the commune where the polling station is located. As a consequence, the communes without own polling stations are missing in the datasets published by POKU, even though they are included in the Swiss official commune register.
+
+<br>
+
+
+#### Special communes for Swiss citizens living abroad (*Auslandschweizergemeinden*)
+In various cantons, special communes/districts ("extraterritorial" communes/districts) are designated for certain elections and votes. These special communes/districts are included in the datasets published by POKU, but are not included in the Swiss official commune register. 12 cantons maintain a special municipality  to count the votes of the Swiss citizens living abroad separately: 
+
+| **Canton ID** | **Canton**            | **FSO no. commune/district (old)** | **FSO no. (as of October 2023)** | **Commune/district** |
+|---------------|-----------------------|------------------------------------|----------------------------------|----------------------|
+| 1             | Zürich                | 9010                               | 19010                            | ZH-Ausland-CH        |
+| 3             | Luzern                | 9030                               | 19030                            | LU-Ausland-CH        |
+| 4             | Uri                   | 9040                               | 19040                            | UR-Ausland-CH        |
+| 10            | Fribourg / Freiburg   | 9100                               | 19100                            | FR-CH de l'étranger  |
+| 12            | Basel-Stadt           | 9120                               | 19120                            | BS-Ausland-CH        |
+| 16            | Appenzell Innerrhoden | 9160                               | 19160                            | AI-Ausland-CH        |
+| 17            | St. Gallen            | 9170                               | 19170                            | SG-Ausland-CH        |
+| 19            | Aargau                | 9190                               | 19190                            | AG-Ausland-CH        |
+| 20            | Thurgau               | 9200                               | 19200                            | TG-Ausland-CH        |
+| 22            | Vaud                  | 9220                               | 19220                            | VD-CH de l'étranger  |
+| 23            | Valais / Wallis       | 9230                               | 19230                            | VS-CH de l'étranger  |
+| 25            | Genève                | 9250                               | 19250                            | GE-CH de l'étranger  |
+
+Note that the FSO identification numbers for the communes/districts of the Swiss abroad have been reassigned. They are now composed as follows: 
+<prefix 19>-<Canton ID FSO, (2 digits)>-<suffix 0>. The new system will be used for the first time for the federal elections in 2023. The old FSO numbers will be discontinued.
+
+### Further Information
+* [Application of the Swiss Communes](https://www.agvchapp.bfs.admin.ch/de/communes/query): For queries regarding the current state of communes, past and future mutations and spatial typologies (only available in DE/FR/IT).
+* [REST services for the Swiss official commune register](https://www.bfs.admin.ch/bfs/de/home/grundlagen/agvch/historisiertes-gemeindeverzeichnis.assetdetail.15224054.html): description available in DE/FR.
+
