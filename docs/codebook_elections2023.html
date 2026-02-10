@@ -14,8 +14,8 @@
 
 <title>Federal Elections 2023</title>
 
-<script src="site_libs/header-attrs-2.7/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -30,14 +30,14 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -47,6 +47,7 @@
   div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   ul.task-list{list-style: none;}
     </style>
+
 
 
 
@@ -76,6 +77,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -133,11 +137,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -166,8 +174,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -175,16 +183,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -294,12 +295,12 @@ div.tocify {
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row">
-<div class="col-sm-12 col-md-4 col-lg-3">
+<div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
 </div>
 
-<div class="toc-content col-sm-12 col-md-8 col-lg-9">
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -307,7 +308,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -317,7 +318,7 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Federal Elections 2023
      
     <span class="caret"></span>
@@ -338,19 +339,19 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Popular votes
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="./popular_votes.html">Data description</a>
+      <a href="./codebookpopvotes.html">Data description</a>
     </li>
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Geometries
      
     <span class="caret"></span>
@@ -365,7 +366,7 @@ div.tocify {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/githubusername/mywebsite">
-    <span class="fas fa-github fa-lg"></span>
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -380,8 +381,10 @@ div.tocify {
 
 <h1 class="title toc-ignore">Federal Elections 2023</h1>
 <h3 class="subtitle">Data Documentation</h3>
-<h4 class="author">Swiss Federal Statistical Office | Politics, Culture, Media Section | Contact: <a href="mailto:poku@bfs.admin.ch" class="email">poku@bfs.admin.ch</a></h4>
-<h4 class="date">Last update: 30/11/23, 16:35</h4>
+<h4 class="author">Swiss Federal Statistical Office | Politics, Culture,
+Media Section | Contact: <a href="mailto:poku@bfs.admin.ch"
+class="email">poku@bfs.admin.ch</a></h4>
+<h4 class="date">Last update: 10/02/26, 09:28</h4>
 
 </div>
 
@@ -389,31 +392,55 @@ div.tocify {
 <p><br></p>
 <div id="intro" class="section level3">
 <h3>Intro</h3>
-<p>The FSO is responsible for publishing the official provisional elections results of the federal elections. This documentation focuses on the dataset <a href="https://opendata.swiss/dataset/eidg-wahlen-2023">Federal elections 2023</a> which contains the continuously updated result files on Election Sunday, October 22, 2023.</p>
-<p><strong>Testing</strong>: For testing purposes, a dataset exists on the DEV environment of opendata.swiss. Test data will be uploaded there several times until election Sunday. More information will follow in the associated data description (please subscribe to the dataset to receive update notifications).<br />
-DEV-environment: <a href="https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023" class="uri">https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023</a></p>
+<p>The FSO is responsible for publishing the official provisional
+elections results of the federal elections. This documentation focuses
+on the dataset <a
+href="https://opendata.swiss/dataset/eidg-wahlen-2023">Federal elections
+2023</a> which contains the continuously updated result files on
+Election Sunday, October 22, 2023.</p>
+<p><strong>Testing</strong>: For testing purposes, a dataset exists on
+the DEV environment of opendata.swiss. Test data will be uploaded there
+several times until election Sunday. More information will follow in the
+associated data description (please subscribe to the dataset to receive
+update notifications).<br />
+DEV-environment: <a
+href="https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023"
+class="uri">https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023</a></p>
 <p><br></p>
 </div>
 <div id="example-data" class="section level3">
 <h3>Example data</h3>
-<p>Currently, 3 provisional test data sets with dummy results from the 2019 elections (National Council) are available. Description and test data for the Council of States will follow.<br />
+<p>Currently, 3 provisional test data sets with dummy results from the
+2019 elections (National Council) are available. Description and test
+data for the Council of States will follow.<br />
 (Go to “View Raw” for download )<br />
 </p>
-<p><strong>Note</strong>: Status of test data : June 2023 (outdated). Please refer to the changelog for the latest changes: <a href="https://bfspoku.github.io/wd-poku/Changelog_Eidgwahlen2023.html" class="uri">https://bfspoku.github.io/wd-poku/Changelog_Eidgwahlen2023.html</a><br />
+<p><strong>Note</strong>: Status of test data : June 2023 (outdated).
+Please refer to the changelog for the latest changes: <a
+href="https://bfspoku.github.io/wd-poku/Changelog_Eidgwahlen2023.html"
+class="uri">https://bfspoku.github.io/wd-poku/Changelog_Eidgwahlen2023.html</a><br />
 </p>
 <ol style="list-style-type: decimal">
 <li><p>Empty files. Structure of the files before election day.<br />
-<a href="https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata1.zip" class="uri">https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata1.zip</a></p></li>
-<li><p>Structure of the files during election day (with partial results).</p>
+<a
+href="https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata1.zip"
+class="uri">https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata1.zip</a></p></li>
+<li><p>Structure of the files during election day (with partial
+results).</p>
 <ul>
 <li>Canton LU complete &amp; confirmed</li>
 <li>Canton BL intermediate status: 28/86 municipalities completed</li>
 <li>remaining cantons empty<br />
 </li>
 </ul>
-<p><a href="https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata2.zip" class="uri">https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata2.zip</a></p></li>
-<li><p>Structure of the files after the election has been completed.<br />
-<a href="https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata3.zip" class="uri">https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata3.zip</a></p></li>
+<p><a
+href="https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata2.zip"
+class="uri">https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata2.zip</a></p></li>
+<li><p>Structure of the files after the election has been
+completed.<br />
+<a
+href="https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata3.zip"
+class="uri">https://github.com/bfspoku/wd-poku/blob/ce1f3f26371e947d8ce94abd95a45112d6f1c249/docs/files/Testdata3.zip</a></p></li>
 </ol>
 <hr style="border:1px solid black">
 <p><br />
@@ -424,13 +451,16 @@ DEV-environment: <a href="https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-
 </h3>
 <p>(Listes/Liste/Lists)<br />
 </p>
-<p>20230926: New JSON with list results at municipality level. Update interval: continuously.<br />
-(Unlike the other files, the file is not offered with an empty structure. Before 12.00 noon on election day, the file will be completely empty (0KB). )</p>
+<p>20230926: New JSON with list results at municipality level. Update
+interval: continuously.<br />
+(Unlike the other files, the file is not offered with an empty
+structure. Before 12.00 noon on election day, the file will be
+completely empty (0KB). )</p>
 <p>Please read the following description.</p>
 <p><br />
 </p>
 Content description for the file: sd-t-17.02-NRW2023-listen-gde.json
-<table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-paper" style="color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -462,7 +492,7 @@ timestamp
 <td style="text-align:left;width: 30em; ">
 Date and Time of data creation
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -475,8 +505,10 @@ level_gemeinden
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-level_gemeinden: continuous update interval with the already completed municipalities (depending on the canton); Important: For performance reasons, the empty file does NOT contain the full file structure.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+level_gemeinden: continuous update interval with the already completed
+municipalities (depending on the canton); Important: For performance
+reasons, the empty file does NOT contain the full file structure.
 </td>
 </tr>
 <tr>
@@ -491,7 +523,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -506,7 +538,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Canton name
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -521,8 +553,14 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO municipality number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Attention: In the case of election results, special cases at the municipal level must be taken into account. Due to shared ballot boxes, no result can be shown for elections in a few municipalities. Some cantons have a separate municipality number for their Swiss abroad. The number/Id of these special municipalities will be composed as follows: Ex. Canton AI: 19160 (&lt;prefix 19&gt;&lt;FSO canton number, 2 digits&gt;&lt;suffix 0&gt;)
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Attention: In the case of election results, special cases at the
+municipal level must be taken into account. Due to shared ballot boxes,
+no result can be shown for elections in a few municipalities. Some
+cantons have a separate municipality number for their Swiss abroad. The
+number/Id of these special municipalities will be composed as follows:
+Ex. Canton AI: 19160 (&lt;prefix 19&gt;&lt;FSO canton number, 2
+digits&gt;&lt;suffix 0&gt;)
 </td>
 </tr>
 <tr>
@@ -537,7 +575,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Municipality name
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -552,7 +590,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO list number (numeric))
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -567,7 +605,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Official list number given by canton (alphanumeric)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -582,7 +620,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO party number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 see metadaten.json
 </td>
 </tr>
@@ -598,7 +636,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of total votes per list; level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 </tbody>
@@ -613,8 +651,9 @@ Number of total votes per list; level: municipality
 </p>
 <p><br />
 </p>
-Content description for the file: sd-t-17.02-NRW2023-wahlbeteiligung.json
-<table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+Content description for the file:
+sd-t-17.02-NRW2023-wahlbeteiligung.json
+<table class=" lightable-paper" style="color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -647,7 +686,7 @@ datetime
 <td style="text-align:left;width: 30em; ">
 Date and Time of data creation
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -662,7 +701,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Year of the election
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -677,7 +716,7 @@ datestring
 <td style="text-align:left;width: 30em; ">
 Status of cantons and municipalities
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Date of the used geo-reference status.
 </td>
 </tr>
@@ -691,7 +730,7 @@ stand
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -704,9 +743,10 @@ wahl_abgeschlossen
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates that all cantons have delievered and confirmed their provisional final result (boolean true/false)
+Indicates that all cantons have delievered and confirmed their
+provisional final result (boolean true/false)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -721,7 +761,7 @@ integer [26]
 <td style="text-align:left;width: 30em; ">
 Total number of cantons
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -734,9 +774,10 @@ kantone_abgeschlossen
 integer [1-26]
 </td>
 <td style="text-align:left;width: 30em; ">
-Number of cantons that have delievered and confirmed their provisional final result
+Number of cantons that have delievered and confirmed their provisional
+final result
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -751,8 +792,12 @@ integer
 <td style="text-align:left;width: 30em; ">
 Total number of municipalities
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-The number of municipalities does not necessarily correspond to the number in the Swiss official commune register. Deviations include municipalities that do not have their own ballot box. In addition, some cantons maintain fictitious separate municipalities for the Swiss living abroad.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+The number of municipalities does not necessarily correspond to the
+number in the Swiss official commune register. Deviations include
+municipalities that do not have their own ballot box. In addition, some
+cantons maintain fictitious separate municipalities for the Swiss living
+abroad.
 </td>
 </tr>
 <tr>
@@ -767,7 +812,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of municipalities with a result
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -780,7 +825,7 @@ Stand_kantone
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -795,7 +840,7 @@ integer [1-26]
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -808,9 +853,10 @@ kanton_abgeschlossen
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates that the canton has delievered and confirmed its provisional final result (boolean true/false)
+Indicates that the canton has delievered and confirmed its provisional
+final result (boolean true/false)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -825,7 +871,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Total number of municipalities (within the canton)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -840,7 +886,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of municipalities (within the canton) with a result
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -853,7 +899,7 @@ level_ch
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 level_ch: Will be filled as soon as the election is completed.
 </td>
 </tr>
@@ -869,7 +915,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of eligible voters; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -884,7 +930,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of received ballots; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -899,7 +945,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of empty ballots; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -914,7 +960,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of invalid ballots; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -929,7 +975,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of valid ballots; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -944,7 +990,7 @@ numeric
 <td style="text-align:left;width: 30em; ">
 Voter turnout (in percent); level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -959,7 +1005,7 @@ numeric
 <td style="text-align:left;width: 30em; ">
 Voter turnout of last election (in percent); level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -972,9 +1018,10 @@ differenz_wahlbeteiligung
 numeric
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference between current voter turnout and turnout in the last election (in percentage points); level: CH
+Difference between current voter turnout and turnout in the last
+election (in percentage points); level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -987,7 +1034,7 @@ level_kantone
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 level_kantone: Update interval per completed canton
 </td>
 </tr>
@@ -1003,7 +1050,7 @@ integer [1-26]
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1018,7 +1065,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Canton name
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1033,7 +1080,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of eligible voters; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1048,7 +1095,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of received ballots; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1063,7 +1110,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of empty ballots; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1078,7 +1125,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of invalid ballots; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1093,7 +1140,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of valid ballots; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1108,7 +1155,7 @@ numeric
 <td style="text-align:left;width: 30em; ">
 Voter turnout (in percent); level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1123,7 +1170,7 @@ numeric
 <td style="text-align:left;width: 30em; ">
 Voter turnout of last election (in percent); level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1136,9 +1183,10 @@ differenz_wahlbeteiligung
 numeric
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in voter turnout between the current election and the past election (in percentage points); level: canton
+Difference in voter turnout between the current election and the past
+election (in percentage points); level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1151,8 +1199,10 @@ level_gemeinden
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-level_gemeinden: continuous update interval with the already completed municipalities (depending on the canton). Empty file already contains complete file structure.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+level_gemeinden: continuous update interval with the already completed
+municipalities (depending on the canton). Empty file already contains
+complete file structure.
 </td>
 </tr>
 <tr>
@@ -1167,8 +1217,14 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO municipality number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Attention: In the case of election results, special cases at the municipal level must be taken into account. Due to shared ballot boxes, no result can be shown for elections in a few municipalities. Some cantons have a separate municipality number for their Swiss abroad. The number/Id of these special municipalities will be composed as follows: Ex. Canton AI: 19160 (&lt;prefix 19&gt;&lt;FSO canton number, 2 digits&gt;&lt;suffix 0&gt;)
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Attention: In the case of election results, special cases at the
+municipal level must be taken into account. Due to shared ballot boxes,
+no result can be shown for elections in a few municipalities. Some
+cantons have a separate municipality number for their Swiss abroad. The
+number/Id of these special municipalities will be composed as follows:
+Ex. Canton AI: 19160 (&lt;prefix 19&gt;&lt;FSO canton number, 2
+digits&gt;&lt;suffix 0&gt;)
 </td>
 </tr>
 <tr>
@@ -1183,7 +1239,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Municipality name
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1198,7 +1254,7 @@ integer [1-26]
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1213,7 +1269,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of eligible voters; level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1228,7 +1284,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of received ballots; level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1243,7 +1299,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of empty ballots; level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1258,7 +1314,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of invalid ballots; level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1273,7 +1329,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 numeric of valid ballots; level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1288,7 +1344,7 @@ numeric
 <td style="text-align:left;width: 30em; ">
 Voter turnout / voter participation (in percent); level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1303,7 +1359,7 @@ numeric
 <td style="text-align:left;width: 30em; ">
 Voter turnout of last election (in percent); level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1316,9 +1372,10 @@ differenz_wahlbeteiligung
 numeric
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in voter turnout between the current election and the past election (in percentage points); level: municipality
+Difference in voter turnout between the current election and the past
+election (in percentage points); level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 </tbody>
@@ -1334,7 +1391,7 @@ Difference in voter turnout between the current election and the past election (
 <p><br />
 </p>
 Content description for the file: sd-t-17.02-NRW2023-kandidierende.json
-<table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-paper" style="color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -1366,7 +1423,7 @@ timestamp
 <td style="text-align:left;width: 30em; ">
 Date and Time of data creation
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1381,7 +1438,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Year of the election
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1395,7 +1452,7 @@ spatial_reference
 <td style="text-align:left;width: 30em; ">
 Status of cantons and municipalities
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Date of the used geo-reference status.
 </td>
 </tr>
@@ -1409,7 +1466,7 @@ stand
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1422,9 +1479,10 @@ wahl_abgeschlossen
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates that all cantons have delivered and confirmed their provisional final result (boolean true/false)
+Indicates that all cantons have delivered and confirmed their
+provisional final result (boolean true/false)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1439,7 +1497,7 @@ integer [26]
 <td style="text-align:left;width: 30em; ">
 Total number of cantons
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1452,9 +1510,10 @@ kantone_abgeschlossen
 integer [1-26]
 </td>
 <td style="text-align:left;width: 30em; ">
-Number of cantons that have delivered and confirmed their provisional final result
+Number of cantons that have delivered and confirmed their provisional
+final result
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1469,7 +1528,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Total number of municipalities
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1484,7 +1543,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of municipalities with a result
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1497,7 +1556,7 @@ Stand_kantone
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1512,7 +1571,7 @@ integer [1-26]
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1525,9 +1584,10 @@ kanton_abgeschlossen
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates that the canton has delivered and confirmed its provisional final result (boolean true/false)
+Indicates that the canton has delivered and confirmed its provisional
+final result (boolean true/false)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1542,8 +1602,12 @@ integer
 <td style="text-align:left;width: 30em; ">
 Total number of municipalities (within the canton)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-The number of municipalities does not necessarily correspond to the number in the Swiss official commune register. Deviations include municipalities that do not have their own ballot box. In addition, some cantons maintain fictitious separate municipalities for the Swiss living abroad.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+The number of municipalities does not necessarily correspond to the
+number in the Swiss official commune register. Deviations include
+municipalities that do not have their own ballot box. In addition, some
+cantons maintain fictitious separate municipalities for the Swiss living
+abroad.
 </td>
 </tr>
 <tr>
@@ -1558,7 +1622,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of municipalities (within the canton) with a result
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1571,7 +1635,7 @@ level_kantone
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 level_kantone: Update interval per completed canton
 </td>
 </tr>
@@ -1587,7 +1651,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1602,7 +1666,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Canton name
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1617,7 +1681,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO list number (numeric)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1632,7 +1696,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Official list number given by canton (alphanumeric)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1647,7 +1711,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Name of the list
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1662,7 +1726,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Candidate number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1677,7 +1741,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Position of candidate on list
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1692,7 +1756,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Position 2 of candidate on list (only applicable when pre-cumulated)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1707,7 +1771,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Family name of candidate
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1722,7 +1786,7 @@ string
 <td style="text-align:left;width: 30em; ">
 First name of candidate
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1737,7 +1801,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Sex of candidate
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 F=female, M=male
 </td>
 </tr>
@@ -1753,7 +1817,7 @@ date
 <td style="text-align:left;width: 30em; ">
 Date of birth of candidate
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1768,7 +1832,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Year of birth of candidate
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1783,8 +1847,11 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO municipality number of place of residence of candidate
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-The number (ID) is only supplied after the periods allowed for rectifications in all cantons have expired. The municipality number is added on the basis of address data by the FSO. For candidates living abroad, 9950 is assigned as municipality number
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+The number (ID) is only supplied after the periods allowed for
+rectifications in all cantons have expired. The municipality number is
+added on the basis of address data by the FSO. For candidates living
+abroad, 9950 is assigned as municipality number
 </td>
 </tr>
 <tr>
@@ -1799,7 +1866,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Place of residence of candidate
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Indication by candidate when registering candidacy.
 </td>
 </tr>
@@ -1815,7 +1882,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Occupation of candidate
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Self-declaration by candidates.
 </td>
 </tr>
@@ -1831,8 +1898,10 @@ integer
 <td style="text-align:left;width: 30em; ">
 2= incumbent; else value=‘null’
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-see metadaten.json; The value =3 (ehemalig/ancien/ne élu/e/già eletto/a in passato/former) can no longer be supplied for 2023. The structure of the variable is retained.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+see metadaten.json; The value =3 (ehemalig/ancien/ne élu/e/già eletto/a
+in passato/former) can no longer be supplied for 2023. The structure of
+the variable is retained.
 </td>
 </tr>
 <tr>
@@ -1847,7 +1916,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO party number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 see metadaten.json
 </td>
 </tr>
@@ -1863,7 +1932,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of candidate votes; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1878,7 +1947,7 @@ boolean
 <td style="text-align:left;width: 30em; ">
 Indicates elected and non elected candidates (boolean true/false)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Critical variable: set only after the canton is confirmed.
 </td>
 </tr>
@@ -1892,8 +1961,11 @@ level_gemeinden
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-level_gemeinden: Update interval per completed canton; Important: For performance reasons, no empty file structure at municipality level. The variables on the “level_gemeinden” level are then filled on election day on a canton-by-canton basis.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+level_gemeinden: Update interval per completed canton; Important: For
+performance reasons, no empty file structure at municipality level. The
+variables on the “level_gemeinden” level are then filled on election day
+on a canton-by-canton basis.
 </td>
 </tr>
 <tr>
@@ -1908,7 +1980,7 @@ integer [1-26]
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1923,8 +1995,14 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO municipality number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Attention: In the case of election results, special cases at the municipal level must be taken into account. Due to shared ballot boxes, no result can be shown for elections in a few municipalities. Some cantons have a separate municipality number for their Swiss abroad. The number/Id of these special municipalities will be composed as follows: Ex. Canton AI: 19160 (&lt;prefix 19&gt;&lt;FSO canton number, 2 digits&gt;&lt;suffix 0&gt;)
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Attention: In the case of election results, special cases at the
+municipal level must be taken into account. Due to shared ballot boxes,
+no result can be shown for elections in a few municipalities. Some
+cantons have a separate municipality number for their Swiss abroad. The
+number/Id of these special municipalities will be composed as follows:
+Ex. Canton AI: 19160 (&lt;prefix 19&gt;&lt;FSO canton number, 2
+digits&gt;&lt;suffix 0&gt;)
 </td>
 </tr>
 <tr>
@@ -1939,7 +2017,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Municipality name
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1954,7 +2032,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO list number (numeric))
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1969,7 +2047,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Official list number given by canton (alphanumeric)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1984,7 +2062,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Candidate number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -1999,7 +2077,7 @@ string
 <td style="text-align:left;width: 30em; ">
 First name of candidate
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2014,7 +2092,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Family name of candidate
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2029,7 +2107,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO party number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 see metadaten.json
 </td>
 </tr>
@@ -2045,7 +2123,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of candidate votes; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2060,7 +2138,7 @@ boolean
 <td style="text-align:left;width: 30em; ">
 Indicates elected and non elected candidates (boolean 1/0)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Critical variable: set only after the canton is confirmed.
 </td>
 </tr>
@@ -2077,7 +2155,7 @@ Critical variable: set only after the canton is confirmed.
 <p><br />
 </p>
 Content description for the file: sd-t-17.02-NRW2023-parteien.json
-<table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-paper" style="color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -2109,7 +2187,7 @@ timestamp
 <td style="text-align:left;width: 30em; ">
 Date and Time of data creation
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2124,7 +2202,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Year of the election
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2138,7 +2216,7 @@ spatial_reference
 <td style="text-align:left;width: 30em; ">
 Status of cantons and municipalities
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Date of the used geo-reference status.
 </td>
 </tr>
@@ -2152,7 +2230,7 @@ stand
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2165,9 +2243,10 @@ wahl_abgeschlossen
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates that all cantons have delievered and confirmed their provisional final result (boolean true/false)
+Indicates that all cantons have delievered and confirmed their
+provisional final result (boolean true/false)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2182,7 +2261,7 @@ integer [26]
 <td style="text-align:left;width: 30em; ">
 Total number of cantons
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2195,9 +2274,10 @@ kantone_abgeschlossen
 integer [1-26]
 </td>
 <td style="text-align:left;width: 30em; ">
-Number of cantons that have delievered and confirmed their provisional final result
+Number of cantons that have delievered and confirmed their provisional
+final result
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2212,8 +2292,12 @@ integer
 <td style="text-align:left;width: 30em; ">
 Total number of municipalities
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-The number of municipalities does not necessarily correspond to the number in the Swiss official commune register. Deviations include municipalities that do not have their own ballot box. In addition, some cantons maintain fictitious separate municipalities for the Swiss living abroad.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+The number of municipalities does not necessarily correspond to the
+number in the Swiss official commune register. Deviations include
+municipalities that do not have their own ballot box. In addition, some
+cantons maintain fictitious separate municipalities for the Swiss living
+abroad.
 </td>
 </tr>
 <tr>
@@ -2228,7 +2312,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of municipalities with a result
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2243,7 +2327,7 @@ integer [1-26]
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2256,7 +2340,7 @@ Stand_kantone
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2269,9 +2353,10 @@ kanton_abgeschlossen
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates that the canton has delievered and confirmed its provisional final result (boolean true/false)
+Indicates that the canton has delievered and confirmed its provisional
+final result (boolean true/false)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2286,7 +2371,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Total number of municipalities (within the canton)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2301,7 +2386,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of municipalities (within the canton) with a result
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2314,8 +2399,13 @@ level_ch
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-level_ch: Will be filled as soon as the election is completed.; The file also includes parties that contested the previous election but are no longer contesting the current election. This is to make it as easy as possible to display all changes in the party results. Consequently, however, it is also possible that parties are listed that are not running in the current election.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+level_ch: Will be filled as soon as the election is completed.; The file
+also includes parties that contested the previous election but are no
+longer contesting the current election. This is to make it as easy as
+possible to display all changes in the party results. Consequently,
+however, it is also possible that parties are listed that are not
+running in the current election.
 </td>
 </tr>
 <tr>
@@ -2330,7 +2420,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO party number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 see metadaten.json
 </td>
 </tr>
@@ -2346,7 +2436,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of lists; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -2362,7 +2452,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of candidates; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -2378,7 +2468,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of female candidates; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -2394,7 +2484,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of male candidates; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -2410,8 +2500,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of elected candidates; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -2426,8 +2517,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of female elected candidates; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -2442,8 +2534,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of male elected candidates; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -2458,8 +2551,12 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of elected candidates last election; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2474,8 +2571,12 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of elected female candidates last election; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2490,8 +2591,12 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of elected male candidates last election; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2504,10 +2609,15 @@ differenz_anzahl_gewaehlte
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in the number of candidates elected between the current election and the previous election; level: CH
+Difference in the number of candidates elected between the current
+election and the previous election; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2520,10 +2630,15 @@ differenz_anzahl_gewaehlte_f
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in the number of female candidates elected between the current election and the previous election; level: CH
+Difference in the number of female candidates elected between the
+current election and the previous election; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2536,10 +2651,15 @@ differenz_anzahl_gewaehlte_m
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in the number of male candidates elected between the current election and the previous election; level: CH
+Difference in the number of male candidates elected between the current
+election and the previous election; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2552,9 +2672,10 @@ fiktive_waehlende
 numeric
 </td>
 <td style="text-align:left;width: 30em; ">
-number of “fictional voters” (Concept for calculating party strengths across different electoral constituencies); level: CH
+number of “fictional voters” (Concept for calculating party strengths
+across different electoral constituencies); level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2569,8 +2690,12 @@ numeric
 <td style="text-align:left;width: 30em; ">
 number of “fictional voters” previous election; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2583,10 +2708,15 @@ differenz_fiktive_waehlende
 numeric
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in the number of “fictional voters” between the current election and the previous election; level: CH
+Difference in the number of “fictional voters” between the current
+election and the previous election; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2601,7 +2731,7 @@ numeric
 <td style="text-align:left;width: 30em; ">
 Party strength in percent; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2616,8 +2746,12 @@ numeric
 <td style="text-align:left;width: 30em; ">
 Party strength previous national election in percent; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2630,10 +2764,15 @@ differenz_partei_staerke
 numeric
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in party strength between current and previous election (in percentage points); level: CH
+Difference in party strength between current and previous election (in
+percentage points); level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2648,7 +2787,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Rank of the party based on its party strength; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2663,7 +2802,7 @@ boolean
 <td style="text-align:left;width: 30em; ">
 Indicates the strongest party (boolean 1/0); level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2676,8 +2815,13 @@ level_kantone
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-level_kantone: Update interval per completed canton; The file also includes parties that contested the previous election but are no longer contesting the current election. This is to make it as easy as possible to display all changes in the party results. Consequently, however, it is also possible that parties are listed that are not running in the current election.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+level_kantone: Update interval per completed canton; The file also
+includes parties that contested the previous election but are no longer
+contesting the current election. This is to make it as easy as possible
+to display all changes in the party results. Consequently, however, it
+is also possible that parties are listed that are not running in the
+current election.
 </td>
 </tr>
 <tr>
@@ -2692,7 +2836,7 @@ integer [1-26]
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2707,7 +2851,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Canton name
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2722,8 +2866,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO party number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-see metadaten.json; Attention: also included are parties that contested only the previous election, but not the current election.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+see metadaten.json; Attention: also included are parties that contested
+only the previous election, but not the current election.
 </td>
 </tr>
 <tr>
@@ -2738,7 +2883,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of lists; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -2754,7 +2899,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of candidates; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -2770,7 +2915,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of female candidates; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -2786,7 +2931,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of male candidates; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -2802,8 +2947,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of elected candidates; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -2818,8 +2964,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of female elected candidates; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -2834,8 +2981,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of male elected candidates; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -2850,8 +2998,12 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of elected candidates last election; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2866,8 +3018,12 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of elected female candidates last election; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2882,8 +3038,12 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of elected male candidates last election; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2896,10 +3056,15 @@ differenz_anzahl_gewaehlte
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in the number of candidates elected between the current election and the previous election; level: canton
+Difference in the number of candidates elected between the current
+election and the previous election; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2912,10 +3077,15 @@ differenz_anzahl_gewaehlte_f
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in the number of female candidates elected between the current election and the previous election; level: canton
+Difference in the number of female candidates elected between the
+current election and the previous election; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2928,10 +3098,15 @@ differenz_anzahl_gewaehlte_m
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in the number of male candidates elected between the current election and the previous election; level: canton
+Difference in the number of male candidates elected between the current
+election and the previous election; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2944,9 +3119,10 @@ fiktive_waehlende
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-number of “fictional voters” (Concept for calculating party strengths across different electoral constituencies); level: canton
+number of “fictional voters” (Concept for calculating party strengths
+across different electoral constituencies); level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -2961,8 +3137,12 @@ integer
 <td style="text-align:left;width: 30em; ">
 number of “fictional voters” previous election; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2975,10 +3155,15 @@ differenz_fiktive_waehlende
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in the number of “fictional voters” between the current election and the previous election; level: canton
+Difference in the number of “fictional voters” between the current
+election and the previous election; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -2993,7 +3178,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Total of party votes; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3008,8 +3193,12 @@ integer
 <td style="text-align:left;width: 30em; ">
 Total of party votes previous election; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -3022,10 +3211,15 @@ differenz_stimmen_partei
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in party votes between current and previous election; level: canton
+Difference in party votes between current and previous election; level:
+canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -3040,7 +3234,7 @@ numeric
 <td style="text-align:left;width: 30em; ">
 Party strength in percent; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3055,8 +3249,12 @@ numeric
 <td style="text-align:left;width: 30em; ">
 Party strength previous national election in percent; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -3069,10 +3267,15 @@ differenz_partei_staerke
 numeric
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in party strength between current and previous election (in percentage points); level: canton
+Difference in party strength between current and previous election (in
+percentage points); level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -3087,7 +3290,7 @@ numeric
 <td style="text-align:left;width: 30em; ">
 Rank of the party based on its party strength; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3102,7 +3305,7 @@ boolean
 <td style="text-align:left;width: 30em; ">
 Indicates the strongest party (boolean 1/0); level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3115,8 +3318,14 @@ level_gemeinden
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-level_gemeinden: continuous update interval with the already completed municipalities (depending on the canton). Empty file already contains complete file structure.; The file also includes parties that contested the previous election but are no longer contesting the current election. This is to make it as easy as possible to display all changes in the party results. Consequently, however, it is also possible that parties are listed that are not running in the current election.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+level_gemeinden: continuous update interval with the already completed
+municipalities (depending on the canton). Empty file already contains
+complete file structure.; The file also includes parties that contested
+the previous election but are no longer contesting the current election.
+This is to make it as easy as possible to display all changes in the
+party results. Consequently, however, it is also possible that parties
+are listed that are not running in the current election.
 </td>
 </tr>
 <tr>
@@ -3131,8 +3340,14 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO municipality number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Attention: In the case of election results, special cases at the municipal level must be taken into account. Due to shared ballot boxes, no result can be shown for elections in a few municipalities. Some cantons have a separate municipality number for their Swiss abroad. The number/Id of these special municipalities will be composed as follows: Ex. Canton AI: 19160 (&lt;prefix 19&gt;&lt;FSO canton number, 2 digits&gt;&lt;suffix 0&gt;)
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Attention: In the case of election results, special cases at the
+municipal level must be taken into account. Due to shared ballot boxes,
+no result can be shown for elections in a few municipalities. Some
+cantons have a separate municipality number for their Swiss abroad. The
+number/Id of these special municipalities will be composed as follows:
+Ex. Canton AI: 19160 (&lt;prefix 19&gt;&lt;FSO canton number, 2
+digits&gt;&lt;suffix 0&gt;)
 </td>
 </tr>
 <tr>
@@ -3147,7 +3362,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Municipality name
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3162,7 +3377,7 @@ integer [1-26]
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3177,7 +3392,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO party number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 see metadaten.json
 </td>
 </tr>
@@ -3193,7 +3408,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Total of party votes; level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3208,8 +3423,12 @@ integer
 <td style="text-align:left;width: 30em; ">
 Total of party votes previous election; level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -3222,10 +3441,15 @@ differenz_stimmen_partei
 integer
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in party votes between current and previous election; level: municipality
+Difference in party votes between current and previous election; level:
+municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -3240,7 +3464,7 @@ numeric
 <td style="text-align:left;width: 30em; ">
 Party strength in percent; level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3253,10 +3477,15 @@ letzte_wahl_partei_staerke
 numeric
 </td>
 <td style="text-align:left;width: 30em; ">
-Party strength previous national election in percent; level: municipality
+Party strength previous national election in percent; level:
+municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -3269,10 +3498,15 @@ differenz_partei_staerke
 numeric
 </td>
 <td style="text-align:left;width: 30em; ">
-Difference in party strength between current and previous election (in percentage points); level: municipality
+Difference in party strength between current and previous election (in
+percentage points); level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34) under the name “Die Mitte” / “Centre”. For the direct comparison of the election years 2023 and 2019, the party results of CVP and BDP are combined for 2019 and shown as results for the Centre party (partei_id = 34).
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+In 2021 the CVP (partei_id = 2) merged with the BDP (partei_id = 34)
+under the name “Die Mitte” / “Centre”. For the direct comparison of the
+election years 2023 and 2019, the party results of CVP and BDP are
+combined for 2019 and shown as results for the Centre party (partei_id =
+34).
 </td>
 </tr>
 <tr>
@@ -3287,7 +3521,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Rank of party; level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3302,7 +3536,7 @@ boolean
 <td style="text-align:left;width: 30em; ">
 Indicates the strongest party (boolean 1/0); level: municipality
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 </tbody>
@@ -3318,7 +3552,7 @@ Indicates the strongest party (boolean 1/0); level: municipality
 <p><br />
 </p>
 Content description for the file: sd-t-17.02-NRW2023-listen.json
-<table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-paper" style="color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -3350,7 +3584,7 @@ timestamp
 <td style="text-align:left;width: 30em; ">
 Date and Time of data creation
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3365,7 +3599,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Year of the election
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3379,7 +3613,7 @@ spatial_reference
 <td style="text-align:left;width: 30em; ">
 Status of cantons and municipalities
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Date of the used geo-reference status.
 </td>
 </tr>
@@ -3393,7 +3627,7 @@ stand
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3406,9 +3640,10 @@ wahl_abgeschlossen
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates that all cantons have delievered and confirmed their provisional final result (boolean true/false)
+Indicates that all cantons have delievered and confirmed their
+provisional final result (boolean true/false)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3423,7 +3658,7 @@ integer [26]
 <td style="text-align:left;width: 30em; ">
 Total number of cantons
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3436,9 +3671,10 @@ kantone_abgeschlossen
 integer [1-26]
 </td>
 <td style="text-align:left;width: 30em; ">
-Number of cantons that have delievered and confirmed their provisional final result
+Number of cantons that have delievered and confirmed their provisional
+final result
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3451,7 +3687,7 @@ Stand_kantone
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3466,7 +3702,7 @@ integer [1-26]
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3479,9 +3715,10 @@ kanton_abgeschlossen
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates that the canton has delievered and confirmed its provisional final result (boolean true/false)
+Indicates that the canton has delievered and confirmed its provisional
+final result (boolean true/false)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3494,7 +3731,7 @@ level_kantone
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 level_kantone: Update interval per completed canton
 </td>
 </tr>
@@ -3510,7 +3747,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3525,7 +3762,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Canton name
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3540,7 +3777,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO list number (numeric))
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3555,7 +3792,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Official list number given by canton (alphanumeric)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3570,7 +3807,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Name of the list
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3585,7 +3822,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Indicates list combination (list union)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 see metadaten.json
 </td>
 </tr>
@@ -3601,7 +3838,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Indicates list sub-combination
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 see metadaten.json
 </td>
 </tr>
@@ -3617,7 +3854,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO party number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 see metadaten.json
 </td>
 </tr>
@@ -3633,8 +3870,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of elected candidates per list; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -3649,7 +3887,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of total votes per list; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3664,7 +3902,7 @@ number
 <td style="text-align:left;width: 30em; ">
 Strength of the list in percent; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 </tbody>
@@ -3675,12 +3913,14 @@ Strength of the list in percent; level: canton
 <div id="json-zeitreihen-frauen-beteiligung" class="section level3">
 <h3>JSON Zeitreihen-frauen-beteiligung<br />
 </h3>
-<p>(Séries temporelles participation-femmes/Serie temporale partecipazione-donne/Time series participation-women)<br />
+<p>(Séries temporelles participation-femmes/Serie temporale
+partecipazione-donne/Time series participation-women)<br />
 </p>
 <p><br />
 </p>
-Content description for the file: sd-t-17.02-NRW2023-zeitreihen-frauen-beteiligung.json
-<table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+Content description for the file:
+sd-t-17.02-NRW2023-zeitreihen-frauen-beteiligung.json
+<table class=" lightable-paper" style="color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -3712,7 +3952,7 @@ timestamp
 <td style="text-align:left;width: 30em; ">
 Date and Time of data creation
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3726,7 +3966,7 @@ spatial_reference
 <td style="text-align:left;width: 30em; ">
 Status of cantons and municipalities
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Date of the used geo-reference status.
 </td>
 </tr>
@@ -3740,7 +3980,7 @@ stand
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3753,9 +3993,10 @@ wahl_abgeschlossen
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates that all cantons have delievered and confirmed their provisional final result (boolean true/false)
+Indicates that all cantons have delievered and confirmed their
+provisional final result (boolean true/false)
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3770,7 +4011,7 @@ integer [26]
 <td style="text-align:left;width: 30em; ">
 Total number of cantons
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3783,9 +4024,10 @@ kantone_abgeschlossen
 integer [1-26]
 </td>
 <td style="text-align:left;width: 30em; ">
-Number of cantons that have delievered and confirmed their provisional final result
+Number of cantons that have delievered and confirmed their provisional
+final result
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3798,7 +4040,7 @@ level_ch
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 level_ch: Will be filled as soon as the election is completed
 </td>
 </tr>
@@ -3814,7 +4056,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Year of the election
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3829,7 +4071,7 @@ number
 <td style="text-align:left;width: 30em; ">
 Voter turnout / voter participation (in percent); level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3844,7 +4086,7 @@ number
 <td style="text-align:left;width: 30em; ">
 Proportion of women (in percent); level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -3859,7 +4101,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of lists; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -3875,7 +4117,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of candidates; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -3891,7 +4133,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of female candidates; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -3907,7 +4149,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of male candidates; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -3923,8 +4165,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of elected candidates; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -3939,8 +4182,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of female elected candidates; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -3955,8 +4199,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of male elected candidates; level: CH
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -3969,7 +4214,7 @@ level_kantone
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 level_kantone: Update interval per completed canton
 </td>
 </tr>
@@ -3985,7 +4230,7 @@ integer [1-26]
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4000,7 +4245,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Canton name short
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4015,7 +4260,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Year of the election
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4030,7 +4275,7 @@ number
 <td style="text-align:left;width: 30em; ">
 Voter turnout / voter participation (in percent); level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4045,7 +4290,7 @@ number
 <td style="text-align:left;width: 30em; ">
 Proportion of women (in percent); level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4060,7 +4305,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of lists; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -4076,7 +4321,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of candidates; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -4092,7 +4337,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of female candidates; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -4108,7 +4353,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of male candidates; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -4124,8 +4369,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of elected candidates; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -4140,8 +4386,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of female elected candidates; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -4156,8 +4403,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of male elected candidates; level: canton
 </td>
-<td style="text-align:left;width: 40em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 40em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 </tbody>
@@ -4168,12 +4416,14 @@ Update 20230821: not considered as critical variable. Will be supplied normally.
 <div id="json-zeitreihen-parteien" class="section level3">
 <h3>JSON Zeitreihen-parteien<br />
 </h3>
-<p>(Séries temporelles partis/Serie temporale parti/Time series parties)<br />
+<p>(Séries temporelles partis/Serie temporale parti/Time series
+parties)<br />
 </p>
 <p><br />
 </p>
-Content description for the file: sd-t-17.02-NRW2023-zeitreihen-parteien.json
-<table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+Content description for the file:
+sd-t-17.02-NRW2023-zeitreihen-parteien.json
+<table class=" lightable-paper" style="color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -4205,7 +4455,7 @@ timestamp
 <td style="text-align:left;width: 30em; ">
 Date and Time of data creation
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4219,7 +4469,7 @@ spatial_reference
 <td style="text-align:left;width: 30em; ">
 Status of cantons and municipalities
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 Date of the used geo-reference status.
 </td>
 </tr>
@@ -4233,7 +4483,7 @@ stand
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4246,9 +4496,10 @@ wahl_abgeschlossen
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates that all cantons have delievered and confirmed their provisional final result (boolean true/false)
+Indicates that all cantons have delievered and confirmed their
+provisional final result (boolean true/false)
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4263,7 +4514,7 @@ integer [26]
 <td style="text-align:left;width: 30em; ">
 Total number of cantons
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4276,9 +4527,10 @@ kantone_abgeschlossen
 integer [1-26]
 </td>
 <td style="text-align:left;width: 30em; ">
-Number of cantons that have delievered and confirmed their provisional final result
+Number of cantons that have delievered and confirmed their provisional
+final result
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4291,7 +4543,7 @@ level_ch
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 level_ch: Will be filled as soon as the election is completed
 </td>
 </tr>
@@ -4307,7 +4559,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Year of the election
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4322,7 +4574,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO party number
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 see metadaten.json
 </td>
 </tr>
@@ -4338,8 +4590,10 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of lists; level: CH
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-Only for cantons with proportional representation system.; The party LPS/PLS (FSO party number=5) was assigned to that of FDP/PLR (FSO party number=1) for level_ch for all data years.
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
+Only for cantons with proportional representation system.; The party
+LPS/PLS (FSO party number=5) was assigned to that of FDP/PLR (FSO party
+number=1) for level_ch for all data years.
 </td>
 </tr>
 <tr>
@@ -4354,8 +4608,10 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of candidates; level: CH
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-Only for cantons with proportional representation system.; The party LPS/PLS (FSO party number=5) was assigned to that of FDP/PLR (FSO party number=1) for level_ch for all data years.
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
+Only for cantons with proportional representation system.; The party
+LPS/PLS (FSO party number=5) was assigned to that of FDP/PLR (FSO party
+number=1) for level_ch for all data years.
 </td>
 </tr>
 <tr>
@@ -4370,8 +4626,10 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of female candidates; level: CH
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-Only for cantons with proportional representation system.; The party LPS/PLS (FSO party number=5) was assigned to that of FDP/PLR (FSO party number=1) for level_ch for all data years.
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
+Only for cantons with proportional representation system.; The party
+LPS/PLS (FSO party number=5) was assigned to that of FDP/PLR (FSO party
+number=1) for level_ch for all data years.
 </td>
 </tr>
 <tr>
@@ -4386,8 +4644,10 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of male candidates; level: CH
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-Only for cantons with proportional representation system.; The party LPS/PLS (FSO party number=5) was assigned to that of FDP/PLR (FSO party number=1) for level_ch for all data years.
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
+Only for cantons with proportional representation system.; The party
+LPS/PLS (FSO party number=5) was assigned to that of FDP/PLR (FSO party
+number=1) for level_ch for all data years.
 </td>
 </tr>
 <tr>
@@ -4402,7 +4662,7 @@ number
 <td style="text-align:left;width: 30em; ">
 Party strength in percent; level: CH
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4417,8 +4677,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of elected candidates; level: CH
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -4433,8 +4694,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of female elected candidates; level: CH
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -4449,8 +4711,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of male elected candidates; level: CH
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -4465,7 +4728,7 @@ number
 <td style="text-align:left;width: 30em; ">
 Proportion of women (in percent); level: CH
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4480,7 +4743,7 @@ boolean
 <td style="text-align:left;width: 30em; ">
 Indicates the strongest party (boolean 1/0); level: CH
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4493,7 +4756,7 @@ level_kantone
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 level_kantone: Update interval per completed canton
 </td>
 </tr>
@@ -4509,7 +4772,7 @@ integer [1-26]
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4524,7 +4787,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Canton name
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4539,7 +4802,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Year of the election
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4554,7 +4817,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO party number
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 see metadaten.json
 </td>
 </tr>
@@ -4570,7 +4833,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of lists; level: canton
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -4586,7 +4849,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of candidates; level: canton
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -4602,7 +4865,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of female candidates; level: canton
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -4618,7 +4881,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of male candidates; level: canton
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for cantons with proportional representation system.
 </td>
 </tr>
@@ -4634,7 +4897,7 @@ number
 <td style="text-align:left;width: 30em; ">
 Party strength in percent; level: canton
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4649,8 +4912,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of elected candidates; level: canton
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -4665,8 +4929,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of female elected candidates; level: canton
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -4681,8 +4946,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of male elected candidates; level: canton
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-Update 20230821: not considered as critical variable. Will be supplied normally.
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
+Update 20230821: not considered as critical variable. Will be supplied
+normally.
 </td>
 </tr>
 <tr>
@@ -4697,7 +4963,7 @@ number
 <td style="text-align:left;width: 30em; ">
 Proportion of women (in percent); level: canton
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4712,7 +4978,7 @@ boolean
 <td style="text-align:left;width: 30em; ">
 Indicates the strongest party (boolean 1/0); level: canton
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 </tbody>
@@ -4727,12 +4993,15 @@ Indicates the strongest party (boolean 1/0); level: canton
 </p>
 <p><br />
 </p>
-<p>Results of the elections to the Council of States are provided in the following formats:</p>
+<p>Results of the elections to the Council of States are provided in the
+following formats:</p>
 <ul>
-<li>sd-t-17.02-SRW2023-kandidierende_erster-wahlgang.json: results of the 1st round of elections</li>
-<li>sd-t-17.02-SRW2023-kandidierende_zweiter-wahlgang.json: results of the 2nd round of elections</li>
+<li>sd-t-17.02-SRW2023-kandidierende_erster-wahlgang.json: results of
+the 1st round of elections</li>
+<li>sd-t-17.02-SRW2023-kandidierende_zweiter-wahlgang.json: results of
+the 2nd round of elections</li>
 </ul>
-<table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<table class=" lightable-paper" style="color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -4764,7 +5033,7 @@ timestamp
 <td style="text-align:left;width: 30em; ">
 Date and Time of data creation
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4779,7 +5048,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Year of the election
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4794,7 +5063,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Round of voting
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4807,7 +5076,7 @@ stand
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 Update interval per completed canton
 </td>
 </tr>
@@ -4821,9 +5090,10 @@ wahlgang_abgeschlossen
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates that all cantons have delivered their provisional final result for a given round of voting (boolean true/false)
+Indicates that all cantons have delivered their provisional final result
+for a given round of voting (boolean true/false)
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4838,7 +5108,7 @@ integer [26]
 <td style="text-align:left;width: 30em; ">
 Total number of cantons
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4851,9 +5121,10 @@ kantone_abgeschlossen
 integer [1-26]
 </td>
 <td style="text-align:left;width: 30em; ">
-Number of cantons that have delivered their provisional final result for a given round of voting
+Number of cantons that have delivered their provisional final result for
+a given round of voting
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4866,7 +5137,7 @@ Stand_kantone
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4881,7 +5152,7 @@ integer [1-26]
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 Update interval per completed canton
 </td>
 </tr>
@@ -4897,8 +5168,9 @@ date string
 <td style="text-align:left;width: 30em; ">
 Date of the election round
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-For election rounds with tacit election (stille_wahl = 1), the original intended date of the election is given.
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
+For election rounds with tacit election (stille_wahl = 1), the original
+intended date of the election is given.
 </td>
 </tr>
 <tr>
@@ -4911,10 +5183,13 @@ stille_wahl
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-True if tacit election. Electoral procedure in which the cantonal government declares the person(s) as elected because there were no more candidates than mandates to be allocated.
+True if tacit election. Electoral procedure in which the cantonal
+government declares the person(s) as elected because there were no more
+candidates than mandates to be allocated.
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-For the second round, the flag is set once the cantons has declared the validity of the single candidature.
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
+For the second round, the flag is set once the cantons has declared the
+validity of the single candidature.
 </td>
 </tr>
 <tr>
@@ -4927,9 +5202,10 @@ zweiter_wahlgang_noetig
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates whether a second round of voting is necessary in a given canton
+Indicates whether a second round of voting is necessary in a given
+canton
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 Only for first round of voting (if wahlgang = 1)
 </td>
 </tr>
@@ -4943,9 +5219,10 @@ wahlgang_abgeschlossen
 boolean
 </td>
 <td style="text-align:left;width: 30em; ">
-Indicates whether the respective round of voting is completed in a given canton
+Indicates whether the respective round of voting is completed in a given
+canton
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4958,7 +5235,7 @@ kandidierende
 </td>
 <td style="text-align:left;width: 30em; ">
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 Update interval per completed canton
 </td>
 </tr>
@@ -4974,7 +5251,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO canton number
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -4989,7 +5266,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Canton name
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -5004,7 +5281,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Family name of candidate
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -5019,7 +5296,7 @@ string
 <td style="text-align:left;width: 30em; ">
 First name of candidate
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -5034,7 +5311,7 @@ string
 <td style="text-align:left;width: 30em; ">
 Sex of candidate
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 F=female, M=male
 </td>
 </tr>
@@ -5050,7 +5327,7 @@ date string
 <td style="text-align:left;width: 30em; ">
 Date of birth of candidate
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -5065,7 +5342,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Year of birth of candidate
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 </td>
 </tr>
 <tr>
@@ -5080,8 +5357,9 @@ integer
 <td style="text-align:left;width: 30em; ">
 2= incumbent; else value=‘null’
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-see metadaten.json; The value =3 (ehemalig/ancien/ne élu/e/già eletto/a in passato/former) can no longer be supplied for 2023.
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
+see metadaten.json; The value =3 (ehemalig/ancien/ne élu/e/già eletto/a
+in passato/former) can no longer be supplied for 2023.
 </td>
 </tr>
 <tr>
@@ -5096,7 +5374,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 FSO party number
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 see metadaten.json
 </td>
 </tr>
@@ -5112,8 +5390,9 @@ boolean
 <td style="text-align:left;width: 30em; ">
 Indicates elected and non elected candidates (boolean true/false)
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
-In case of a tacit election, the flag is set once the canton has declared the candidate as elected.
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
+In case of a tacit election, the flag is set once the canton has
+declared the candidate as elected.
 </td>
 </tr>
 <tr>
@@ -5128,7 +5407,7 @@ integer
 <td style="text-align:left;width: 30em; ">
 Number of votes candidate has received
 </td>
-<td style="text-align:left;width: 30em; background-color: #D3D3D3 !important;">
+<td style="text-align:left;width: 30em; background-color: rgba(211, 211, 211, 255) !important;">
 will be null in case of tacit election
 </td>
 </tr>
@@ -5176,6 +5455,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
