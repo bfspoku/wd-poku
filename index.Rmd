@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Open Government Data Documentation"
 output: 
   html_document:
     toc: FALSE
@@ -7,7 +7,7 @@ output:
 
 
 
-Welcome to the **Open Government Data (OGD) documentation** for Swiss popular votes and election-related datasets.
+Welcome to the Open Government Data (OGD) documentation for Swiss popular votes and election-related datasets.
 
 ---
 
@@ -19,7 +19,7 @@ Documentation of datasets on popular votes, including metadata, variables, and d
 
 ---
 
-##Federal Elections 2023
+## Federal Elections 2023
 
 Documentation for the 2023 federal elections, including:
 - dataset descriptions
