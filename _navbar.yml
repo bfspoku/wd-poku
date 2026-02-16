@@ -1,7 +1,11 @@
-name: "Mywebsite"
+name: "About"
 title: "About"
 type: default
+
 left:
+  - text: "Popular Votes"
+    href: ./codebook_popvotes.html
+
   - text: "Federal Elections 2023" 
     menu:
        - text: "Info"
@@ -12,15 +16,9 @@ left:
          href: ./Changelog_Eidgwahlen2023.html       
        - text: "API description"
          href: ./APIs_elections2023.html
-  - text: "Popular votes" 
-    menu:
-       - text: "Data description"
-         href: ./codebookpopvotes.html
-  - text: "Geometries" 
-    menu:
-       - text: "Geometries"
-         href: ./geometries.html
-         
-right:
-  - icon: fa-github fa-lg
-    href: https://github.com/githubusername/mywebsite
+    href: ./Info.html
+
+  - text: "Geometries"
+    href: ./geometries.html
+
+

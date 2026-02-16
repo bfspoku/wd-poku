@@ -7,12 +7,46 @@ output:
 
 
 
+Welcome to the **Open Government Data (OGD) documentation** for Swiss popular votes and election-related datasets.
 
-Documentation for the datasets published by POKU/FSO on opendata.swiss:
+---
+
+## Popular Votes
+
+Documentation of datasets on popular votes, including metadata, variables, and data structure.
+
+➡️ **[Go to Popular Votes documentation](codebook_popvotes.html)**
+
+---
+
+##Federal Elections 2023
+
+Documentation for the 2023 federal elections, including:
+- dataset descriptions
+- changelogs
+- API specifications
+
+➡️ **[Go to Federal Elections 2023](Info.html)**
+
+---
+
+## Geometries
+
+Technical notes on where to obtain official spatial datasets and specific decriptions used in political data,
+including known **exceptions and deviations** for specific geometries.
+
+➡️ **[Go to Geometries](geometries.html)**
+
+---
+
+## Datasets included
+
+The described datasets can be found on opendata.swss:
 
 * [Datasets on the official provisional election results for the 2023 federal elections](https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023) (URL currently leads to DEV environment, productive URL to be published soon)
-* [Echtzeitdaten am Abstimmungstag zu eidgenössischen Abstimmungsvorlagen ](https://opendata.swiss/en/dataset/echtzeitdaten-am-abstimmungstag-zu-eidgenoessischen-abstimmungsvorlagen) (tbd)
-* [Echtzeitdaten am Abstimmungstag zu kantonalen Abstimmungsvorlagen](https://opendata.swiss/de/dataset/echtzeitdaten-am-abstimmungstag-zu-kantonalen-abstimmungsvorlagen) (tbd)
+* [Echtzeitdaten am Abstimmungstag zu eidgenössischen Abstimmungsvorlagen ](https://opendata.swiss/en/dataset/echtzeitdaten-am-abstimmungstag-zu-eidgenoessischen-abstimmungsvorlagen) 
+* [Real-time data on federal popular votes - Municipal status on the date of the vote ](https://opendata.swiss/en/dataset/echtzeitdaten-zu-den-eidgenossischen-abstimmungen-gemeindestand-am-datum-der-abstimmung)
+* [Real-time data on cantonal popular votes](https://opendata.swiss/de/dataset/echtzeitdaten-am-abstimmungstag-zu-kantonalen-abstimmungsvorlagen) (tbd)
 
 
 

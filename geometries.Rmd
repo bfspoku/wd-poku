@@ -48,7 +48,7 @@ For these communes, the results are published with the FSO identification number
 #### Special communes for Swiss citizens living abroad (*Auslandschweizergemeinden*)
 In various cantons, special communes/districts ("extraterritorial" communes/districts) are designated for certain elections and votes. These special communes/districts are included in the datasets published by POKU, but are not included in the Swiss official commune register. 12 cantons maintain a special municipality  to count the votes of the Swiss citizens living abroad separately: 
 
-| **Canton ID** | **Canton**            | **FSO no. commune/district (old)** | **FSO no. (as of October 2023)** | **Commune/district** |
+| **Canton ID** | **Canton**            | **FSO no. commune/district (old, but still used for popular votes)** | **FSO no. (for federal elections 2023)** | **Commune/district** |
 |---------------|-----------------------|------------------------------------|----------------------------------|----------------------|
 | 1             | Zürich                | 9010                               | 19010                            | ZH-Ausland-CH        |
 | 3             | Luzern                | 9030                               | 19030                            | LU-Ausland-CH        |
@@ -64,7 +64,23 @@ In various cantons, special communes/districts ("extraterritorial" communes/dist
 | 25            | Genève                | 9250                               | 19250                            | GE-CH de l'étranger  |
 
 Note that the FSO identification numbers for the communes/districts of the Swiss abroad have been reassigned. They are now composed as follows: 
-<prefix 19>-<Canton ID FSO, (2 digits)>-<suffix 0>. The new system will be used for the first time for the federal elections in 2023. The old FSO numbers will be discontinued.
+<prefix 19>-<Canton ID FSO, (2 digits)>-<suffix 0>. The new system will be used for the first time for the federal elections in 2023. The old FSO numbers are still in use for popular votes but will be discontinued.
+
+
+### Harmonization of municipal and district results
+
+In Switzerland, municipalities change continually — they merge, split, border changes, rename, etc. Over time, this means that a municipality’s identity in 1981 (for example) may not exist in the same form today. 
+
+The Federal Statistical Office (FSO) maintains a historicised municipal register ([Historisiertes Gemeindeverzeichnis der Schweiz](https://www.bfs.admin.ch/bfs/de/home/dienstleistungen/forschung/api/api-gemeinde.html)), which tracks all municipalities and their mutations (mergers, dissolutions, creations) since 1848, with dates and links between old and new units. This list includes historic IDs (not to be confused with the FSO ID for municipalities) that uniquely identify territories at different points in time and correspondences between periods.
+
+In practical terms, harmonisation means taking data collected for historical municipalities and re-aggregating it so that it corresponds to the current municipal structure (or another reference structure). That allows you to:
+
+- Produce historical maps or statistics “as if” the current boundaries existed in the past.
+- Avoid discontinuities caused by mergers or splits. In certain cases, this might be useful to compare time series.
+
+When historical municipal results are harmonised to the current municipal structure (e.g., after mergers), the values for these “new” municipalities are constructed by aggregation of the original municipalities.This means the municipal-level results are not official — they are an artificial representation for consistency over time. For example, with the recent change of Moutier from canton Bern to canton Jura, a new municipality and district “Moutier” was added to Jura. In the harmonised datasets, Moutier will appear in all historical data files back to 1981 (in the case of the harmonised dataset for [Popular Votes documentation](codebookpopvotes.html)), even though in reality the change only took effect on 01.01.2026. This illustrates how harmonisation can produce artificial municipal-level results that do not reflect the official situation at the time.
+
+To preserve official totals, cantonal and national (Swiss) results are kept identical to the official published numbers.Harmonisation only adjusts the distribution across municipalities or districts, without changing the overall sum.
 
 ### Further Information
 * [Application of the Swiss Communes](https://www.agvchapp.bfs.admin.ch/de/communes/query): For queries regarding the current state of communes, past and future mutations and spatial typologies (only available in DE/FR/IT).

@@ -30,8 +30,6 @@
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -232,7 +230,10 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="dropdown">
+        <li>
+  <a href="./codebook_popvotes.html">Popular Votes</a>
+</li>
+<li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Federal Elections 2023
      
@@ -253,38 +254,12 @@ $(document).ready(function () {
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Popular votes
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="./codebookpopvotes.html">Data description</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Geometries
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="./geometries.html">Geometries</a>
-    </li>
-  </ul>
+<li>
+  <a href="./geometries.html">Geometries</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/githubusername/mywebsite">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -298,8 +273,36 @@ $(document).ready(function () {
 </div>
 
 
-<p>Documentation for the datasets published by POKU/FSO on
-opendata.swiss:</p>
+<p>Welcome to the <strong>Open Government Data (OGD)
+documentation</strong> for Swiss popular votes and election-related
+datasets.</p>
+<hr />
+<div id="popular-votes" class="section level2">
+<h2>Popular Votes</h2>
+<p>Documentation of datasets on popular votes, including metadata,
+variables, and data structure.</p>
+<p>➡️ <strong><a href="codebook_popvotes.html">Go to Popular Votes
+documentation</a></strong></p>
+<hr />
+<p>##Federal Elections 2023</p>
+<p>Documentation for the 2023 federal elections, including: - dataset
+descriptions - changelogs - API specifications</p>
+<p>➡️ <strong><a href="Info.html">Go to Federal Elections
+2023</a></strong></p>
+<hr />
+</div>
+<div id="geometries" class="section level2">
+<h2>Geometries</h2>
+<p>Technical notes on where to obtain official spatial datasets and
+specific decriptions used in political data, including known
+<strong>exceptions and deviations</strong> for specific geometries.</p>
+<p>➡️ <strong><a href="geometries.html">Go to
+Geometries</a></strong></p>
+<hr />
+</div>
+<div id="datasets-included" class="section level2">
+<h2>Datasets included</h2>
+<p>The described datasets can be found on opendata.swss:</p>
 <ul>
 <li><a
 href="https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023">Datasets
@@ -308,11 +311,16 @@ elections</a> (URL currently leads to DEV environment, productive URL to
 be published soon)</li>
 <li><a
 href="https://opendata.swiss/en/dataset/echtzeitdaten-am-abstimmungstag-zu-eidgenoessischen-abstimmungsvorlagen">Echtzeitdaten
-am Abstimmungstag zu eidgenössischen Abstimmungsvorlagen</a> (tbd)</li>
+am Abstimmungstag zu eidgenössischen Abstimmungsvorlagen</a></li>
 <li><a
-href="https://opendata.swiss/de/dataset/echtzeitdaten-am-abstimmungstag-zu-kantonalen-abstimmungsvorlagen">Echtzeitdaten
-am Abstimmungstag zu kantonalen Abstimmungsvorlagen</a> (tbd)</li>
+href="https://opendata.swiss/en/dataset/echtzeitdaten-zu-den-eidgenossischen-abstimmungen-gemeindestand-am-datum-der-abstimmung">Real-time
+data on federal popular votes - Municipal status on the date of the
+vote</a></li>
+<li><a
+href="https://opendata.swiss/de/dataset/echtzeitdaten-am-abstimmungstag-zu-kantonalen-abstimmungsvorlagen">Real-time
+data on cantonal popular votes</a> (tbd)</li>
 </ul>
+</div>
 
 
 

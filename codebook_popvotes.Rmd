@@ -5,6 +5,7 @@ author: "Swiss Federal Statistical Office | Politics, Culture, Media Section | C
 date: "Last update: `r format(Sys.time(), '%d/%m/%y, %H:%M')`"
 output:
   html_document:
+    toc: TRUE    
 ---
 
 ```{r setup, include=FALSE}
@@ -94,7 +95,7 @@ The table below describes the properties of the JSON result files for the follow
 - [Real-time data on federal popular votes – Municipal status on the date of the vote](https://opendata.swiss/en/dataset/echtzeitdaten-zu-den-eidgenossischen-abstimmungen-gemeindestand-am-datum-der-abstimmung)  
 (**endpoint URL**: https://ckan.opendata.swiss/api/3/action/package_show?id=echtzeitdaten-zu-den-eidgenossischen-abstimmungen-gemeindestand-am-datum-der-abstimmung)
 
-The two datasets are largely identical in structure. In the first dataset, the result files of all previous votes are harmonised to the **most recent municipal structure**. This primarily affects the result files of past votes. The logic behind this harmonization is to ensure compatibility with applications such as VoteInfo, which use a single, current geometry reference.. In contrast, the second dataset always presents the result files using the **municipal structure valid on Voting Sunday**. In addition, the second dataset contains a small number of additional properties that are primarily used by the FSO’s [Popular Votes Dashboard](https://popular-votes.admin.ch/en/overview). These additional properties mainly relate to the presentation of results by **settlement type** or **language region** and are provided in the `raumgliederungen` array. Aside from these additional properties, there is **no difference** between the files for the **most recent vote**, as both datasets reflect the same current municipal status. For municipal-level analysis, we recommend using the files with the original municipal structure from the day of the vote.
+The two datasets are largely identical in structure. In the first dataset, the result files of all previous votes are harmonised to the **most recent municipal structure**. This primarily affects the result files of past votes. The logic behind this harmonization is to ensure compatibility with applications such as VoteInfo, which use a single, current geometry reference (see also [Geometries](https://bfspoku.github.io/wd-poku/geometries.html)). In contrast, the second dataset always presents the result files using the **municipal structure valid on Voting Sunday**. In addition, the second dataset contains a small number of additional properties that are primarily used by the FSO’s [Popular Votes Dashboard](https://popular-votes.admin.ch/en/overview). These additional properties mainly relate to the presentation of results by **settlement type** or **language region** and are provided in the `raumgliederungen` array. Aside from these additional properties, there is **no difference** between the files for the **most recent vote**, as both datasets reflect the same current municipal status. For municipal-level analysis, we recommend using the files with the original municipal structure from the day of the vote.
 
 ```{r, echo=FALSE}
 library(knitr)
@@ -127,7 +128,7 @@ In such cases, voters are presented with the following three ballot items:
 2. **Direct counter-proposal** (usually proposed by the Federal Council)
 3. **Deciding question**, asking which proposal should prevail if both the main proposal and the counter-proposal are accepted
 
-If both the main proposal and the counter-proposal are accepted by the voters, the outcome of the **deciding question** determines which proposal is ultimately implemented (see also [Procedure applicable to an initiative and counter-proposal] (https://www.fedlex.admin.ch/eli/cc/1999/404/en#art_139_b)).
+If both the main proposal and the counter-proposal are accepted by the voters, the outcome of the **deciding question** determines which proposal is ultimately implemented (see also [Procedure applicable to an initiative and counter-proposal](https://www.fedlex.admin.ch/eli/cc/1999/404/en#art_139_b)).
 
 
 #### Conceptual and Technical Representation
@@ -142,8 +143,10 @@ In the JSON result files, the deciding question contains the same result propert
 
 - **Yes votes** represent votes in favour of the **main proposal**
 - **No votes** represent votes in favour of the **counter-proposal**
+- **Cantonal Results**: Following the same logic, "Yes" results for cantonal data (e.g., `jaStaendeGanz`, `jaStaendeHalb`) indicate support for the main initiative, while "No" results indicate support for the counter-proposal. (see also table above).
+- `doppeltesMehr` is set to true because cantonal results are required to determine the winner of the deciding question. While the deciding question does not require a traditional double majority (popular and cantonal) to pass, the outcome is determined by which proposal garners the higher combined percentage of both popular and cantonal votes (as per https://www.fedlex.admin.ch/eli/cc/1999/404/de#art_139_b).
 
-In the same logic, if `vorlageAngenommen = true` then the result of the deciding question is in favor of the main proposal/initiative. This interpretation applies only to deciding questions and does not affect the interpretation of results for other proposal types.
+Finally, if `vorlageAngenommen = true` then the result of the deciding question is in favor of the main proposal/initiative. This interpretation applies only to deciding questions and does not affect the interpretation of results for other proposal types.
 
 #### Identification via Proposal IDs
 

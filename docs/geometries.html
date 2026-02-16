@@ -34,8 +34,6 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -315,7 +313,10 @@ div.tocify {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="dropdown">
+        <li>
+  <a href="./codebook_popvotes.html">Popular Votes</a>
+</li>
+<li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Federal Elections 2023
      
@@ -336,38 +337,12 @@ div.tocify {
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Popular votes
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="./codebookpopvotes.html">Data description</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Geometries
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="./geometries.html">Geometries</a>
-    </li>
-  </ul>
+<li>
+  <a href="./geometries.html">Geometries</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/githubusername/mywebsite">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -381,7 +356,7 @@ div.tocify {
 <h4 class="author">Swiss Federal Statistical Office | Section Politics,
 Culture, Media (POKU) | Contact: <a href="mailto:poku@bfs.admin.ch"
 class="email">poku@bfs.admin.ch</a></h4>
-<h4 class="date">Last update: 10/02/26, 09:29</h4>
+<h4 class="date">Last update: 13/02/26, 18:03</h4>
 
 </div>
 
@@ -495,8 +470,9 @@ citizens living abroad separately:</p>
 <tr class="header">
 <th><strong>Canton ID</strong></th>
 <th><strong>Canton</strong></th>
-<th><strong>FSO no. commune/district (old)</strong></th>
-<th><strong>FSO no. (as of October 2023)</strong></th>
+<th><strong>FSO no. commune/district (old, but still used for popular
+votes)</strong></th>
+<th><strong>FSO no. (for federal elections 2023)</strong></th>
 <th><strong>Commune/district</strong></th>
 </tr>
 </thead>
@@ -591,8 +567,53 @@ citizens living abroad separately:</p>
 of the Swiss abroad have been reassigned. They are now composed as
 follows: &lt;prefix 19&gt;-&lt;Canton ID FSO, (2 digits)&gt;-&lt;suffix
 0&gt;. The new system will be used for the first time for the federal
-elections in 2023. The old FSO numbers will be discontinued.</p>
+elections in 2023. The old FSO numbers are still in use for popular
+votes but will be discontinued.</p>
 </div>
+</div>
+<div id="harmonization-of-municipal-and-district-results"
+class="section level3">
+<h3>Harmonization of municipal and district results</h3>
+<p>In Switzerland, municipalities change continually — they merge,
+split, border changes, rename, etc. Over time, this means that a
+municipality’s identity in 1981 (for example) may not exist in the same
+form today.</p>
+<p>The Federal Statistical Office (FSO) maintains a historicised
+municipal register (<a
+href="https://www.bfs.admin.ch/bfs/de/home/dienstleistungen/forschung/api/api-gemeinde.html">Historisiertes
+Gemeindeverzeichnis der Schweiz</a>), which tracks all municipalities
+and their mutations (mergers, dissolutions, creations) since 1848, with
+dates and links between old and new units. This list includes historic
+IDs (not to be confused with the FSO ID for municipalities) that
+uniquely identify territories at different points in time and
+correspondences between periods.</p>
+<p>In practical terms, harmonisation means taking data collected for
+historical municipalities and re-aggregating it so that it corresponds
+to the current municipal structure (or another reference structure).
+That allows you to:</p>
+<ul>
+<li>Produce historical maps or statistics “as if” the current boundaries
+existed in the past.</li>
+<li>Avoid discontinuities caused by mergers or splits. In certain cases,
+this might be useful to compare time series.</li>
+</ul>
+<p>When historical municipal results are harmonised to the current
+municipal structure (e.g., after mergers), the values for these “new”
+municipalities are constructed by aggregation of the original
+municipalities.This means the municipal-level results are not official —
+they are an artificial representation for consistency over time. For
+example, with the recent change of Moutier from canton Bern to canton
+Jura, a new municipality and district “Moutier” was added to Jura. In
+the harmonised datasets, Moutier will appear in all historical data
+files back to 1981 (in the case of the harmonised dataset for <a
+href="codebookpopvotes.html">Popular Votes documentation</a>), even
+though in reality the change only took effect on 01.01.2026. This
+illustrates how harmonisation can produce artificial municipal-level
+results that do not reflect the official situation at the time.</p>
+<p>To preserve official totals, cantonal and national (Swiss) results
+are kept identical to the official published numbers.Harmonisation only
+adjusts the distribution across municipalities or districts, without
+changing the overall sum.</p>
 </div>
 <div id="further-information" class="section level3">
 <h3>Further Information</h3>

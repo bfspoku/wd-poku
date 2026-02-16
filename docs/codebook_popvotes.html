@@ -30,11 +30,10 @@
        h6 {font-size: 12px;}
        code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
        pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -45,18 +44,109 @@
   ul.task-list{list-style: none;}
     </style>
 
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
   }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
 </script>
-
-
 
 
 
@@ -222,6 +312,75 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
 
 </head>
 
@@ -229,6 +388,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -245,7 +414,10 @@ $(document).ready(function () {
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="dropdown">
+        <li>
+  <a href="./codebook_popvotes.html">Popular Votes</a>
+</li>
+<li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Federal Elections 2023
      
@@ -266,38 +438,12 @@ $(document).ready(function () {
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Popular votes
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="./codebookpopvotes.html">Data description</a>
-    </li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Geometries
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="./geometries.html">Geometries</a>
-    </li>
-  </ul>
+<li>
+  <a href="./geometries.html">Geometries</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/githubusername/mywebsite">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -312,7 +458,7 @@ $(document).ready(function () {
 <h4 class="author">Swiss Federal Statistical Office | Politics, Culture,
 Media Section | Contact: <a href="mailto:poku@bfs.admin.ch"
 class="email">poku@bfs.admin.ch</a></h4>
-<h4 class="date">Last update: 10/02/26, 09:29</h4>
+<h4 class="date">Last update: 13/02/26, 18:03</h4>
 
 </div>
 
@@ -455,11 +601,12 @@ dataset, the result files of all previous votes are harmonised to the
 <strong>most recent municipal structure</strong>. This primarily affects
 the result files of past votes. The logic behind this harmonization is
 to ensure compatibility with applications such as VoteInfo, which use a
-single, current geometry reference.. In contrast, the second dataset
-always presents the result files using the <strong>municipal structure
-valid on Voting Sunday</strong>. In addition, the second dataset
-contains a small number of additional properties that are primarily used
-by the FSO’s <a
+single, current geometry reference (see also <a
+href="https://bfspoku.github.io/wd-poku/geometries.html">Geometries</a>).
+In contrast, the second dataset always presents the result files using
+the <strong>municipal structure valid on Voting Sunday</strong>. In
+addition, the second dataset contains a small number of additional
+properties that are primarily used by the FSO’s <a
 href="https://popular-votes.admin.ch/en/overview">Popular Votes
 Dashboard</a>. These additional properties mainly relate to the
 presentation of results by <strong>settlement type</strong> or
@@ -665,11 +812,12 @@ proposal</td>
 <td align="left">doppeltesMehr</td>
 <td align="left">Indicates if the cantonal votes (staende) are relevant
 for the results of the vote. Generally true if a double majority is
-required for the proposal to be accepted. Also used for the deciding
-question.</td>
+required for the proposal to be accepted.</td>
 <td align="left">boolean</td>
 <td align="left"></td>
-<td align="left">Might be renamed in the future</td>
+<td align="left">Also used for the deciding question even though the
+deciding question does not require a double majority. Might be renamed
+in the future</td>
 </tr>
 <tr class="odd">
 <td align="left">staende</td>
@@ -805,7 +953,7 @@ and used only in the unharmonized files
 <tr class="even">
 <td align="left">anzahlBezirkeAusgezaehlt</td>
 <td align="left">Number of fully counted districts in a given
-geographical unit..</td>
+geographical unit.</td>
 <td align="left">integer</td>
 <td align="left"></td>
 <td align="left">Only available on the canton level or higher and used
@@ -902,7 +1050,11 @@ by the number of persons eligible to vote.</td>
 </tr>
 <tr class="odd">
 <td align="left">gueltigeStimmen</td>
-<td align="left">Number of valid votes.</td>
+<td align="left">Number of valid votes. In most cases, the number of
+valid votes on the federal level consists of the sum of yes and no
+votes. In the case of connected proposals, the “votes without response”
+(stimmen ohne Antwort) are also added to the number of valid
+ballots.</td>
 <td align="left">integer or null</td>
 <td align="left"></td>
 <td align="left"></td>
@@ -980,10 +1132,9 @@ accepted</li>
 </ol>
 <p>If both the main proposal and the counter-proposal are accepted by
 the voters, the outcome of the <strong>deciding question</strong>
-determines which proposal is ultimately implemented (see also [Procedure
-applicable to an initiative and counter-proposal] (<a
-href="https://www.fedlex.admin.ch/eli/cc/1999/404/en#art_139_b"
-class="uri">https://www.fedlex.admin.ch/eli/cc/1999/404/en#art_139_b</a>)).</p>
+determines which proposal is ultimately implemented (see also <a
+href="https://www.fedlex.admin.ch/eli/cc/1999/404/en#art_139_b">Procedure
+applicable to an initiative and counter-proposal</a>).</p>
 <div id="conceptual-and-technical-representation"
 class="section level4">
 <h4>Conceptual and Technical Representation</h4>
@@ -1006,12 +1157,24 @@ interpretation:</p>
 <strong>main proposal</strong></li>
 <li><strong>No votes</strong> represent votes in favour of the
 <strong>counter-proposal</strong></li>
+<li><strong>Cantonal Results</strong>: Following the same logic, “Yes”
+results for cantonal data (e.g., <code>jaStaendeGanz</code>,
+<code>jaStaendeHalb</code>) indicate support for the main initiative,
+while “No” results indicate support for the counter-proposal. (see also
+table above).</li>
+<li><code>doppeltesMehr</code> is set to true because cantonal results
+are required to determine the winner of the deciding question. While the
+deciding question does not require a traditional double majority
+(popular and cantonal) to pass, the outcome is determined by which
+proposal garners the higher combined percentage of both popular and
+cantonal votes (as per <a
+href="https://www.fedlex.admin.ch/eli/cc/1999/404/de#art_139_b"
+class="uri">https://www.fedlex.admin.ch/eli/cc/1999/404/de#art_139_b</a>).</li>
 </ul>
-<p>In the same logic, if <code>vorlageAngenommen = true</code> then the
-result of the deciding question is in favor of the main
-proposal/initiative. This interpretation applies only to deciding
-questions and does not affect the interpretation of results for other
-proposal types.</p>
+<p>Finally, if <code>vorlageAngenommen = true</code> then the result of
+the deciding question is in favor of the main proposal/initiative. This
+interpretation applies only to deciding questions and does not affect
+the interpretation of results for other proposal types.</p>
 </div>
 <div id="identification-via-proposal-ids" class="section level4">
 <h4>Identification via Proposal IDs</h4>
@@ -1038,70 +1201,74 @@ proposals</strong>, the field <code>hauptvorlagenId</code> is set to
 <code>null</code>.</p>
 <div id="example-main-proposal" class="section level5">
 <h5>Example: Main Proposal</h5>
-<pre class="json"><code>{
-  &quot;vorlagen&quot;: [
-    {
-      &quot;vorlagenId&quot;: 8881,
-      &quot;reihenfolgeAnzeige&quot;: 8881,
-      &quot;vorlagenTitel&quot;: [
-        ...
-      ],
-      &quot;vorlageBeendet&quot;: false,
-      &quot;provisorisch&quot;: true,
-      &quot;vorlageAngenommen&quot;: null,
-      &quot;vorlagenArtId&quot;: 4,
-      &quot;hauptvorlagenId&quot;: null,
-      &quot;reserveInfoText&quot;: null
-    }
-  ]
-}</code></pre>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  <span class="dt">&quot;vorlagen&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>      <span class="dt">&quot;vorlagenId&quot;</span><span class="fu">:</span> <span class="dv">8881</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>      <span class="dt">&quot;reihenfolgeAnzeige&quot;</span><span class="fu">:</span> <span class="dv">8881</span><span class="fu">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>      <span class="dt">&quot;vorlagenTitel&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>        <span class="er">...</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>      <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>      <span class="dt">&quot;vorlageBeendet&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>      <span class="dt">&quot;provisorisch&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>      <span class="dt">&quot;vorlageAngenommen&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>      <span class="dt">&quot;vorlagenArtId&quot;</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>      <span class="dt">&quot;hauptvorlagenId&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>      <span class="dt">&quot;reserveInfoText&quot;</span><span class="fu">:</span> <span class="kw">null</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 </div>
 <div id="example-counter-proposal" class="section level5">
 <h5>Example: Counter-proposal</h5>
-<pre class="json"><code>{
-  &quot;vorlagen&quot;: [
-    {
-      &quot;vorlagenId&quot;: 8882,
-      &quot;reihenfolgeAnzeige&quot;: 8882,
-      &quot;vorlagenTitel&quot;: [
-        ...
-      ],
-      &quot;vorlageBeendet&quot;: false,
-      &quot;provisorisch&quot;: true,
-      &quot;vorlageAngenommen&quot;: null,
-      &quot;vorlagenArtId&quot;: 5,
-      &quot;hauptvorlagenId&quot;: 8881,
-      &quot;reserveInfoText&quot;: null
-    }
-  ]
-}
-</code></pre>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  <span class="dt">&quot;vorlagen&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>      <span class="dt">&quot;vorlagenId&quot;</span><span class="fu">:</span> <span class="dv">8882</span><span class="fu">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>      <span class="dt">&quot;reihenfolgeAnzeige&quot;</span><span class="fu">:</span> <span class="dv">8882</span><span class="fu">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>      <span class="dt">&quot;vorlagenTitel&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>        <span class="er">...</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>      <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>      <span class="dt">&quot;vorlageBeendet&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>      <span class="dt">&quot;provisorisch&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>      <span class="dt">&quot;vorlageAngenommen&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>      <span class="dt">&quot;vorlagenArtId&quot;</span><span class="fu">:</span> <span class="dv">5</span><span class="fu">,</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>      <span class="dt">&quot;hauptvorlagenId&quot;</span><span class="fu">:</span> <span class="dv">8881</span><span class="fu">,</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>      <span class="dt">&quot;reserveInfoText&quot;</span><span class="fu">:</span> <span class="kw">null</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 </div>
 <div id="example-deciding-question" class="section level5">
 <h5>Example: Deciding Question</h5>
-<pre class="json"><code>{
-  &quot;vorlagen&quot;: [
-    {
-      &quot;vorlagenId&quot;: 8883,
-      &quot;reihenfolgeAnzeige&quot;: 8883,
-      &quot;vorlagenTitel&quot;: [
-        ...
-      ],
-      &quot;vorlageBeendet&quot;: false,
-      &quot;provisorisch&quot;: true,
-      &quot;vorlageAngenommen&quot;: null,
-      &quot;vorlagenArtId&quot;: 6,
-      &quot;hauptvorlagenId&quot;: 8881,
-      &quot;reserveInfoText&quot;: null
-    }
-  ]
-}</code></pre>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  <span class="dt">&quot;vorlagen&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>      <span class="dt">&quot;vorlagenId&quot;</span><span class="fu">:</span> <span class="dv">8883</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>      <span class="dt">&quot;reihenfolgeAnzeige&quot;</span><span class="fu">:</span> <span class="dv">8883</span><span class="fu">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>      <span class="dt">&quot;vorlagenTitel&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>        <span class="er">...</span></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>      <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>      <span class="dt">&quot;vorlageBeendet&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>      <span class="dt">&quot;provisorisch&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>      <span class="dt">&quot;vorlageAngenommen&quot;</span><span class="fu">:</span> <span class="kw">null</span><span class="fu">,</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>      <span class="dt">&quot;vorlagenArtId&quot;</span><span class="fu">:</span> <span class="dv">6</span><span class="fu">,</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>      <span class="dt">&quot;hauptvorlagenId&quot;</span><span class="fu">:</span> <span class="dv">8881</span><span class="fu">,</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>      <span class="dt">&quot;reserveInfoText&quot;</span><span class="fu">:</span> <span class="kw">null</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a>  <span class="ot">]</span></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 </div>
 </div>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -1134,6 +1301,35 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
