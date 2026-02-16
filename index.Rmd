@@ -43,7 +43,7 @@ including known **exceptions and deviations** for specific geometries.
 
 The described datasets can be found on opendata.swss:
 
-* [Datasets on the official provisional election results for the 2023 federal elections](https://ogdch-abnahme.clients.liip.ch/de/dataset/eidg-wahlen-2023) (URL currently leads to DEV environment, productive URL to be published soon)
+* [Datasets on the official provisional election results for the 2023 federal elections](https://opendata.swiss/dataset/eidg-wahlen-2023)
 * [Echtzeitdaten am Abstimmungstag zu eidgenössischen Abstimmungsvorlagen ](https://opendata.swiss/en/dataset/echtzeitdaten-am-abstimmungstag-zu-eidgenoessischen-abstimmungsvorlagen) 
 * [Real-time data on federal popular votes - Municipal status on the date of the vote ](https://opendata.swiss/en/dataset/echtzeitdaten-zu-den-eidgenossischen-abstimmungen-gemeindestand-am-datum-der-abstimmung)
 * [Real-time data on cantonal popular votes](https://opendata.swiss/de/dataset/echtzeitdaten-am-abstimmungstag-zu-kantonalen-abstimmungsvorlagen) (tbd)
