@@ -31,8 +31,12 @@ codebook_raw <- read_xlsx("codebook/codebook_votations.xlsx") %>%
   ))
 
 ```
-<br>
 
+<div class="alert alert-info">
+  <strong>Popular vote on March 8:</strong> Please pay particular attention to the information on the special case of connected proposals.
+</div>
+
+<br>
 ### Intro
 
 The Swiss Federal Statistical Office (FSO), Politics, Culture and Media Section (POKU), is responsible for processing and publishing the official results of federal popular votes on Voting Sunday. Moreover, in the context of the project [VoteInfo](https://www.admin.ch/gov/de/start/dokumentation/abstimmungen/voteinfo.html), it handles the publication of the results of the cantonal popular votes for the application. The results are processed centrally and made available in machine-readable formats. This documentation focuses on the datasets offered via opendata.swiss which contain the continuously updated result files:
@@ -67,9 +71,12 @@ For cantonal votes, the cantons are responsible for announcing cantonal proposal
 
 On Voting Sunday, cantonal data deliveries are processed and **continuously published from 12:00 p.m. onwards**:
 
-- Results on the municipal level are received continuously throughout the day; most cantons send several deliveries with intermediate results, while some only send the fully counted result once
+- Results on the municipal level are received continuously throughout the day; most cantons send several deliveries with intermediate results, while some only send the fully counted result once.
+- In most cases, intermediate results are transmitted at **municipal level once a municipality has been fully counted** (`gebietAusgezaehlt = true`). There are two notable exceptions:  
+  - In the canton of **Basel-Stadt**, intermediate results are sent at municipal level **before counting is completed**. The canton first transmits votes cast by correspondence and later adds the ballot box votes. During this phase, the municipality remains marked as *counting* (`gebietAusgezaehlt = false`).  
+  - In the canton of **Geneva**, so-called *résultats anticipés* are transmitted as intermediate results. These correspond to votes cast by correspondence but are provided **only at cantonal level**. As a result, the JSON files contain cantonal-level results while district- and municipality-level results remain empty at this stage.
 - Incoming data are validated and processed automatically. Updated result files are published in near real time via opendata.swiss
-- Once all municipal results are in, the canton is asked to confirm the aggregated cantonal result. This process may take some time (usually within 15 minutes, after the fully counted results are in). After confirmation is received, the results are marked as **completed** (`vorlageBeendet = true`) for the respective canton. The vote is considered as concluded only after all 26 cantons are marked as completed for all proposals. We refer to the results as 'Provisional official result'.
+- Once all municipal results are in, the **canton is asked to confirm the aggregated cantonal result**. This process may take some time (usually within 15 minutes, after the fully counted results are in). After confirmation is received, the results are marked as **completed** (`vorlageBeendet = true`) for the respective canton. The vote is considered as concluded only after all 26 cantons are marked as completed for all proposals. We refer to the results as 'Provisional official result'.
 - Due to the high number of access requests the access URLs indicated on opendata.swiss all point to the VoteInfo server on voting Sunday (URLs starting with https://ogd-static.voteinfo-app.ch/v1/ogd). Later on, after the confirmation of the final results (see point 3 below), the referenced URLs point to DAM (URLs starting with https://dam-api.bfs.admin.ch/hub/api/dam/assets/).
 
 #### 3. Post-processing Phase
