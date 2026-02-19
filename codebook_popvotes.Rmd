@@ -37,6 +37,7 @@ codebook_raw <- read_xlsx("codebook/codebook_votations.xlsx") %>%
 </div>
 
 <br>
+
 ### Intro
 
 The Swiss Federal Statistical Office (FSO), Politics, Culture and Media Section (POKU), is responsible for processing and publishing the official results of federal popular votes on Voting Sunday. Moreover, in the context of the project [VoteInfo](https://www.admin.ch/gov/de/start/dokumentation/abstimmungen/voteinfo.html), it handles the publication of the results of the cantonal popular votes for the application. The results are processed centrally and made available in machine-readable formats. This documentation focuses on the datasets offered via opendata.swiss which contain the continuously updated result files:
@@ -155,14 +156,14 @@ In the JSON result files, the deciding question contains the same result propert
 
 Finally, if `vorlageAngenommen = true` then the result of the deciding question is in favor of the main proposal/initiative. This interpretation applies only to deciding questions and does not affect the interpretation of results for other proposal types.
 
-#### Identification via Proposal IDs
+#### Identification via Proposal IDs and Type
 
 Connected proposals can be identified using their proposal IDs and type indicators:
 
 - The **fourth digit** of the `vorlagenId` identifies the role of the proposal:
-  - `1` → main proposal
-  - `2` → counter-proposal
-  - `3` → deciding question
+  - `ddd1` → main proposal
+  - `ddd2` → counter-proposal
+  - `ddd3` → deciding question
 - The field `vorlagenArtId` further specifies the proposal type:
   - `4` → main proposal
   - `5` → counter-proposal

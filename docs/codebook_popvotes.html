@@ -458,7 +458,7 @@ div.tocify {
 <h4 class="author">Swiss Federal Statistical Office | Politics, Culture,
 Media Section | Contact: <a href="mailto:poku@bfs.admin.ch"
 class="email">poku@bfs.admin.ch</a></h4>
-<h4 class="date">Last update: 18/02/26, 17:55</h4>
+<h4 class="date">Last update: 19/02/26, 08:35</h4>
 
 </div>
 
@@ -468,7 +468,9 @@ class="email">poku@bfs.admin.ch</a></h4>
 attention to the information on the special case of connected
 proposals.</p>
 </div>
-<p><br> ### Intro</p>
+<p><br></p>
+<div id="intro" class="section level3">
+<h3>Intro</h3>
 <p>The Swiss Federal Statistical Office (FSO), Politics, Culture and
 Media Section (POKU), is responsible for processing and publishing the
 official results of federal popular votes on Voting Sunday. Moreover, in
@@ -492,6 +494,7 @@ href="https://opendata.swiss/de/dataset/echtzeitdaten-am-abstimmungstag-zu-kanto
 data on cantonal popular votes</a> (tbd)</li>
 </ul>
 <p><br></p>
+</div>
 <div id="data-processing-lifecycle" class="section level3">
 <h3>Data Processing Lifecycle</h3>
 <p>The data are produced in <strong>JSON format</strong> and uploaded to
@@ -1197,17 +1200,18 @@ the deciding question is in favor of the main proposal/initiative. This
 interpretation applies only to deciding questions and does not affect
 the interpretation of results for other proposal types.</p>
 </div>
-<div id="identification-via-proposal-ids" class="section level4">
-<h4>Identification via Proposal IDs</h4>
+<div id="identification-via-proposal-ids-and-type"
+class="section level4">
+<h4>Identification via Proposal IDs and Type</h4>
 <p>Connected proposals can be identified using their proposal IDs and
 type indicators:</p>
 <ul>
 <li>The <strong>fourth digit</strong> of the <code>vorlagenId</code>
 identifies the role of the proposal:
 <ul>
-<li><code>1</code> → main proposal</li>
-<li><code>2</code> → counter-proposal</li>
-<li><code>3</code> → deciding question</li>
+<li><code>ddd1</code> → main proposal</li>
+<li><code>ddd2</code> → counter-proposal</li>
+<li><code>ddd3</code> → deciding question</li>
 </ul></li>
 <li>The field <code>vorlagenArtId</code> further specifies the proposal
 type:
